@@ -3,3 +3,5 @@ C:\Users\ShOnZi\Desktop\Labyrinth\Labyrinth\Labyrinth-3\bin\Debug\Labyrinth.pdb
 C:\Users\ShOnZi\Desktop\Labyrinth\Labyrinth\Labyrinth-3\obj\x86\Debug\kursov_proekt.csprojResolveAssemblyReference.cache
 C:\Users\ShOnZi\Desktop\Labyrinth\Labyrinth\Labyrinth-3\obj\x86\Debug\Labyrinth.exe
 C:\Users\ShOnZi\Desktop\Labyrinth\Labyrinth\Labyrinth-3\obj\x86\Debug\Labyrinth.pdb
+C:\Users\ShOnZi\Desktop\TelerikAcademy\C#\HQC\Homerwork\TeamWork- Labyrinth-3\Labyrinth-3\obj\x86\Debug\Labyrinth.exe
+C:\Users\ShOnZi\Desktop\TelerikAcademy\C#\HQC\Homerwork\TeamWork- Labyrinth-3\Labyrinth-3\obj\x86\Debug\Labyrinth.pdb

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-
-namespace kursov_proekt
+namespace Labyrinth
 {
-
-	// ej na tova mu se vika kasha. ima vsiakakvi podpravki, moze da dobavite oshte sol i da izhvurlite na bokluka
-	// happy hacking!
+    // ej na tova mu se vika kasha. ima vsiakakvi podpravki, moze da dobavite oshte sol i da izhvurlite na bokluka
+    // happy hacking!
     class Program
     {
         private static bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
@@ -21,13 +19,10 @@ namespace kursov_proekt
         private static int positionY;  //used for coordinates. columns.
 
         public static int currentMoves;
-        public static List<Scoreboard> scores = new List<Scoreboard>(4);
+        public static List<PlayerScore> scores = new List<PlayerScore>(4);
 
         static void Main(string[] args)
         {
-
-
-
             positionX = positionY = 3;  // player position
             commandListener = playing = true;
             string[,] labyrinth = new string[7, 7];
@@ -48,88 +43,52 @@ namespace kursov_proekt
                 while (flag) //used for adding score only when game is finished naturally and not by the restart command.
                 {
                     AddScore(scores, currentMoves);
-
                 }
             }
         }
-        static void AddScore(List<Scoreboard> scores, int currentMoves)
+
+        static void AddScore(List<PlayerScore> scores, int currentMoves)
         {
             if (scores.Count != 0)
             {
-                scores.Sort(delegate(Scoreboard s1, Scoreboard s2) { return s1.moves.CompareTo(s2.moves); });
+                scores.Sort((s1, s2) => s1.Moves.CompareTo(s2.Moves));
             }
-
 
             if (scores.Count == 5)
             {
-
-                if (scores[4].moves > currentMoves)
+                if (scores[4].Moves > currentMoves)
                 {
-
                     scores.Remove(scores[4]);
                     Console.WriteLine("Please enter your nickname");
                     string name = Console.ReadLine();
-                    scores.Add(new Scoreboard(currentMoves, name));
+                    scores.Add(new PlayerScore(currentMoves, name));
                     ShowScoreboard(scores);
-
                 }
-
             }
             if (scores.Count < 5)
             {
                 Console.WriteLine("Please enter your nickname");
                 string name = Console.ReadLine();
-                scores.Add(new Scoreboard(currentMoves, name));
+                scores.Add(new PlayerScore(currentMoves, name));
                 ShowScoreboard(scores);
             }
 
-
             flag = false;
-
-        }
-
-        static void ShowScoreboard(List<Scoreboard> scores)
-        {
-            Console.WriteLine("\n");
-            if (scores.Count == 0) { Console.WriteLine("The scoreboard is empty! "); }
-            else
-            {
-                int i = 1;
-                scores.Sort(delegate(Scoreboard s1, Scoreboard s2) { return s1.moves.CompareTo(s2.moves); });
-                Console.WriteLine("Top 5: \n");
-                scores.ForEach(delegate(Scoreboard s)
-                {
-
-
-
-                    Console.WriteLine(String.Format(i+". {1} ---> {0} moves", s.moves, s.name));
-                    i++;   
-                }
-                );
-                Console.WriteLine("\n");
-            }
-
         }
 
         static void TypeCommand(string[,] labyrinth, bool flag_temp, int x, int y)
         {
-
             currentMoves = 0;
 
             while (flag_temp)
             {
-
-
                 Console.Write("\nEnter your move (L=left, R=right, D=down, U=up): ");
                 string i = string.Empty;
                 i = Console.ReadLine();
 
-
-
                 switch (i)
                 {
                     case "d":
-
 
                         if (labyrinth[x + 1, y] == "-")
                         {
@@ -141,13 +100,10 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (x == 6)
                         {
-
-
                             Console.WriteLine("\nCongratulations you escaped with {0} moves.\n", currentMoves);
                             flag_temp = false;
 
@@ -156,11 +112,7 @@ namespace kursov_proekt
 
                         DisplayLabyrinth(labyrinth);
 
-
-
-
                         break;
-
                     case "D":
                         if (labyrinth[x + 1, y] == "-")
                         {
@@ -172,7 +124,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (x == 6)
@@ -185,10 +136,6 @@ namespace kursov_proekt
                         DisplayLabyrinth(labyrinth);
 
                         break;
-
-
-
-
                     case "u":
                         if (labyrinth[x - 1, y] == "-")
                         {
@@ -200,7 +147,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (x == 0)
@@ -211,7 +157,6 @@ namespace kursov_proekt
                         }
 
                         DisplayLabyrinth(labyrinth);
-
 
                         break;
                     case "U":
@@ -225,7 +170,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (x == 0)
@@ -236,7 +180,6 @@ namespace kursov_proekt
                         }
 
                         DisplayLabyrinth(labyrinth);
-
 
                         break;
                     case "r":
@@ -251,7 +194,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (y == 6)
@@ -276,7 +218,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (y == 6)
@@ -301,7 +242,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (y == 0)
@@ -326,7 +266,6 @@ namespace kursov_proekt
                         else
                         {
                             Console.WriteLine("\nInvalid move! \n ");
-
                         }
 
                         if (y == 0)
@@ -337,7 +276,6 @@ namespace kursov_proekt
                         }
 
                         DisplayLabyrinth(labyrinth);
-
 
                         break;
                     case "top":
@@ -358,55 +296,49 @@ namespace kursov_proekt
                     default:
                         Console.WriteLine("Invalid command!");
                         break;
-
                 }
-
             }
         }
 
         static void LabyrinthGenerator(string[,] labyrinth, int x, int y)
         {
-
             Random randomInt = new Random();
 
             for (int i = 0; i < 7; i++)
             {
-
-
                 for (int j = 0; j < 7; j++)
                 {
                     labyrinth[i, j] = Convert.ToString(randomInt.Next(2));
-                    if (labyrinth[i, j] == "0") { labyrinth[i, j] = "-"; } else { labyrinth[i, j] = "x"; }
+                    if (labyrinth[i, j] == "0")
+                    {
+                        labyrinth[i, j] = "-";
+                    }
+                    else
+                    {
+                        labyrinth[i, j] = "x";
+                    }
                 }
-
-
             }
             labyrinth[positionX, positionY] = "*";
         }
 
         static void SolutionChecker(string[,] labyrinth, int x, int y)
         {
-
             bool checking = true;
-
 
             if (labyrinth[x + 1, y] == "x" && labyrinth[x, y + 1] == "x" && labyrinth[x - 1, y] == "x" && labyrinth[x, y - 1] == "x")
             {
                 checking = false;
-
             }
 
             while (checking)
             {
                 try
                 {
-
-
                     if (labyrinth[x + 1, y] == "-")
                     {
                         labyrinth[x + 1, y] = "0";
                         x++;
-
                     }
                     else if (labyrinth[x, y + 1] == "-")
                     {
@@ -426,26 +358,23 @@ namespace kursov_proekt
                     else
                     {
                         checking = false;
-
                     }
-
                 }
                 catch (Exception)
                 {
                     for (int i = 0; i < 7; i++)
                     {
-
-
                         for (int j = 0; j < 7; j++)
                         {
-
-                            if (labyrinth[i, j] == "0") { labyrinth[i, j] = "-"; }
+                            if (labyrinth[i, j] == "0")
+                            {
+                                labyrinth[i, j] = "-";
+                            }
                         }
 
                         checking = false;
                         mazeHasSolution = true;
                     }
-
                 }
             }
         }
@@ -467,21 +396,25 @@ namespace kursov_proekt
             Console.WriteLine();
         }
 
-    }
-
-    public class Scoreboard
-    {
-        public int moves;
-        public string name;
-
-        public Scoreboard(int moves, string name)
+        private static void ShowScoreboard(List<PlayerScore> scores)
         {
-            this.moves = moves;
-            this.name = name;
+            Console.WriteLine("\n");
+            if (scores.Count == 0)
+            {
+                Console.WriteLine("The scoreboard is empty! ");
+            }
+            else
+            {
+                int i = 1;
+                scores.Sort((s1,s2) => s1.Moves.CompareTo(s2.Moves));
+                Console.WriteLine("Top 5: \n");
+                scores.ForEach(delegate(PlayerScore s)
+                {
+                    Console.WriteLine(String.Format(i + ". {1} ---> {0} moves", s.Moves, s.Name));
+                    i++;   
+                });
+                Console.WriteLine("\n");
+            }
         }
-
     }
-
 }
-
-

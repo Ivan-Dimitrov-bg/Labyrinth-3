@@ -43,10 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="kursov_proekt.cs" />
+    <Compile Include="CommandListener.cs" />
+    <Compile Include="Interfaces\ICommender.cs" />
+    <Compile Include="Interfaces\ILabyrnith.cs" />
+    <Compile Include="Interfaces\IScoreBoard.cs" />
+    <Compile Include="kursov-proekt.cs" />
+    <Compile Include="Labyrinth.cs" />
+    <Compile Include="PlayerPosition.cs" />
+    <Compile Include="PlayerScore.cs" />
+    <Compile Include="ScoreBoard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lab3ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
