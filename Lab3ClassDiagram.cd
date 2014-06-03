@@ -8,11 +8,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Labyrinth.Program" Collapsed="true">
+  <Class Name="Labyrinth.Labyrinth3Game" Collapsed="true">
     <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAJgIIAAAAAAgQACBgQQABAAAAAA=</HashCode>
-      <FileName>kursov-proekt.cs</FileName>
+      <FileName>Labyrinth3Game.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.Labyrinth" Collapsed="true" BaseTypeListCollapsed="true">
@@ -49,13 +49,13 @@
     <Position X="0.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\ICommender.cs</FileName>
+      <FileName>Interfaces\ICommander.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Labyrinth.Intefaces.ILabyrnith" Collapsed="true">
     <Position X="2.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\ILabyrnith.cs</FileName>
     </TypeIdentifier>
   </Interface>

@@ -8,7 +8,7 @@ namespace Labyrinth
 {
     // ej na tova mu se vika kasha. ima vsiakakvi podpravki, moze da dobavite oshte sol i da izhvurlite na bokluka
     // happy hacking!
-    class Program
+    class Labyrinth3Game
     {
         private static bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
         private static bool commandListener; //waiting for input.
@@ -23,6 +23,9 @@ namespace Labyrinth
 
         static void Main(string[] args)
         {
+            //Only these should remain in the Main method:
+            //GameEngine gameStarter = new GameEngine();
+            //gameStarter.Start();
             positionX = positionY = 3;  // player position
             commandListener = playing = true;
             string[,] labyrinth = new string[7, 7];

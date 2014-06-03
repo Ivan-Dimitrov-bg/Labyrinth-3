@@ -14,13 +14,14 @@ namespace Labyrinth
             throw new NotImplementedException();
         }
 
-        public bool HasSolutuon()
+        public void DisplayLabyrint()
         {
             // TODO: Implement this method
             throw new NotImplementedException();
         }
 
-        public void DisplayLabyrint()
+        
+        private bool HasSolutuon()
         {
             // TODO: Implement this method
             throw new NotImplementedException();

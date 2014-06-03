@@ -9,8 +9,6 @@ namespace Labyrinth.Intefaces
     {
         void GenerateLabyrinth();
 
-        bool HasSolutuon();
-
         void DisplayLabyrint();
     }
 }

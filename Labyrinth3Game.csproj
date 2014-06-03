@@ -44,10 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandListener.cs" />
-    <Compile Include="Interfaces\ICommender.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="Interfaces\ICommander.cs" />
+    <Compile Include="Interfaces\IEngine.cs" />
     <Compile Include="Interfaces\ILabyrnith.cs" />
     <Compile Include="Interfaces\IScoreBoard.cs" />
-    <Compile Include="kursov-proekt.cs" />
+    <Compile Include="Labyrinth3Game.cs" />
     <Compile Include="Labyrinth.cs" />
     <Compile Include="PlayerPosition.cs" />
     <Compile Include="PlayerScore.cs" />
