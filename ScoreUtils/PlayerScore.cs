@@ -22,7 +22,7 @@ namespace Labyrinth.ScoreUtils
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("moves","Moves cannot be negative!");
+                    throw new ArgumentException("Moves cannot be negative!", "moves");
                 }
                 this.playerMoves = value;
             }
@@ -38,7 +38,7 @@ namespace Labyrinth.ScoreUtils
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("name","Name cannot be null or empty!");
+                    throw new ArgumentException("Name cannot be null or empty!", "name");
                 }
                 this.playerName = value;
             }
