@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Labyrinth.Intefaces
+namespace Labyrinth.Interfaces
 {
-    public interface ILabyrnith
+    public interface IMaze
     {
         void GenerateLabyrinth();
 
         void DisplayLabyrint();
+
     }
 }

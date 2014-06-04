@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Labyrinth.Intefaces;
+using Labyrinth.Interfaces;
 
-namespace Labyrinth
+namespace Labyrinth.GameObjects
 {
-    public class CommandListener : ICommander
+    public  class CommandListener : ICommander
     {
+
         public void ExecuteCommand()
         {
             // TODO: Implement this method

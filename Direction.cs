@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Labyrinth
 {
-    public struct PlayerPosition
+    public enum Direction
     {
-        public int X { get; set; }
-
-        public int Y { get; set; }
+        Up,
+        Down,
+        Left,
+        Right
     }
 }

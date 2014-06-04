@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Labyrinth.Interfaces
 {
-    public interface IEngine
+    public interface ICell
     {
-        void Start();
+        char Value { get; set; }
+
+        bool IsEmpty { get; }
     }
 }

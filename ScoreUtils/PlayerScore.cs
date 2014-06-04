@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Labyrinth.Interfaces;
 
-namespace Labyrinth
+namespace Labyrinth.ScoreUtils
 {
     public class PlayerScore
     {
@@ -41,14 +42,7 @@ namespace Labyrinth
                 }
                 this.playerName = value;
             }
-        }
+        }     
 
-        public PlayerScore(int moves, string name)
-        {
-            this.playerMoves = moves;
-            this.playerName = name;
-        }
-
-        
     }
 }

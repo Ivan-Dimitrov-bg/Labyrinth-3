@@ -43,17 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandListener.cs" />
+    <Compile Include="Direction.cs" />
+    <Compile Include="GameObjects\CommandListener.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="GameObjects\Cell.cs" />
+    <Compile Include="Interfaces\ICell.cs" />
     <Compile Include="Interfaces\ICommander.cs" />
-    <Compile Include="Interfaces\IEngine.cs" />
-    <Compile Include="Interfaces\ILabyrnith.cs" />
+    <Compile Include="Interfaces\IMaze.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IScoreBoard.cs" />
+    <Compile Include="GameObjects\MazeCell.cs" />
     <Compile Include="Labyrinth3Game.cs" />
-    <Compile Include="Labyrinth.cs" />
-    <Compile Include="PlayerPosition.cs" />
-    <Compile Include="PlayerScore.cs" />
-    <Compile Include="ScoreBoard.cs" />
+    <Compile Include="GameObjects\Maze.cs" />
+    <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="ScoreUtils\PlayerScore.cs" />
+    <Compile Include="ScoreUtils\ScoreBoard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

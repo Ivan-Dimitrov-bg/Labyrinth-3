@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Labyrinth.ScoreUtils;
 
-namespace Labyrinth.Intefaces
+namespace Labyrinth.Interfaces
 {
     public interface IScoreBoard
     {
-        void AddScore();
+        void AddScore(PlayerScore currentPlayer);
 
         void ShowScore();
     }
