@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Labyrinth.GameEngine;
 using Labyrinth.Interfaces;
 using Labyrinth.ScoreUtils;
 
@@ -9,7 +10,6 @@ namespace Labyrinth.GameObjects
 {
     public class Player : Cell, IPlayer
     {
-        private const char PLAYER_VALUE = '*';
 
         public int X { get; set; }
 
@@ -19,7 +19,7 @@ namespace Labyrinth.GameObjects
 
         public Direction Direction { get; set; }
 
-        public Player(int x, int y) : base(PLAYER_VALUE)
+        public Player(int x, int y) : base(GameConstants.PLAYER_VALUE)
         {
             this.X = x;
             this.Y = y;

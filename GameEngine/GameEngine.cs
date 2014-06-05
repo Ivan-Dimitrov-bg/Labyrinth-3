@@ -2,39 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Labyrinth;
 using Labyrinth.GameObjects;
 using Labyrinth.Interfaces;
 using Labyrinth.ScoreUtils;
 
-namespace Labyrinth
+namespace Labyrinth.GameEngine
 {
     public class GameEngine
     {
-        private const bool PLAYING = true; //game in progress.      
-        private const int PLAYER_INITIAL_XY = 3;
-        private const int LAB_DIMENSIONS = 7;
-
+        
         private readonly Player player;
         private readonly ScoreBoard scores;
-        private readonly Maze labyrinth ;
+        private readonly Maze labyrinth;
 
         public GameEngine()
         {
-            player = new Player(PLAYER_INITIAL_XY, PLAYER_INITIAL_XY);
+            player = new Player(GameConstants.PLAYER_INITIAL,GameConstants.PLAYER_INITIAL);
+            labyrinth = new Maze(GameConstants.LAB_DIMENSIONS, GameConstants.LAB_DIMENSIONS);
             scores = new ScoreBoard();
-            labyrinth = new Maze(LAB_DIMENSIONS, LAB_DIMENSIONS);
         }
 
         public void Start()
         {
-            while (PLAYING)
+            while (GameConstants.PLAYING)
             {
-                Console.WriteLine("Welcome to \"Labyrinth\" game. Please try to escape. Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n ");
-                
+                Renderer.RenderMessage(GameConstants.WELCOME_MESSAGE);
+               
                 player.Score = new PlayerScore();
-
-                labyrinth.GenerateLabyrinth();
-                labyrinth.DisplayLabyrint();
+                
+                labyrinth.GenerateMaze();
+                Renderer.RenderMaze(labyrinth);
                 TypeCommand(player.X, player.Y);
             }
         }
@@ -43,9 +41,8 @@ namespace Labyrinth
         {
             while (true)
             {
-                Console.Write("\nEnter your move (L=left, R=right, D=down, U=up): ");
-                string i = string.Empty;
-                i = Console.ReadLine();
+                Renderer.RenderMessage(GameConstants.INPUT_MESSAGE);
+                string i = Console.ReadLine();
 
                 switch (i)
                 {
@@ -53,34 +50,34 @@ namespace Labyrinth
                     case "D":
                         if (labyrinth[x + 1, y].IsEmpty)
                         {
-                            labyrinth[x, y] = new MazeCell('-');
+                            labyrinth[x, y] = new MazeCell(GameConstants.EMPTY_CELL);
                             x++;
                             labyrinth[x, y] = player;
                             player.Score.Moves++;
                         }
                         else
                         {
-                            Console.WriteLine("\nInvalid move! \n ");
+                            Renderer.RenderMessage(GameConstants.INPUT_MESSAGE);
                         }
                       
-                        labyrinth.DisplayLabyrint();
+                       Renderer.RenderMaze(labyrinth);
 
                         break;
                     case "u":                       
                     case "U":
                         if (labyrinth[x - 1, y].IsEmpty)
                         {
-                            labyrinth[x, y] = new MazeCell('-');
+                            labyrinth[x, y] = new MazeCell(GameConstants.EMPTY_CELL);
                             x--;
                             labyrinth[x, y] = player;
                             player.Score.Moves++;
                         }
                         else
                         {
-                            Console.WriteLine("\nInvalid move! \n ");
+                            Renderer.RenderMessage(GameConstants.INVALID_MOVE_MESSAGE);
                         }
 
-                        labyrinth.DisplayLabyrint();
+                        Renderer.RenderMaze(labyrinth);
 
                         break;
                     case "r":                       
@@ -88,7 +85,7 @@ namespace Labyrinth
 
                         if (labyrinth[x, y + 1].IsEmpty)
                         {
-                            labyrinth[x, y] = new MazeCell('-');
+                            labyrinth[x, y] = new MazeCell(GameConstants.EMPTY_CELL);
                             y++;
                             labyrinth[x, y] = player;
 
@@ -96,15 +93,15 @@ namespace Labyrinth
                         }
                         else
                         {
-                            Console.WriteLine("\nInvalid move! \n ");
+                            Renderer.RenderMessage(GameConstants.INVALID_MOVE_MESSAGE);
                         }
-                        labyrinth.DisplayLabyrint();
+                        Renderer.RenderMaze(labyrinth);
                         break;
                     case "l":
                     case "L":
                         if (labyrinth[x, y - 1].IsEmpty)
                         {
-                            labyrinth[x, y] = new MazeCell('-');
+                            labyrinth[x, y] = new MazeCell(GameConstants.EMPTY_CELL);
                             y--;
                             labyrinth[x, y] = player;
 
@@ -112,38 +109,31 @@ namespace Labyrinth
                         }
                         else
                         {
-                            Console.WriteLine("\nInvalid move! \n ");
+                            Renderer.RenderMessage(GameConstants.INVALID_MOVE_MESSAGE);
                         }
-                        labyrinth.DisplayLabyrint();
+                        Renderer.RenderMaze(labyrinth);
                         break;
                     case "top":
                         scores.ShowScore();
-                        Console.WriteLine("\n");
-                        labyrinth.DisplayLabyrint();
+                        Renderer.RenderMessage(GameConstants.NEW_LINE);
+                        Renderer.RenderMaze(labyrinth);
                         break;
                     case "restart":
                         return;
                     case "exit":
-                        Console.WriteLine("Good bye!");
+                        Renderer.RenderMessage(GameConstants.INVALID_MOVE_MESSAGE);
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Invalid command!");
+                        Renderer.RenderMessage(GameConstants.INVALID_MOVE_MESSAGE);
                         break;
                 }
                 if (x == 0 || x == this.labyrinth.Rows - 1 || y == 0 || y == this.labyrinth.Cols - 1)
                 {
-                    this.PrintHighScores();
+                    Renderer.RenderScore(scores, player);
+                    return;
                 }
             }
-        }
-
-        private void PrintHighScores()
-        {
-            Console.WriteLine("\nCongratulations you escaped with {0} moves.\n", player.Score.Moves);
-            scores.AddScore(player.Score);
-            scores.ShowScore();
-            
         }
     }
 }

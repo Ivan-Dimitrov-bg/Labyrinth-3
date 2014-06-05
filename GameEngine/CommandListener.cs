@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using Labyrinth.Interfaces;
 
-namespace Labyrinth.GameObjects
+namespace Labyrinth.GameEngine
 {
-    public  class CommandListener : ICommander
+    public  class CommandListener 
     {
-
         public void ExecuteCommand()
         {
             // TODO: Implement this method

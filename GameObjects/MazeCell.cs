@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Labyrinth.GameEngine;
 
 namespace Labyrinth.GameObjects
 {
     public class MazeCell : Cell
     {
-        private const char WALL = 'x';
-        private static Random randomInt = new Random();
+        
+        private static readonly Random randomInt = new Random();
 
         public MazeCell(char value) : base(value)
         {
@@ -18,7 +19,7 @@ namespace Labyrinth.GameObjects
         {
             get
             {
-                return this.Value == EMPTY_CELL;
+                return this.Value == GameConstants.EMPTY_CELL;
             }
         }
 
@@ -27,11 +28,11 @@ namespace Labyrinth.GameObjects
             int valueDecider = randomInt.Next(2);
             if (valueDecider == 0)
             {
-                return new MazeCell(EMPTY_CELL);
+                return new MazeCell(GameConstants.EMPTY_CELL);
             }
             else
             {
-                return new MazeCell(WALL);
+                return new MazeCell(GameConstants.WALL);
             }
         }
     }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Labyrinth.GameEngine;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.ScoreUtils
 {
     public class ScoreBoard : IScoreBoard
     {
-        private const int MAX_SCORELIST_SIZE = 5;
         private readonly List<PlayerScore> scores;
 
         public ScoreBoard()
@@ -18,19 +19,19 @@ namespace Labyrinth.ScoreUtils
 
         public void AddScore(PlayerScore currentPlayerScore)
         {
-            if (scores.Count == MAX_SCORELIST_SIZE)
+            if (scores.Count == GameConstants.MAX_SCORELIST_SIZE)
             {
-                if (scores[MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)
+                if (scores[GameConstants.MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)
                 {
                     scores.Remove(scores[4]);
-                    Console.WriteLine("Please enter your nickname");
+                    Renderer.RenderMessage(GameConstants.NICKNAME_INPUT_MESSAGE);
                     currentPlayerScore.Name = Console.ReadLine();
                     scores.Add(currentPlayerScore);
                 }
             }
-            if (scores.Count < MAX_SCORELIST_SIZE)
+            if (scores.Count < GameConstants.MAX_SCORELIST_SIZE)
             {
-                Console.WriteLine("Please enter your nickname");
+               Renderer.RenderMessage(GameConstants.NICKNAME_INPUT_MESSAGE);
                 currentPlayerScore.Name = Console.ReadLine();
                 scores.Add(currentPlayerScore);
             }
@@ -40,21 +41,21 @@ namespace Labyrinth.ScoreUtils
 
         public void ShowScore()
         {
-            Console.WriteLine("\n");
+            Renderer.RenderMessage(GameConstants.NEW_LINE);
             if (this.scores.Count == 0)
             {
-                Console.WriteLine("The scoreboard is empty! ");
+                Renderer.RenderMessage(GameConstants.EMPTY_SCOREBOARD_MESSAGE);
             }
             else
             {
                 int playerPosition = 1;
-                Console.WriteLine("Top 5: \n");
+                Renderer.RenderMessage(GameConstants.TOP_FIVE_MESSAGE);
                 this.scores.ForEach((s) =>
                 {
-                    Console.WriteLine(String.Format(playerPosition + ". {1} ---> {0} moves", s.Moves, s.Name));
+                    Renderer.RenderMessage(String.Format(playerPosition + ". {1} ---> {0} moves", s.Moves, s.Name));
                     playerPosition++;   
                 });
-                Console.WriteLine("\n");
+               Renderer.RenderMessage(GameConstants.NEW_LINE);
             }
         }
 

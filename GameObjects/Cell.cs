@@ -8,8 +8,7 @@ namespace Labyrinth.GameObjects
 {
     public abstract class Cell : ICell
     {
-        protected const char EMPTY_CELL = '-';
-        
+       
         public char Value { get; set; }
 
         public virtual bool IsEmpty

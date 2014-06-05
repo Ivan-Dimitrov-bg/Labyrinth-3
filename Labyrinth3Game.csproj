@@ -43,19 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Direction.cs" />
-    <Compile Include="GameObjects\CommandListener.cs" />
-    <Compile Include="GameEngine.cs" />
+    <Compile Include="GameEngine\Direction.cs" />
+    <Compile Include="GameEngine\CommandListener.cs" />
+    <Compile Include="GameEngine\GameConstants.cs" />
+    <Compile Include="GameEngine\GameEngine.cs" />
     <Compile Include="GameObjects\Cell.cs" />
     <Compile Include="Interfaces\ICell.cs" />
-    <Compile Include="Interfaces\ICommander.cs" />
     <Compile Include="Interfaces\IMaze.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IScoreBoard.cs" />
     <Compile Include="GameObjects\MazeCell.cs" />
-    <Compile Include="Labyrinth3Game.cs" />
+    <Compile Include="GameEngine\LabyrinthGame.cs" />
     <Compile Include="GameObjects\Maze.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameEngine\Renderer.cs" />
     <Compile Include="ScoreUtils\PlayerScore.cs" />
     <Compile Include="ScoreUtils\ScoreBoard.cs" />
   </ItemGroup>

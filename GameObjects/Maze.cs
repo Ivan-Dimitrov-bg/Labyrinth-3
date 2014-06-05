@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Labyrinth.GameEngine;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.GameObjects
 {
     public class Maze : IMaze
-    {
-        private const int PLAYER_INITIAL_X = 3;
-        private const int PLAYER_INITIAL_Y = 3;
-        private const char VISITED_CELL_MARKER = '0';
-
-        private readonly Player Player = new Player(PLAYER_INITIAL_X,PLAYER_INITIAL_X);
+    {        
         private readonly ICell[,] lab;
+        private bool mazeHasSolution;
 
         public ICell this[int row, int col]
         {
@@ -52,23 +49,26 @@ namespace Labyrinth.GameObjects
             lab = new Cell[rows, cols];
         }
 
-        public void GenerateLabyrinth()
+        public void GenerateMaze()
         {
-            do
+            mazeHasSolution = false;
+
+            while (!mazeHasSolution)                
             {
                 for (int i = 0; i < this.Rows; i++)
                 {
                     for (int j = 0; j < this.Cols; j++)
                     {
-                        this.lab[i, j] = MazeCell.GenerateRandomCell(); ;
+                        this.lab[i, j] = MazeCell.GenerateRandomCell();
                     }
-                }
-                this.lab[PLAYER_INITIAL_X, PLAYER_INITIAL_X] = Player;
+                }                
+                this.HasSolutuon(GameConstants.PLAYER_INITIAL, GameConstants.PLAYER_INITIAL);
+                this.lab[GameConstants.PLAYER_INITIAL, GameConstants.PLAYER_INITIAL] = 
+                    new Player(GameConstants.PLAYER_INITIAL, GameConstants.PLAYER_INITIAL);
             }
-            while (!this.HasSolutuon(PLAYER_INITIAL_X, PLAYER_INITIAL_X));
         }
 
-        public void DisplayLabyrint()
+        public void DisplayMaze()
         {
             for (int i = 0; i < this.Rows; i++)
             {
@@ -85,53 +85,66 @@ namespace Labyrinth.GameObjects
             Console.WriteLine();
         }
         
-        private bool HasSolutuon(int row, int col)
+        private void HasSolutuon(int row, int col)
         {
-            while (!InRange(row, this.Rows) || !InRange(col, this.Cols))
-            { 
-                if (lab[row + 1, col].IsEmpty)
-                {
-                    lab[row + 1, col].Value = VISITED_CELL_MARKER;
-                    row++;
-                }
-                else if (lab[row, col + 1].IsEmpty)
-                {
-                    lab[row + 1, col].Value = VISITED_CELL_MARKER;
-                    col++;
-                }
-                else if (lab[row - 1, col].IsEmpty)
-                {
-                    lab[row + 1, col].Value = VISITED_CELL_MARKER;
-                    row--;
-                }
-                else if (lab[row, col - 1].IsEmpty)
-                {
-                    lab[row + 1, col].Value = VISITED_CELL_MARKER;
-                    col--;
-                }
-                else
-                {
-                    return false;
-                }
+            bool checking = true;
+
+            if (!lab[row + 1, col].IsEmpty && !lab[row, col + 1].IsEmpty && !lab[row - 1, col].IsEmpty && !lab[row, col - 1].IsEmpty)
+            {
+                checking = false;
             }
 
-            for (int i = 0; i < 7; i++)
+            while (checking)
             {
-                for (int j = 0; j < 7; j++)
+                try
                 {
-                    if (lab[i, j].Value == VISITED_CELL_MARKER)
+                    if (lab[row + 1, col].IsEmpty)
                     {
-                        lab[i, j].Value = '-';
+                        lab[row + 1, col].Value = GameConstants.VISITED_CELL_MARKER;
+                        row++;
+                    }
+                    else if (lab[row, col + 1].IsEmpty)
+                    {
+                        lab[row, col + 1].Value = GameConstants.VISITED_CELL_MARKER;
+                        col++;
+                    }
+                    else if (lab[row - 1, col].IsEmpty)
+                    {
+                        lab[row - 1, col].Value = GameConstants.VISITED_CELL_MARKER;
+                        row--;
+                    }
+                    else if (lab[row, col - 1].IsEmpty)
+                    {
+                        lab[row, col - 1].Value = GameConstants.VISITED_CELL_MARKER;
+                        col--;
+                    }
+                    else
+                    {
+                        checking = false;
+                    }
+                }
+                catch (Exception)
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        for (int j = 0; j < 7; j++)
+                        {
+                            if (lab[i, j].Value == GameConstants.VISITED_CELL_MARKER)
+                            {
+                                lab[i, j].Value = '-';
+                            }
+                        }
+
+                        checking = false;
+                        mazeHasSolution = true;
                     }
                 }
             }
-
-            return true;
         }
 
         private bool InRange(int index, int length)
         {
-            return 0 <= index || index < length;
+            return 0 <= index && index < length;
         }
     }
 }

@@ -7,9 +7,14 @@ namespace Labyrinth.Interfaces
 {
     public interface IMaze
     {
-        void GenerateLabyrinth();
+        int Rows { get; }
 
-        void DisplayLabyrint();
+        int Cols { get; }
 
+        ICell this[int row, int col] { get; set; }
+
+        void GenerateMaze();
+
+        void DisplayMaze();
     }
 }

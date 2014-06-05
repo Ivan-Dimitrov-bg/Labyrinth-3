@@ -1,33 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Labyrinth.GameObjects.CommandListener" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Labyrinth.GameEngine.CommandListener" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>GameObjects\CommandListener.cs</FileName>
+      <FileName>GameEngine\CommandListener.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Labyrinth.GameEngine" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Labyrinth.GameEngine.GameEngine" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAQAAAAAIAAAAAIAgACABAAAABAAAgAA=</HashCode>
-      <FileName>GameEngine.cs</FileName>
+      <HashCode>AAAAAAAAACAAAQAAAAAIAAAAAAAgAAABAAAAAAAAAAA=</HashCode>
+      <FileName>GameEngine\GameEngine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.GameObjects.Maze" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AjAAIAAAAAAAAEAICAEAAIAEAAAAAAAAAAAAAQAAAAI=</HashCode>
+      <HashCode>AgAAIAAAAAAAAEAASBAAAIAAAAAAAAAAAAAAAAAACAI=</HashCode>
       <FileName>GameObjects\Maze.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="LabGame.Labyrinth3Game" Collapsed="true">
+  <Class Name="Labyrinth.GameEngine.LabyrinthGame" Collapsed="true">
     <Position X="0.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Labyrinth3Game.cs</FileName>
+      <FileName>GameEngine\LabyrinthGame.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.ScoreUtils.PlayerScore" Collapsed="true">
@@ -40,7 +39,7 @@
   <Class Name="Labyrinth.ScoreUtils.ScoreBoard" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="4.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAQAAAAAAAAAAIAAAAAAAAAAABAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAQAAAAAAAAAAIAAAAAAAAAAABAAAgAAAAAAA=</HashCode>
       <FileName>ScoreUtils\ScoreBoard.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -48,7 +47,7 @@
   <Interface Name="Labyrinth.Interfaces.IMaze" Collapsed="true">
     <Position X="4.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAEAASAAAAIAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Interfaces\IMaze.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -57,13 +56,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IScoreBoard.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Labyrinth.Interfaces.ICommander" Collapsed="true">
-    <Position X="0.75" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\ICommander.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
