@@ -7,7 +7,7 @@ using Labyrinth.ScoreUtils;
 
 namespace Labyrinth.Interfaces
 {
-    public interface IPlayer
+    public interface IPlayer : ICell
     {
         int X { get; set; }
         
