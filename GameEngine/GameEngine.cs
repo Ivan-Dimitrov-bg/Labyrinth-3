@@ -127,9 +127,9 @@ namespace Labyrinth.GameEngine
                     case "restart":
                         return;
                     case "exit":
-                        Renderer.RenderMessage(INVALID_MOVE_MESSAGE);
+                        Renderer.RenderMessage(GOODBYE_MESSAGE);
                         isPlaying = false;
-                        break;
+                        return;
                     default:
                         Renderer.RenderMessage(INVALID_MOVE_MESSAGE);
                         break;

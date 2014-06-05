@@ -56,9 +56,9 @@ namespace Labyrinth.ScoreUtils
             {
                 int playerPosition = 1;
                 Renderer.RenderMessage(TOP_FIVE_MESSAGE);
-                this.scores.ForEach((s) =>
+                this.scores.ForEach((currentPlayer) =>
                 {
-                    Renderer.RenderMessage(SCORELIST_ROW_TEMPLATE, playerPosition, s.Name, s.Moves);
+                    Renderer.RenderMessage(SCORELIST_ROW_TEMPLATE, playerPosition, currentPlayer.Name, currentPlayer.Moves);
                     playerPosition++;   
                 });
                 Renderer.RenderMessage(NEW_LINE);
@@ -67,7 +67,7 @@ namespace Labyrinth.ScoreUtils
 
         private void SortScores()
         {
-            this.scores.Sort((s1, s2) => s1.Moves.CompareTo(s2.Moves));
+            this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
     }
 }
