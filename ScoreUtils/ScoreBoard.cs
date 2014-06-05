@@ -52,7 +52,7 @@ namespace Labyrinth.ScoreUtils
                 Renderer.RenderMessage(GameConstants.TOP_FIVE_MESSAGE);
                 this.scores.ForEach((s) =>
                 {
-                    Renderer.RenderMessage(String.Format(playerPosition + ". {1} ---> {0} moves", s.Moves, s.Name));
+                    Renderer.RenderMessage(playerPosition + ". {1} ---> {0} moves", s.Moves, s.Name);
                     playerPosition++;   
                 });
                Renderer.RenderMessage(GameConstants.NEW_LINE);

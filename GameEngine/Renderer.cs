@@ -17,15 +17,15 @@ namespace Labyrinth.GameEngine
             scores.ShowScore();
         }
 
-        public static void RenderMessage(string message, params object[] obj)
+        public static void RenderMessage(string message, params object[] args)
         {
-            if (obj == null)
+            if (args == null)
             {
                 Console.WriteLine(message);
             }
             else
             {
-                Console.WriteLine(message, obj);
+                Console.WriteLine(message, args);
             }
         }
     }
