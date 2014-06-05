@@ -8,10 +8,12 @@ namespace Labyrinth.GameObjects
 {
     public class MazeCell : Cell
     {
-        
-        private static readonly Random randomInt = new Random();
+        private const char WALL = 'x';
+        private const char DEFAULT_CELL_VALUE = '-';
 
-        public MazeCell(char value) : base(value)
+        private static readonly Random randomInt = new Random();
+        
+        public MazeCell(char value = DEFAULT_CELL_VALUE) : base(value)
         {
         }
 
@@ -19,20 +21,21 @@ namespace Labyrinth.GameObjects
         {
             get
             {
-                return this.Value == GameConstants.EMPTY_CELL;
+                return this.Value == DEFAULT_CELL_VALUE;
             }
         }
 
         public static MazeCell GenerateRandomCell()
         {
             int valueDecider = randomInt.Next(2);
+            
             if (valueDecider == 0)
             {
-                return new MazeCell(GameConstants.EMPTY_CELL);
+                return new MazeCell();
             }
             else
             {
-                return new MazeCell(GameConstants.WALL);
+                return new MazeCell(WALL);
             }
         }
     }

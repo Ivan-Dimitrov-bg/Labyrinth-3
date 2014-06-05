@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="GameEngine\Direction.cs" />
     <Compile Include="GameEngine\CommandListener.cs" />
-    <Compile Include="GameEngine\GameConstants.cs" />
     <Compile Include="GameEngine\GameEngine.cs" />
     <Compile Include="GameObjects\Cell.cs" />
     <Compile Include="Interfaces\ICell.cs" />

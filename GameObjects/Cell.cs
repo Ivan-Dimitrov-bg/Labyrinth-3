@@ -8,7 +8,6 @@ namespace Labyrinth.GameObjects
 {
     public abstract class Cell : ICell
     {
-       
         public char Value { get; set; }
 
         public virtual bool IsEmpty

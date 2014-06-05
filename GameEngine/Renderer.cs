@@ -4,7 +4,9 @@ using Labyrinth.Interfaces;
 namespace Labyrinth.GameEngine
 {
     public static class Renderer
-    {
+    {      
+        private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
+
         public static void RenderMaze(IMaze maze)
         {
             maze.DisplayMaze();
@@ -13,7 +15,7 @@ namespace Labyrinth.GameEngine
         public static void RenderScore(IScoreBoard scores, IPlayer player)
         {
             scores.AddScore(player.Score);
-            Renderer.RenderMessage(GameConstants.CONGRATULATIONS_MESSAGE, player.Score.Moves);            
+            Renderer.RenderMessage(CONGRATULATIONS_MESSAGE, player.Score.Moves);            
             scores.ShowScore();
         }
 

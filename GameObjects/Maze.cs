@@ -8,7 +8,11 @@ using Labyrinth.Interfaces;
 namespace Labyrinth.GameObjects
 {
     public class Maze : IMaze
-    {        
+    { 
+        private const int LAB_DIMENSIONS = 7;
+        private const char VISITED_CELL_MARKER = '0';
+        private const string OUTOFRANGE_MSG = "Position is out of the maze!";
+        
         private readonly ICell[,] lab;
         private bool mazeHasSolution;
 
@@ -22,7 +26,7 @@ namespace Labyrinth.GameObjects
             {
                 if (!InRange(row, this.Rows) || !InRange(col, this.Cols))
                 {
-                    throw new IndexOutOfRangeException("Position is out of the maze!");
+                    throw new IndexOutOfRangeException(OUTOFRANGE_MSG);
                 }
                 this.lab[row, col] = value;
             }
@@ -44,7 +48,7 @@ namespace Labyrinth.GameObjects
             }
         }
 
-        public Maze(int rows, int cols)
+        public Maze(int rows=LAB_DIMENSIONS, int cols=LAB_DIMENSIONS)
         {
             lab = new Cell[rows, cols];
         }
@@ -61,28 +65,24 @@ namespace Labyrinth.GameObjects
                     {
                         this.lab[i, j] = MazeCell.GenerateRandomCell();
                     }
-                }                
-                this.HasSolutuon(GameConstants.PLAYER_INITIAL, GameConstants.PLAYER_INITIAL);
-                this.lab[GameConstants.PLAYER_INITIAL, GameConstants.PLAYER_INITIAL] = 
-                    new Player(GameConstants.PLAYER_INITIAL, GameConstants.PLAYER_INITIAL);
+                }
+                this.HasSolutuon(Player.PLAYER_INITIAL, Player.PLAYER_INITIAL);
             }
+            this.lab[Player.PLAYER_INITIAL, Player.PLAYER_INITIAL] = new Player();
         }
 
         public void DisplayMaze()
         {
             for (int i = 0; i < this.Rows; i++)
             {
-                ICell s1 = this.lab[i, 0];
-                ICell s2 = this.lab[i, 1];
-                ICell s3 = this.lab[i, 2];
-                ICell s4 = this.lab[i, 3];
-                ICell s5 = this.lab[i, 4];
-                ICell s6 = this.lab[i, 5];
-                ICell s7 = this.lab[i, 6];
-
-                Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} ", s1, s2, s3, s4, s5, s6, s7);
+                StringBuilder row = new StringBuilder();
+                for (int j = 0; j < this.Cols; j++)
+                {
+                    row.Append(this.lab[i, j] + " ");
+                }
+                Renderer.RenderMessage(row.ToString());
             }
-            Console.WriteLine();
+            Renderer.RenderMessage(string.Empty);
         }
         
         private void HasSolutuon(int row, int col)
@@ -100,22 +100,22 @@ namespace Labyrinth.GameObjects
                 {
                     if (lab[row + 1, col].IsEmpty)
                     {
-                        lab[row + 1, col].Value = GameConstants.VISITED_CELL_MARKER;
+                        lab[row + 1, col].Value = VISITED_CELL_MARKER;
                         row++;
                     }
                     else if (lab[row, col + 1].IsEmpty)
                     {
-                        lab[row, col + 1].Value = GameConstants.VISITED_CELL_MARKER;
+                        lab[row, col + 1].Value = VISITED_CELL_MARKER;
                         col++;
                     }
                     else if (lab[row - 1, col].IsEmpty)
                     {
-                        lab[row - 1, col].Value = GameConstants.VISITED_CELL_MARKER;
+                        lab[row - 1, col].Value = VISITED_CELL_MARKER;
                         row--;
                     }
                     else if (lab[row, col - 1].IsEmpty)
                     {
-                        lab[row, col - 1].Value = GameConstants.VISITED_CELL_MARKER;
+                        lab[row, col - 1].Value = VISITED_CELL_MARKER;
                         col--;
                     }
                     else
@@ -123,13 +123,13 @@ namespace Labyrinth.GameObjects
                         checking = false;
                     }
                 }
-                catch (Exception)
+                catch (IndexOutOfRangeException)
                 {
-                    for (int i = 0; i < 7; i++)
+                    for (int i = 0; i < this.Rows; i++)
                     {
-                        for (int j = 0; j < 7; j++)
+                        for (int j = 0; j < this.Cols; j++)
                         {
-                            if (lab[i, j].Value == GameConstants.VISITED_CELL_MARKER)
+                            if (lab[i, j].Value == VISITED_CELL_MARKER)
                             {
                                 lab[i, j].Value = '-';
                             }
