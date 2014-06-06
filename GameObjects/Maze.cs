@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Labyrinth.GameObjects
 {
-    public class Maze : IMaze, IRenderable
+    public class Maze : IMaze
     { 
         private const int LAB_DIMENSIONS = 7;
         private const char VISITED_CELL_MARKER = '0';

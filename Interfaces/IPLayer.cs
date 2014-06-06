@@ -5,9 +5,9 @@ namespace Labyrinth.Interfaces
 {
     public interface IPlayer : ICell
     {
-        int X { get; set; }
+        int X { get;  }
         
-        int Y { get; set; }
+        int Y { get;  }
 
         PlayerDirection Direction { get; set; }
 

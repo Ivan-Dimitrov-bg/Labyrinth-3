@@ -1,32 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameEngine;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.GameObjects
 {
-    public class GameMessage : Renderer, IRenderable
+    public class GameMessage : IRenderable
     {
-        private string message;
-        private object[] args;
+        private readonly string Message;
+        private readonly object[] Args;
 
         public GameMessage(string message, params object[] args)
         {
-            this.message = message;
-            this.args = args;
+            this.Message = message;
+            this.Args = args;
         }
 
         public void Render()
         {
-            if (args == null)
+            if (this.Args == null)
             {
-                Console.WriteLine(message);
+                Console.WriteLine(this.Message);
             }
             else
             {
-                Console.WriteLine(message, args);
+                Console.WriteLine(this.Message, this.Args);
             }
         }
     }

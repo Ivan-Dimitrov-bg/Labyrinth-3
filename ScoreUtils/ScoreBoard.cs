@@ -6,7 +6,7 @@ using Labyrinth.GameObjects;
 
 namespace Labyrinth.ScoreUtils
 {
-    public class ScoreBoard : IScoreBoard, IRenderable
+    public class ScoreBoard : IScoreBoard
     {
         private const string NEW_LINE = "\n";
 
