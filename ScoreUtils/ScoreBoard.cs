@@ -1,73 +1,58 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameEngine;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.ScoreUtils
 {
-    public class ScoreBoard : IScoreBoard
+    public class ScoreBoard : IScoreBoard, IEnumerable<IScore>
     {
-        private const string NEW_LINE = "\n";
         private const int MAX_SCORELIST_SIZE = 5;
-        private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname";
-        private const string TOP_FIVE_MESSAGE = "Top 5: \n";
-        private const string EMPTY_SCOREBOARD_MESSAGE = "The scoreboard is empty! ";
-        private const string SCORELIST_ROW_TEMPLATE = "{0}. {1} ---> {2} moves";
 
-        private readonly List<PlayerScore> scores;
+        private readonly List<IScore> scores;
+
+        public int Count
+        {
+            get
+            {
+                return this.scores.Count;
+            }
+        }
 
         public ScoreBoard()
         {
-            this.scores = new List<PlayerScore>();
+            this.scores = new List<IScore>();
         }
 
-        public void AddScore(PlayerScore currentPlayerScore)
+        public void AddScore(IScore currentPlayerScore)
         {
             if (scores.Count == MAX_SCORELIST_SIZE)
             {
                 if (scores[MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)
                 {
-                    scores.Remove(scores[4]);
-                    Renderer.RenderMessage(NICKNAME_INPUT_MESSAGE);
-                    currentPlayerScore.Name = Console.ReadLine();
-                    scores.Add(currentPlayerScore);
+                    scores.Remove(scores[4]);                  
                 }
             }
             if (scores.Count < MAX_SCORELIST_SIZE)
             {
-                Renderer.RenderMessage(NICKNAME_INPUT_MESSAGE);
-                currentPlayerScore.Name = Console.ReadLine();
                 scores.Add(currentPlayerScore);
             }
 
-            this.SortScores();
-        }
-
-        public void ShowScore()
-        {
-            Renderer.RenderMessage(NEW_LINE);
-            if (this.scores.Count == 0)
-            {
-                Renderer.RenderMessage(EMPTY_SCOREBOARD_MESSAGE);
-            }
-            else
-            {
-                int playerPosition = 1;
-                Renderer.RenderMessage(TOP_FIVE_MESSAGE);
-                this.scores.ForEach((currentPlayer) =>
-                {
-                    Renderer.RenderMessage(SCORELIST_ROW_TEMPLATE, playerPosition, currentPlayer.Name, currentPlayer.Moves);
-                    playerPosition++;   
-                });
-                Renderer.RenderMessage(NEW_LINE);
-            }
-        }
-
-        private void SortScores()
-        {
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        public IEnumerator<IScore> GetEnumerator()
+        {
+            foreach (var item in this.scores)
+            {
+                yield return item;
+            }
+        }
+
     }
 }

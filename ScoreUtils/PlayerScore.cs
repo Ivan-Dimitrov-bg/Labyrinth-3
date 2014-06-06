@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.ScoreUtils
 {
-    public class PlayerScore
+    public class PlayerScore : IScore
     {
         private int playerMoves;
 

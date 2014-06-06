@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.Interfaces;
-
-namespace Labyrinth.GameObjects
+﻿namespace Labyrinth.GameObjects
 {
+    using Labyrinth.Interfaces;
+
     public abstract class Cell : ICell
     {
         public char Value { get; set; }

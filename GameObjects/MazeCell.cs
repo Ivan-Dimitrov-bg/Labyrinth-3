@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameEngine;
 
 namespace Labyrinth.GameObjects
 {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameEngine;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.GameObjects
@@ -69,20 +65,6 @@ namespace Labyrinth.GameObjects
                 this.HasSolutuon(Player.PLAYER_INITIAL, Player.PLAYER_INITIAL);
             }
             this.lab[Player.PLAYER_INITIAL, Player.PLAYER_INITIAL] = new Player();
-        }
-
-        public void DisplayMaze()
-        {
-            for (int i = 0; i < this.Rows; i++)
-            {
-                StringBuilder row = new StringBuilder();
-                for (int j = 0; j < this.Cols; j++)
-                {
-                    row.Append(this.lab[i, j] + " ");
-                }
-                Renderer.RenderMessage(row.ToString());
-            }
-            Renderer.RenderMessage(string.Empty);
         }
         
         private void HasSolutuon(int row, int col)

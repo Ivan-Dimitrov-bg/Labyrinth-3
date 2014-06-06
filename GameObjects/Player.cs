@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameEngine;
-using Labyrinth.Interfaces;
+﻿using Labyrinth.Interfaces;
 using Labyrinth.ScoreUtils;
 
 namespace Labyrinth.GameObjects
@@ -18,9 +13,9 @@ namespace Labyrinth.GameObjects
 
         public int Y { get; set; }
 
-        public PlayerScore Score { get; set; }
+        public IScore Score { get; set; }
 
-        public Direction Direction { get; set; }
+        public PlayerDirection Direction { get; set; }
         
         public Player(int x=PLAYER_INITIAL, int y=PLAYER_INITIAL) : base(PLAYER_VALUE)
         {

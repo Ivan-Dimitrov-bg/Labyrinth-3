@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameEngine;
-using Labyrinth.ScoreUtils;
-
+﻿using Labyrinth.GameObjects;
 namespace Labyrinth.Interfaces
 {
     public interface IPlayer : ICell
@@ -13,9 +7,8 @@ namespace Labyrinth.Interfaces
         
         int Y { get; set; }
 
-        Direction Direction { get; set; }
+        PlayerDirection Direction { get; set; }
 
-        PlayerScore Score { get; set; }
-
+        IScore Score { get; set; }
     }
 }
