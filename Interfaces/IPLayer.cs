@@ -1,4 +1,6 @@
 ﻿using Labyrinth.GameObjects;
+using Labyrinth.ScoreUtils;
+
 namespace Labyrinth.Interfaces
 {
     public interface IPlayer : ICell
@@ -9,6 +11,6 @@ namespace Labyrinth.Interfaces
 
         PlayerDirection Direction { get; set; }
 
-        IScore Score { get; set; }
+        PlayerScore Score { get; set; }
     }
 }

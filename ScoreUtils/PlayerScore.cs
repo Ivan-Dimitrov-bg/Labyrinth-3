@@ -3,7 +3,7 @@ using Labyrinth.Interfaces;
 
 namespace Labyrinth.ScoreUtils
 {
-    public class PlayerScore : IScore
+    public class PlayerScore 
     {
         private int playerMoves;
 

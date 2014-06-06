@@ -1,35 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Labyrinth.GameEngine.CommandListener" Collapsed="true">
-    <Position X="6" Y="2" Width="1.5" />
+    <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GameEngine\CommandListener.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.GameEngine.GameEngine" Collapsed="true">
-    <Position X="7.75" Y="2" Width="1.5" />
+    <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAABdAAAAAIAAAAAAAgAAAHAAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACAABdAAAAAYAAAAAAAgAAAHAAAAEAAAgAA=</HashCode>
       <FileName>GameEngine\GameEngine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.GameEngine.LabyrinthGame" Collapsed="true">
-    <Position X="9.5" Y="2" Width="1.5" />
+    <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>GameEngine\LabyrinthGame.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Labyrinth.GameEngine.Renderer" Collapsed="true">
-    <Position X="9.5" Y="3" Width="1.5" />
+  <Class Name="Labyrinth.GameEngine.Renderer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAgAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ACAAgAAAAAAAAAAAAAAAQAAIAAAAgAASAAAAAAAAAAA=</HashCode>
       <FileName>GameEngine\Renderer.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Labyrinth.GameObjects.Cell" Collapsed="true">
-    <Position X="2.5" Y="2" Width="1.5" />
+    <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>GameObjects\Cell.cs</FileName>
@@ -37,22 +38,22 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Labyrinth.GameObjects.Maze" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="6" Y="3" Width="1.5" />
+    <Position X="8.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAIAAAAAAAAEAISBAAAIAAAIAAAAAAAAAAAAAADAI=</HashCode>
+      <HashCode>AgAAIAAAAAAAAEAICBAAAIAAAIAAAAAAAAAAAAAADAI=</HashCode>
       <FileName>GameObjects\Maze.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Labyrinth.GameObjects.MazeCell" Collapsed="true">
-    <Position X="3.5" Y="3.25" Width="1.5" />
+    <Position X="3.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABBACAAAAAAAAAAAAAAAABAAAAAAAAAAAAIAAAAAAA=</HashCode>
       <FileName>GameObjects\MazeCell.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.GameObjects.Player" Collapsed="true">
-    <Position X="1.25" Y="3.25" Width="1.5" />
+    <Position X="6" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAACAAAAAAEAAABAAAAAAAAAAAYAA=</HashCode>
       <FileName>GameObjects\Player.cs</FileName>
@@ -60,53 +61,60 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Labyrinth.ScoreUtils.PlayerScore" Collapsed="true">
-    <Position X="7.75" Y="3" Width="1.5" />
+    <Position X="10.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAQAAAAAAEAAAAAAAAAAEAA=</HashCode>
       <FileName>ScoreUtils\PlayerScore.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Labyrinth.ScoreUtils.ScoreBoard" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="6" Y="4" Width="1.5" />
+    <Position X="8.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAQAAAAAAAAAAIQAAIAAAAAAATAAAgAAAAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAABAAAAAIAAQAAAAAAAAFAAAAAAAAAAA=</HashCode>
       <FileName>ScoreUtils\ScoreBoard.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Interface Name="Labyrinth.Interfaces.ICell" Collapsed="true">
-    <Position X="1.25" Y="5" Width="1.5" />
+    <Position X="3.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Interfaces\ICell.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Labyrinth.Interfaces.IMaze" Collapsed="true">
-    <Position X="6" Y="5.25" Width="1.5" />
+    <Position X="8.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAEAASAAAAIAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAEAACAAAAIAAAAAAAAAAAAAAAAAACAA=</HashCode>
       <FileName>Interfaces\IMaze.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Labyrinth.Interfaces.IPlayer" Collapsed="true">
-    <Position X="1.25" Y="6.25" Width="1.5" />
+    <Position X="3.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>Interfaces\IPlayer.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Labyrinth.Interfaces.IScoreBoard" Collapsed="true">
-    <Position X="7.75" Y="5.25" Width="1.5" />
+  <Interface Name="Labyrinth.Interfaces.IRenderer" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>ACAAgAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Labyrinth.Interfaces.IScoreBoard" Collapsed="true">
+    <Position X="12" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IScoreBoard.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="Labyrinth.GameEngine.Direction" Collapsed="true">
-    <Position X="6" Y="6.25" Width="1.5" />
+  <Enum Name="Labyrinth.GameObjects.PlayerDirection" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
-      <FileName>GameEngine\Direction.cs</FileName>
+      <FileName>GameObjects\PlayerDirection.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

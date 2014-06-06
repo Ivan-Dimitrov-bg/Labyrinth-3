@@ -51,7 +51,6 @@
     <Compile Include="Interfaces\IMaze.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
-    <Compile Include="Interfaces\IScore.cs" />
     <Compile Include="Interfaces\IScoreBoard.cs" />
     <Compile Include="GameObjects\MazeCell.cs" />
     <Compile Include="GameEngine\LabyrinthGame.cs" />

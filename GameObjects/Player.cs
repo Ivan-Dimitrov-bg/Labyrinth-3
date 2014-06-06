@@ -13,7 +13,7 @@ namespace Labyrinth.GameObjects
 
         public int Y { get; set; }
 
-        public IScore Score { get; set; }
+        public PlayerScore Score { get; set; }
 
         public PlayerDirection Direction { get; set; }
         

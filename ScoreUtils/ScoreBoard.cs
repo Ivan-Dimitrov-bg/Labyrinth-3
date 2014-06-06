@@ -5,11 +5,11 @@ using Labyrinth.Interfaces;
 
 namespace Labyrinth.ScoreUtils
 {
-    public class ScoreBoard : IScoreBoard, IEnumerable<IScore>
+    public class ScoreBoard : IScoreBoard, IEnumerable<PlayerScore>
     {
         private const int MAX_SCORELIST_SIZE = 5;
 
-        private readonly List<IScore> scores;
+        private readonly List<PlayerScore> scores;
 
         public int Count
         {
@@ -21,10 +21,10 @@ namespace Labyrinth.ScoreUtils
 
         public ScoreBoard()
         {
-            this.scores = new List<IScore>();
+            this.scores = new List<PlayerScore>();
         }
 
-        public void AddScore(IScore currentPlayerScore)
+        public void AddScore(PlayerScore currentPlayerScore)
         {
             if (scores.Count == MAX_SCORELIST_SIZE)
             {
@@ -46,7 +46,7 @@ namespace Labyrinth.ScoreUtils
             return this.GetEnumerator();
         }
 
-        public IEnumerator<IScore> GetEnumerator()
+        public IEnumerator<PlayerScore> GetEnumerator()
         {
             foreach (var item in this.scores)
             {
