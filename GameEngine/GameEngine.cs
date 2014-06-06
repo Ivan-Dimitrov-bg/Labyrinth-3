@@ -23,7 +23,7 @@ namespace Labyrinth.GameEngine
         private readonly ScoreBoard scores;
         private readonly Maze labyrinth;
         private readonly Player player;
-        private readonly IRenderer renderer;
+        private readonly Renderer renderer;
 
         private bool isPlaying = true; //game in progress.    
 
@@ -39,10 +39,10 @@ namespace Labyrinth.GameEngine
         {
             while (isPlaying)
             {
-                renderer.RenderMessage(WELCOME_MESSAGE);                               
+                renderer.Render(new GameMessage(WELCOME_MESSAGE));                               
                 player.Score = new PlayerScore();
                 labyrinth.GenerateMaze();
-                renderer.RenderMaze(labyrinth);
+                renderer.Render(labyrinth);
                 TypeCommand(player.X, player.Y);
             }
         }
@@ -51,7 +51,7 @@ namespace Labyrinth.GameEngine
         {
             while (true)
             {
-                renderer.RenderMessage(INPUT_MESSAGE);
+                renderer.Render(new GameMessage(INPUT_MESSAGE));
                 string i = Console.ReadLine();
 
                 switch (i)
@@ -67,10 +67,10 @@ namespace Labyrinth.GameEngine
                         }
                         else
                         {
-                            renderer.RenderMessage(INPUT_MESSAGE);
+                            renderer.Render(new GameMessage(INPUT_MESSAGE));
                         }
                       
-                        renderer.RenderMaze(labyrinth);
+                        renderer.Render(labyrinth);
 
                         break;
                     case "u":                       
@@ -84,10 +84,10 @@ namespace Labyrinth.GameEngine
                         }
                         else
                         {
-                            renderer.RenderMessage(INVALID_MOVE_MESSAGE);
+                            renderer.Render(new GameMessage(INVALID_MOVE_MESSAGE));
                         }
 
-                        renderer.RenderMaze(labyrinth);
+                        renderer.Render(labyrinth);
 
                         break;
                     case "r":                       
@@ -103,9 +103,9 @@ namespace Labyrinth.GameEngine
                         }
                         else
                         {
-                            renderer.RenderMessage(INVALID_MOVE_MESSAGE);
+                            renderer.Render(new GameMessage(INVALID_MOVE_MESSAGE));
                         }
-                        renderer.RenderMaze(labyrinth);
+                        renderer.Render(labyrinth);
                         break;
                     case "l":
                     case "L":
@@ -119,32 +119,32 @@ namespace Labyrinth.GameEngine
                         }
                         else
                         {
-                            renderer.RenderMessage(INVALID_MOVE_MESSAGE);
+                            renderer.Render(new GameMessage(INVALID_MOVE_MESSAGE));
                         }
-                        renderer.RenderMaze(labyrinth);
+                        renderer.Render(labyrinth);
                         break;
                     case "top":
-                        renderer.RenderScore(scores, player);
-                        renderer.RenderMessage(NEW_LINE);
-                        renderer.RenderMaze(labyrinth);
+                        renderer.Render(scores);
+                        renderer.Render(new GameMessage(NEW_LINE));
+                        renderer.Render(labyrinth);
                         break;
                     case "restart":
                         return;
                     case "exit":
-                        renderer.RenderMessage(GOODBYE_MESSAGE);
+                        renderer.Render(new GameMessage(GOODBYE_MESSAGE));
                         isPlaying = false;
                         return;
                     default:
-                        renderer.RenderMessage(INVALID_MOVE_MESSAGE);
+                        renderer.Render(new GameMessage(GOODBYE_MESSAGE));
                         break;
                 }
                 if (x == 0 || x == this.labyrinth.Rows - 1 || y == 0 || y == this.labyrinth.Cols - 1)
                 {
-                    renderer.RenderMessage(CONGRATULATIONS_MESSAGE, player.Score.Moves);   
-                    renderer.RenderMessage(NICKNAME_INPUT_MESSAGE);
+                    renderer.Render(new GameMessage(CONGRATULATIONS_MESSAGE, player.Score.Moves));   
+                    renderer.Render(new GameMessage(NICKNAME_INPUT_MESSAGE));
                     player.Score.Name = Console.ReadLine();
                     scores.AddScore(player.Score);  
-                    renderer.RenderScore(scores, player);
+                    renderer.Render(scores);
                     return;
                 }
             }

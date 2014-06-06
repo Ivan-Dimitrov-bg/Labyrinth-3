@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth.Interfaces
 {
-    public interface IMaze
+    public interface IMaze: IRenderable
     {
         int Rows { get; }
 
@@ -9,7 +9,5 @@
         ICell this[int row, int col] { get; set; }
 
         void GenerateMaze();
-
-
     }
 }

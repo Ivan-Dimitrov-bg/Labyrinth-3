@@ -1,9 +1,10 @@
 ﻿using System;
 using Labyrinth.Interfaces;
+using System.Text;
 
 namespace Labyrinth.GameObjects
 {
-    public class Maze : IMaze
+    public class Maze : IMaze, IRenderable
     { 
         private const int LAB_DIMENSIONS = 7;
         private const char VISITED_CELL_MARKER = '0';
@@ -66,7 +67,21 @@ namespace Labyrinth.GameObjects
             }
             this.lab[Player.PLAYER_INITIAL, Player.PLAYER_INITIAL] = new Player();
         }
-        
+
+        public void Render()
+        {
+            for (int i = 0; i < this.Rows; i++)
+            {
+                StringBuilder row = new StringBuilder();
+                for (int j = 0; j < this.Cols; j++)
+                {
+                    row.Append(this.lab[i, j] + " ");
+                }
+                new GameMessage(row.ToString()).Render();
+            }
+            new GameMessage(string.Empty).Render();
+        }
+
         private void HasSolutuon(int row, int col)
         {
             bool checking = true;

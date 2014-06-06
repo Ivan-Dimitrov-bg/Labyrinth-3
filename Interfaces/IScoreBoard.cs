@@ -3,7 +3,7 @@ using Labyrinth.ScoreUtils;
 
 namespace Labyrinth.Interfaces
 {
-    public interface IScoreBoard: IEnumerable<PlayerScore>
+    public interface IScoreBoard :IRenderable
     {
         int Count { get; }
         
