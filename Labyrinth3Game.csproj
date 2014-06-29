@@ -48,6 +48,7 @@
     <Compile Include="GameEngine\CommandListener.cs" />
     <Compile Include="GameEngine\GameEngine.cs" />
     <Compile Include="GameObjects\Cell.cs" />
+    <Compile Include="GameObjects\Position.cs" />
     <Compile Include="Interfaces\ICell.cs" />
     <Compile Include="Interfaces\IMaze.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />

@@ -22,15 +22,18 @@ namespace Labyrinth.GameEngine
 
         private readonly ScoreBoard scores;
         private readonly Maze labyrinth;
-        private readonly Player player;
         private readonly Renderer renderer;
+        // We can set this as default position, if no other is entered
+        private readonly Position playerInitialPosition = new Position(3, 3);
 
+        private Player player;
         private bool isPlaying = true; //game in progress.    
 
+        // Here we can take initial position of player
         public GameEngine()
         {
-            player = new Player();
-            labyrinth = new Maze();
+            player = new Player(new Position(playerInitialPosition.X, playerInitialPosition.Y));
+            labyrinth = new Maze(player.Position);
             scores = new ScoreBoard();
             renderer = new Renderer();
         }
@@ -39,89 +42,36 @@ namespace Labyrinth.GameEngine
         {
             while (isPlaying)
             {
-                renderer.Render(new GameMessage(WELCOME_MESSAGE));                               
+                renderer.Render(new GameMessage(WELCOME_MESSAGE));
+                
+                player = new Player(new Position(playerInitialPosition.X, playerInitialPosition.Y));
                 player.Score = new PlayerScore();
                 labyrinth.GenerateMaze();
                 renderer.Render(labyrinth);
-                TypeCommand(player.X, player.Y);
+                TypeCommand(player.Position);
             }
         }
 
-        private void TypeCommand(int x, int y)
+        private void TypeCommand(Position position)
         {
             while (true)
             {
                 renderer.Render(new GameMessage(INPUT_MESSAGE));
-                string i = Console.ReadLine();
+                string command = Console.ReadLine().ToLower();
 
-                switch (i)
+                switch (command)
                 {
                     case "d":
-                    case "D":
-                        if (labyrinth[x + 1, y].IsEmpty)
-                        {
-                            labyrinth[x, y] = new MazeCell();
-                            x++;
-                            labyrinth[x, y] = player;
-                            player.Score.Moves++;
-                        }
-                        else
-                        {
-                            renderer.Render(new GameMessage(INPUT_MESSAGE));
-                        }
-                      
-                        renderer.Render(labyrinth);
-
+                        Move(PlayerDirection.Down, position);
                         break;
-                    case "u":                       
-                    case "U":
-                        if (labyrinth[x - 1, y].IsEmpty)
-                        {
-                            labyrinth[x, y] = new MazeCell();
-                            x--;
-                            labyrinth[x, y] = player;
-                            player.Score.Moves++;
-                        }
-                        else
-                        {
-                            renderer.Render(new GameMessage(INVALID_MOVE_MESSAGE));
-                        }
-
-                        renderer.Render(labyrinth);
-
+                    case "u":
+                        Move(PlayerDirection.Up, position);
                         break;
-                    case "r":                       
-                    case "R":
-
-                        if (labyrinth[x, y + 1].IsEmpty)
-                        {
-                            labyrinth[x, y] = new MazeCell();
-                            y++;
-                            labyrinth[x, y] = player;
-
-                            player.Score.Moves++;
-                        }
-                        else
-                        {
-                            renderer.Render(new GameMessage(INVALID_MOVE_MESSAGE));
-                        }
-                        renderer.Render(labyrinth);
+                    case "r":
+                        Move(PlayerDirection.Right, position);
                         break;
                     case "l":
-                    case "L":
-                        if (labyrinth[x, y - 1].IsEmpty)
-                        {
-                            labyrinth[x, y] = new MazeCell();
-                            y--;
-                            labyrinth[x, y] = player;
-
-                            player.Score.Moves++;
-                        }
-                        else
-                        {
-                            renderer.Render(new GameMessage(INVALID_MOVE_MESSAGE));
-                        }
-                        renderer.Render(labyrinth);
+                        Move(PlayerDirection.Left, position);
                         break;
                     case "top":
                         renderer.Render(scores);
@@ -129,25 +79,96 @@ namespace Labyrinth.GameEngine
                         renderer.Render(labyrinth);
                         break;
                     case "restart":
+                        renderer.Clear();
                         return;
                     case "exit":
                         renderer.Render(new GameMessage(GOODBYE_MESSAGE));
                         isPlaying = false;
                         return;
                     default:
-                        renderer.Render(new GameMessage(GOODBYE_MESSAGE));
+                        //renderer.Render(new GameMessage(GOODBYE_MESSAGE));
                         break;
                 }
-                if (x == 0 || x == this.labyrinth.Rows - 1 || y == 0 || y == this.labyrinth.Cols - 1)
+                if (IsEndOfLabyrinthReached(position))
                 {
-                    renderer.Render(new GameMessage(CONGRATULATIONS_MESSAGE, player.Score.Moves));   
+                    renderer.Render(new GameMessage(CONGRATULATIONS_MESSAGE, player.Score.Moves));
                     renderer.Render(new GameMessage(NICKNAME_INPUT_MESSAGE));
                     player.Score.Name = Console.ReadLine();
-                    scores.AddScore(player.Score);  
+                    scores.AddScore(player.Score);
                     renderer.Render(scores);
                     return;
                 }
             }
+        }
+
+        private bool IsCellEmpty(PlayerDirection direction, Position position)
+        {
+            bool isCellEmpty = false;
+
+            switch (direction)
+            {
+                case PlayerDirection.Up:
+                    isCellEmpty = labyrinth[position.X - 1, position.Y].IsEmpty;
+                    break;
+                case PlayerDirection.Down:
+                    isCellEmpty = labyrinth[position.X + 1, position.Y].IsEmpty;
+                    break;
+                case PlayerDirection.Left:
+                    isCellEmpty = labyrinth[position.X, position.Y - 1].IsEmpty;
+                    break;
+                case PlayerDirection.Right:
+                    isCellEmpty = labyrinth[position.X, position.Y + 1].IsEmpty;
+                    break;
+                default:
+                    throw new ArgumentException("Incorrect player direction!");
+            }
+
+            return isCellEmpty;
+        }
+
+        private void Move(PlayerDirection direction, Position position)
+        {
+            if (IsCellEmpty(direction, position))
+            {
+                labyrinth[position.X, position.Y] = new MazeCell();
+
+                switch (direction)
+                {
+                    case PlayerDirection.Up:
+                        position.X--;
+                        break;
+                    case PlayerDirection.Down:
+                        position.X++;
+                        break;
+                    case PlayerDirection.Left:
+                        position.Y--;
+                        break;
+                    case PlayerDirection.Right:
+                        position.Y++;
+                        break;
+                    default:
+                        throw new ArgumentException("Incorrect player direction!");
+                }
+
+                labyrinth[position.X, position.Y] = player;
+                player.Score.Moves++;
+                renderer.Clear();
+                renderer.Render(new GameMessage(WELCOME_MESSAGE));
+                renderer.Render(labyrinth);
+            }
+        }
+
+        private bool IsEndOfLabyrinthReached(Position position)
+        {
+            if (position.X == 0 || 
+                position.X == this.labyrinth.Rows - 1 || 
+                position.Y == 0 || 
+                position.Y == this.labyrinth.Cols - 1)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

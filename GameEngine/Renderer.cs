@@ -1,4 +1,5 @@
-﻿using Labyrinth.Interfaces;
+﻿using System;
+using Labyrinth.Interfaces;
 
 namespace Labyrinth.GameEngine
 {
@@ -7,6 +8,11 @@ namespace Labyrinth.GameEngine
         public void Render(IRenderable obj)
         {
             obj.Render();
+        }
+
+        public void Clear()
+        {
+            Console.Clear();
         }
     }
 }

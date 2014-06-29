@@ -5,13 +5,14 @@ using System.Text;
 namespace Labyrinth.GameObjects
 {
     public class Maze : IMaze
-    { 
+    {
         private const int LAB_DIMENSIONS = 7;
         private const char VISITED_CELL_MARKER = '0';
         private const string OUTOFRANGE_MSG = "Position is out of the maze!";
-        
+
         private readonly ICell[,] lab;
         private bool mazeHasSolution;
+        private Position playerInitialPosition;
 
         public ICell this[int row, int col]
         {
@@ -45,39 +46,42 @@ namespace Labyrinth.GameObjects
             }
         }
 
-        public Maze(int rows=LAB_DIMENSIONS, int cols=LAB_DIMENSIONS)
+        public Maze(Position playerInitialPosition, int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
         {
             lab = new Cell[rows, cols];
+            this.playerInitialPosition = new Position(playerInitialPosition.X, playerInitialPosition.Y);
         }
 
         public void GenerateMaze()
         {
             mazeHasSolution = false;
 
-            while (!mazeHasSolution)                
+            while (!mazeHasSolution)
             {
-                for (int i = 0; i < this.Rows; i++)
+                for (int row = 0; row < this.Rows; row++)
                 {
-                    for (int j = 0; j < this.Cols; j++)
+                    for (int col = 0; col < this.Cols; col++)
                     {
-                        this.lab[i, j] = MazeCell.GenerateRandomCell();
+                        this.lab[row, col] = MazeCell.GenerateRandomCell();
                     }
                 }
-                this.HasSolutuon(Player.PLAYER_INITIAL, Player.PLAYER_INITIAL);
+
+                this.HasSolutuon(playerInitialPosition.X, playerInitialPosition.Y);
             }
-            this.lab[Player.PLAYER_INITIAL, Player.PLAYER_INITIAL] = new Player();
+
+            this.lab[playerInitialPosition.X, playerInitialPosition.Y] = new Player(playerInitialPosition);
         }
 
         public void Render()
         {
-            for (int i = 0; i < this.Rows; i++)
+            for (int row = 0; row < this.Rows; row++)
             {
-                StringBuilder row = new StringBuilder();
-                for (int j = 0; j < this.Cols; j++)
+                StringBuilder rowSB = new StringBuilder();
+                for (int col = 0; col < this.Cols; col++)
                 {
-                    row.Append(this.lab[i, j] + " ");
+                    rowSB.Append(this.lab[row, col] + " ");
                 }
-                new GameMessage(row.ToString()).Render();
+                new GameMessage(rowSB.ToString()).Render();
             }
             new GameMessage(string.Empty).Render();
         }
@@ -122,13 +126,13 @@ namespace Labyrinth.GameObjects
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    for (int i = 0; i < this.Rows; i++)
+                    for (int curRow = 0; curRow < this.Rows; curRow++)
                     {
-                        for (int j = 0; j < this.Cols; j++)
+                        for (int curCol = 0; curCol < this.Cols; curCol++)
                         {
-                            if (lab[i, j].Value == VISITED_CELL_MARKER)
+                            if (lab[curRow, curCol].Value == VISITED_CELL_MARKER)
                             {
-                                lab[i, j].Value = '-';
+                                lab[curRow, curCol].Value = '-';
                             }
                         }
 
