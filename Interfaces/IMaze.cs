@@ -13,7 +13,5 @@
         Position PlayerPosition { get; set; }
 
         void GenerateMaze();
-
-        bool IsEndOfLabyrinthReached();
     }
 }

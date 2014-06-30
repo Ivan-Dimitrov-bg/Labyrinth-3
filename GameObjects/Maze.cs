@@ -98,20 +98,7 @@
                 }
                 renderer.Render("\n");
             }
-        }
-
-        public bool IsEndOfLabyrinthReached()
-        {
-            if (this.PlayerPosition.X == 0 ||
-                this.PlayerPosition.X == this.Rows - 1 ||
-                this.PlayerPosition.Y == 0 ||
-                this.PlayerPosition.Y == this.Cols - 1)
-            {
-                return true;
-            }
-
-            return false;
-        }
+        }     
 
         private void HasSolutuon(int row, int col)
         {

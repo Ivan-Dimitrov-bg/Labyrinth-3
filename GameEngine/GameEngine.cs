@@ -10,41 +10,39 @@
         private const string NEW_LINE = "\n";
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. Please try to escape. Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
         private const string INPUT_MESSAGE = "\nEnter your move (L=left, R=right, D=down, U=up): ";
-        private const string INVALID_MOVE_MESSAGE = "\nInvalid move! \n ";
-        private const string INVALID_COMMAND_MESSAGE = "Invalid command!";
-        private const string GOODBYE_MESSAGE = "Good bye!";
+        private const string INVALID_MOVE_MESSAGE = "Invalid move!\n ";
+        private const string INVALID_COMMAND_MESSAGE = "Invalid command!\n";
+        private const string GOODBYE_MESSAGE = "Good bye!\n";
         private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname: ";
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
 
         private readonly IScoreBoard scores;
-        private readonly IMaze labyrinth;
+        private readonly IMaze maze;
         private readonly IRenderer renderer;
 
         // We can set this as default position, if no other is entered
         private readonly Position playerInitialPosition = new Position(3, 3);
 
         private IPlayer player;
-        private bool isPlaying = true; //game in progress.    
+        private bool hasExitCommand; //game in progress.    
 
         // Here we can take initial position of player
         public GameEngine()
         {
             player = new Player(new Position(playerInitialPosition.X, playerInitialPosition.Y));
-            labyrinth = new Maze(player.Position);
+            maze = new Maze(player.Position);
             scores = new ScoreBoard();
             renderer = new Renderer();
         }
 
         public void Start()
         {
-            while (isPlaying)
-            {
-                renderer.Render(WELCOME_MESSAGE);               
+            while (!hasExitCommand)
+            { 
                 player = new Player(new Position(playerInitialPosition.X, playerInitialPosition.Y));
                 player.Score = new PlayerScore();
-                labyrinth.PlayerPosition = player.Position;
-                labyrinth.GenerateMaze();
-                labyrinth.Render(renderer);                
+                maze.PlayerPosition = player.Position;
+                maze.GenerateMaze();              
                 TypeCommand();
             }
         }
@@ -53,7 +51,27 @@
         {
             while (true)
             {
+                player.Move(maze);               
+                player.Score.Moves++;               
+                renderer.Render(WELCOME_MESSAGE);
+                maze.Render(renderer);
+
+                if (player.Direction == PlayerDirection.Invalid)
+                {
+                    renderer.Render(INVALID_MOVE_MESSAGE);
+                }
+                if (player.IsOutOfTheMaze(maze))
+                {
+                    renderer.Render(CONGRATULATIONS_MESSAGE, player.Score.Moves);
+                    renderer.Render(NICKNAME_INPUT_MESSAGE);
+                    player.Score.Name = Console.ReadLine();
+                    scores.AddScore(player.Score);
+                    scores.Render(renderer);
+                    return;
+                }
+
                 renderer.Render(INPUT_MESSAGE);
+                player.Direction = PlayerDirection.Idle;
                 string command = Console.ReadLine().ToLower();
 
                 switch (command)
@@ -73,33 +91,22 @@
                     case "top":
                         scores.Render(renderer);
                         renderer.Render(NEW_LINE);
-                        labyrinth.Render(renderer);
                         break;
                     case "restart":
                         renderer.Clear();
                         return;
                     case "exit":
                         renderer.Render(GOODBYE_MESSAGE);
-                        isPlaying = false;
+                        hasExitCommand = true;
                         return;
                     default:
+                        renderer.Render(INVALID_COMMAND_MESSAGE);
                         break;
                 }
                
-                player.Move(labyrinth);
-                player.Score.Moves++;
-                player.Direction = PlayerDirection.Idle;
-                renderer.Clear();
-                renderer.Render(WELCOME_MESSAGE);
-                labyrinth.Render(renderer);
-                if (labyrinth.IsEndOfLabyrinthReached())
+                if (player.Direction != PlayerDirection.Idle)
                 {
-                    renderer.Render(CONGRATULATIONS_MESSAGE, player.Score.Moves);
-                    renderer.Render(NICKNAME_INPUT_MESSAGE);
-                    player.Score.Name = Console.ReadLine();
-                    scores.AddScore(player.Score);
-                    scores.Render(renderer);
-                    return;
+                    renderer.Clear();
                 }
             }
         }

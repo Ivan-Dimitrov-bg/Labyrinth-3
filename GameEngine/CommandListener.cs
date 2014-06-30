@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.Interfaces;
-
-namespace Labyrinth.GameEngine
+﻿namespace Labyrinth.GameEngine
 {
-    public  class CommandListener 
+    using System;
+
+    public class CommandListener 
     {
         public void ExecuteCommand()
         {

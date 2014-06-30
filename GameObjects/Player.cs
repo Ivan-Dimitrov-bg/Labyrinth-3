@@ -38,6 +38,7 @@
         public Player(Position position) : base(PLAYER_VALUE)
         {
             this.Position = position;
+            this.Direction = PlayerDirection.Idle;
             this.PlayerInitialPosition = new Position(this.Position.X, this.Position.Y);
         }
         
@@ -63,8 +64,28 @@
                         break;
                 }
             }
+            else
+            {
+                if (this.Direction != PlayerDirection.Idle)
+                {
+                    this.Direction = PlayerDirection.Invalid;
+                }
+            }
         }
 
+        public bool IsOutOfTheMaze(IMaze maze)
+        {
+            if (this.position.X == 0 ||
+                this.position.X == maze.Rows - 1 ||
+                this.position.Y == 0 ||
+                this.position.Y == maze.Cols - 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
         private bool IsCellEmpty(IMaze labyrinth)
         {
             bool isCellEmpty = false;

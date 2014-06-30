@@ -11,6 +11,8 @@
 
         PlayerScore Score { get; set; }
 
-        void Move(IMaze labyrinth);
+        void Move(IMaze maze);
+
+        bool IsOutOfTheMaze(IMaze maze);
     }
 }

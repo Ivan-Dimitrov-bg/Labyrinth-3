@@ -6,6 +6,7 @@
         Down,
         Left,
         Right,
-        Idle
+        Idle,
+        Invalid
     }
 }

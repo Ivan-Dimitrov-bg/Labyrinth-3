@@ -8,7 +8,7 @@
         private const string NEW_LINE = "\n";
 
         private const string TOP_FIVE_MESSAGE = "Top 5: \n";
-        private const string EMPTY_SCOREBOARD_MESSAGE = "The scoreboard is empty! ";
+        private const string EMPTY_SCOREBOARD_MESSAGE = "The scoreboard is empty!\n";
         private const int MAX_SCORELIST_SIZE = 5;
 
         private readonly List<PlayerScore> scores;
@@ -46,7 +46,6 @@
         //Bridge pattern.The object recieves particular implementation of the renderer.
         public void Render(IRenderer renderer)
         {
-            renderer.Render(NEW_LINE);
             if (scores.Count == 0)
             {
                 renderer.Render(EMPTY_SCOREBOARD_MESSAGE);
