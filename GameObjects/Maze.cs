@@ -1,19 +1,20 @@
-﻿using System;
-using Labyrinth.Interfaces;
-using System.Text;
-
-namespace Labyrinth.GameObjects
+﻿namespace Labyrinth.GameObjects
 {
-    public class Maze : IMaze
+    using System;
+    using Labyrinth.Interfaces;
+    
+    public class Maze : IMaze, IRenderable
     {
         private const int LAB_DIMENSIONS = 7;
         private const char VISITED_CELL_MARKER = '0';
         private const string OUTOFRANGE_MSG = "Position is out of the maze!";
 
         private readonly ICell[,] lab;
-        private bool mazeHasSolution;
-        private Position playerInitialPosition;
 
+        private Position playerPosition;
+        private bool mazeHasSolution;
+        private bool[,]visitedCells;
+        
         public ICell this[int row, int col]
         {
             get
@@ -46,10 +47,22 @@ namespace Labyrinth.GameObjects
             }
         }
 
+        public Position PlayerPosition
+        {
+            get
+            {
+                return this.playerPosition;
+            }
+            set
+            {
+                this.playerPosition = value;
+            }
+        }
+
         public Maze(Position playerInitialPosition, int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
         {
             lab = new Cell[rows, cols];
-            this.playerInitialPosition = new Position(playerInitialPosition.X, playerInitialPosition.Y);
+            this.PlayerPosition = playerInitialPosition;
         }
 
         public void GenerateMaze()
@@ -66,80 +79,54 @@ namespace Labyrinth.GameObjects
                     }
                 }
 
-                this.HasSolutuon(playerInitialPosition.X, playerInitialPosition.Y);
+                visitedCells = new bool[this.Rows, this.Cols];
+                this.HasSolutuon(this.PlayerPosition.X, this.PlayerPosition.Y);
             }
-
-            this.lab[playerInitialPosition.X, playerInitialPosition.Y] = new Player(playerInitialPosition);
         }
 
-        public void Render()
+        //Bridge pattern.The object recieves particular implementation of the renderer.
+        public void Render(IRenderer renderer)
         {
+            this.lab[this.PlayerPosition.X, this.PlayerPosition.Y] = new Player(this.PlayerPosition);
+
             for (int row = 0; row < this.Rows; row++)
-            {
-                StringBuilder rowSB = new StringBuilder();
+            { 
                 for (int col = 0; col < this.Cols; col++)
                 {
-                    rowSB.Append(this.lab[row, col] + " ");
+                    //Composite pattern... rendering the maze renders all the cells in it 
+                    this.lab[row, col].Render(renderer);
                 }
-                new GameMessage(rowSB.ToString()).Render();
+                renderer.Render("\n");
             }
-            new GameMessage(string.Empty).Render();
+        }
+
+        public bool IsEndOfLabyrinthReached()
+        {
+            if (this.PlayerPosition.X == 0 ||
+                this.PlayerPosition.X == this.Rows - 1 ||
+                this.PlayerPosition.Y == 0 ||
+                this.PlayerPosition.Y == this.Cols - 1)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void HasSolutuon(int row, int col)
         {
-            bool checking = true;
-
-            if (!lab[row + 1, col].IsEmpty && !lab[row, col + 1].IsEmpty && !lab[row - 1, col].IsEmpty && !lab[row, col - 1].IsEmpty)
+            if (!InRange(row, this.Rows) || !InRange(col, this.Cols))
             {
-                checking = false;
+                mazeHasSolution = true;
+                return;
             }
-
-            while (checking)
+            else if (!visitedCells[row, col] && this[row, col].IsEmpty)
             {
-                try
-                {
-                    if (lab[row + 1, col].IsEmpty)
-                    {
-                        lab[row + 1, col].Value = VISITED_CELL_MARKER;
-                        row++;
-                    }
-                    else if (lab[row, col + 1].IsEmpty)
-                    {
-                        lab[row, col + 1].Value = VISITED_CELL_MARKER;
-                        col++;
-                    }
-                    else if (lab[row - 1, col].IsEmpty)
-                    {
-                        lab[row - 1, col].Value = VISITED_CELL_MARKER;
-                        row--;
-                    }
-                    else if (lab[row, col - 1].IsEmpty)
-                    {
-                        lab[row, col - 1].Value = VISITED_CELL_MARKER;
-                        col--;
-                    }
-                    else
-                    {
-                        checking = false;
-                    }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    for (int curRow = 0; curRow < this.Rows; curRow++)
-                    {
-                        for (int curCol = 0; curCol < this.Cols; curCol++)
-                        {
-                            if (lab[curRow, curCol].Value == VISITED_CELL_MARKER)
-                            {
-                                lab[curRow, curCol].Value = '-';
-                            }
-                        }
-
-                        checking = false;
-                        mazeHasSolution = true;
-                    }
-                }
+                visitedCells[row, col] = true;
+                HasSolutuon(row, col + 1);
+                HasSolutuon(row + 1, col);
+                HasSolutuon(row - 1, col);
+                HasSolutuon(row, col - 1);
             }
         }
 

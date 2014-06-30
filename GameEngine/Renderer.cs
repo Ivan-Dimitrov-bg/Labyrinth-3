@@ -3,11 +3,19 @@ using Labyrinth.Interfaces;
 
 namespace Labyrinth.GameEngine
 {
-    public class Renderer
+    public class Renderer: IRenderer
     { 
-        public void Render(IRenderable obj)
+
+        public void Render(string message, params object[] args)
         {
-            obj.Render();
+            if (args == null)
+            {
+                Console.Write("{0}", message);
+            }
+            else
+            {
+                Console.Write(message, args);
+            }
         }
 
         public void Clear()

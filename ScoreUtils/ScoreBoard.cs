@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Labyrinth.Interfaces;
-using Labyrinth.GameObjects;
-
-namespace Labyrinth.ScoreUtils
+﻿namespace Labyrinth.ScoreUtils
 {
+    using System.Collections.Generic;
+    using Labyrinth.Interfaces;
+
     public class ScoreBoard : IScoreBoard
     {
         private const string NEW_LINE = "\n";
 
         private const string TOP_FIVE_MESSAGE = "Top 5: \n";
         private const string EMPTY_SCOREBOARD_MESSAGE = "The scoreboard is empty! ";
-        private const string SCORELIST_ROW_TEMPLATE = "{0}. {1} ---> {2} moves";
         private const int MAX_SCORELIST_SIZE = 5;
 
         private readonly List<PlayerScore> scores;
@@ -47,24 +43,29 @@ namespace Labyrinth.ScoreUtils
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
 
-        public void Render()
+        //Bridge pattern.The object recieves particular implementation of the renderer.
+        public void Render(IRenderer renderer)
         {
-            new GameMessage(NEW_LINE).Render();
+            renderer.Render(NEW_LINE);
             if (scores.Count == 0)
             {
-                new GameMessage(EMPTY_SCOREBOARD_MESSAGE).Render();
+                renderer.Render(EMPTY_SCOREBOARD_MESSAGE);
             }
             else
             {
                 int playerPosition = 1;
-                new GameMessage(TOP_FIVE_MESSAGE).Render();
-                this.scores.ForEach((currentPlayer) =>
+                renderer.Render(TOP_FIVE_MESSAGE);
+                this.scores.ForEach((currentPlayerScore) =>
                 {
-                    new GameMessage(SCORELIST_ROW_TEMPLATE, playerPosition, currentPlayer.Name, currentPlayer.Moves).Render();
+                    currentPlayerScore.Position = playerPosition;
+
+                    //Composite pattern... rendering the score list renders all the scores in it 
+                    currentPlayerScore.Render(renderer);
                     playerPosition++;   
+                     renderer.Render(NEW_LINE);
                 });
                 
-                new GameMessage(NEW_LINE).Render();
+               
             }
         }
     }

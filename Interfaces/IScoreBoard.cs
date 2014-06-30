@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Labyrinth.ScoreUtils;
-
-namespace Labyrinth.Interfaces
+﻿namespace Labyrinth.Interfaces
 {
+    using Labyrinth.ScoreUtils;
+
     public interface IScoreBoard :IRenderable
     {
         int Count { get; }

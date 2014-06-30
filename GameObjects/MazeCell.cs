@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Labyrinth.GameObjects
+﻿namespace Labyrinth.GameObjects
 {
+    using System;
+
     public class MazeCell : Cell
     {
         private const char WALL = 'x';

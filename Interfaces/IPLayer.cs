@@ -1,8 +1,8 @@
-﻿using Labyrinth.GameObjects;
-using Labyrinth.ScoreUtils;
-
-namespace Labyrinth.Interfaces
+﻿namespace Labyrinth.Interfaces
 {
+    using Labyrinth.GameObjects;
+    using Labyrinth.ScoreUtils;
+
     public interface IPlayer : ICell
     {
         Position Position { get; }
@@ -10,5 +10,7 @@ namespace Labyrinth.Interfaces
         PlayerDirection Direction { get; set; }
 
         PlayerScore Score { get; set; }
+
+        void Move(IMaze labyrinth);
     }
 }

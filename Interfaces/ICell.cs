@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth.Interfaces
 {
-    public interface ICell
+    public interface ICell:IRenderable
     {
         char Value { get; set; }
 

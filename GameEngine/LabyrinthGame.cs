@@ -1,6 +1,4 @@
-﻿using Labyrinth.GameEngine;
-
-namespace Labyrinth.GameEngine
+﻿namespace Labyrinth.GameEngine
 {
     class LabyrinthGame
     {

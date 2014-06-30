@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Labyrinth.Interfaces
+﻿namespace Labyrinth.Interfaces
 {
     public interface IRenderable
     {
-        void Render();
+        //Bridge pattern. All renderable objects recieve particular implementation of the renderer.
+        void Render(IRenderer renderer);
     }
 }
