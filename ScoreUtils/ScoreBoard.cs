@@ -13,6 +13,11 @@
 
         private readonly List<PlayerScore> scores;
 
+        public ScoreBoard()
+        {
+            this.scores = new List<PlayerScore>();
+        }
+
         public int Count
         {
             get
@@ -20,24 +25,20 @@
                 return this.scores.Count;
             }
         }
-
-        public ScoreBoard()
-        {
-            this.scores = new List<PlayerScore>();
-        }
-
+    
         public void AddScore(PlayerScore currentPlayerScore)
         {
-            if (scores.Count == MAX_SCORELIST_SIZE)
+            if (this.scores.Count == MAX_SCORELIST_SIZE)
             {
-                if (scores[MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)
+                if (this.scores[MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)
                 {
-                    scores.Remove(scores[4]);                  
+                    this.scores.Remove(this.scores[4]);                  
                 }
             }
-            if (scores.Count < MAX_SCORELIST_SIZE)
+
+            if (this.scores.Count < MAX_SCORELIST_SIZE)
             {
-                scores.Add(currentPlayerScore);
+                this.scores.Add(currentPlayerScore);
             }
 
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
@@ -46,7 +47,7 @@
         //Bridge pattern.The object recieves particular implementation of the renderer.
         public void Render(IRenderer renderer)
         {
-            if (scores.Count == 0)
+            if (this.scores.Count == 0)
             {
                 renderer.Render(EMPTY_SCOREBOARD_MESSAGE);
             }
@@ -62,9 +63,7 @@
                     currentPlayerScore.Render(renderer);
                     playerPosition++;   
                      renderer.Render(NEW_LINE);
-                });
-                
-               
+                });   
             }
         }
     }

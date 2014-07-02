@@ -13,21 +13,42 @@
 
         private Position playerPosition;
         private bool mazeHasSolution;
-        private bool[,]visitedCells;
-        
+        private bool[,] visitedCells;
+
+        public Maze(Position playerInitialPosition, int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
+        {
+            this.lab = new Cell[rows, cols];
+            this.PlayerPosition = playerInitialPosition;
+        }
+
         public ICell this[int row, int col]
         {
             get
             {
                 return this.lab[row, col];
             }
+
             set
             {
-                if (!InRange(row, this.Rows) || !InRange(col, this.Cols))
+                if (!this.InRange(row, this.Rows) || !this.InRange(col, this.Cols))
                 {
                     throw new IndexOutOfRangeException(OUTOFRANGE_MSG);
                 }
+
                 this.lab[row, col] = value;
+            }
+        }   
+
+        public Position PlayerPosition
+        {
+            get
+            {
+                return this.playerPosition;
+            }
+
+            set
+            {
+                this.playerPosition = value;
             }
         }
 
@@ -47,29 +68,11 @@
             }
         }
 
-        public Position PlayerPosition
-        {
-            get
-            {
-                return this.playerPosition;
-            }
-            set
-            {
-                this.playerPosition = value;
-            }
-        }
-
-        public Maze(Position playerInitialPosition, int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
-        {
-            lab = new Cell[rows, cols];
-            this.PlayerPosition = playerInitialPosition;
-        }
-
         public void GenerateMaze()
         {
-            mazeHasSolution = false;
+            this.mazeHasSolution = false;
 
-            while (!mazeHasSolution)
+            while (!this.mazeHasSolution)
             {
                 for (int row = 0; row < this.Rows; row++)
                 {
@@ -79,7 +82,7 @@
                     }
                 }
 
-                visitedCells = new bool[this.Rows, this.Cols];
+                this.visitedCells = new bool[this.Rows, this.Cols];
                 this.HasSolutuon(this.PlayerPosition.X, this.PlayerPosition.Y);
             }
         }
@@ -96,24 +99,25 @@
                     //Composite pattern... rendering the maze renders all the cells in it 
                     this.lab[row, col].Render(renderer);
                 }
+
                 renderer.Render("\n");
             }
         }     
 
         private void HasSolutuon(int row, int col)
         {
-            if (!InRange(row, this.Rows) || !InRange(col, this.Cols))
+            if (!this.InRange(row, this.Rows) || !this.InRange(col, this.Cols))
             {
-                mazeHasSolution = true;
+                this.mazeHasSolution = true;
                 return;
             }
-            else if (!visitedCells[row, col] && this[row, col].IsEmpty)
+            else if (!this.visitedCells[row, col] && this[row, col].IsEmpty)
             {
-                visitedCells[row, col] = true;
-                HasSolutuon(row, col + 1);
-                HasSolutuon(row + 1, col);
-                HasSolutuon(row - 1, col);
-                HasSolutuon(row, col - 1);
+                this.visitedCells[row, col] = true;
+                this.HasSolutuon(row, col + 1);
+                this.HasSolutuon(row + 1, col);
+                this.HasSolutuon(row - 1, col);
+                this.HasSolutuon(row, col - 1);
             }
         }
 

@@ -29,21 +29,21 @@
         // Here we can take initial position of player
         public GameEngine()
         {
-            player = new Player(new Position(playerInitialPosition.X, playerInitialPosition.Y));
-            maze = new Maze(player.Position);
-            scores = new ScoreBoard();
-            renderer = new Renderer();
+            this.player = new Player(new Position(this.playerInitialPosition.X, this.playerInitialPosition.Y));
+            this.maze = new Maze(this.player.Position);
+            this.scores = new ScoreBoard();
+            this.renderer = new Renderer();
         }
 
         public void Start()
         {
-            while (!hasExitCommand)
-            { 
-                player = new Player(new Position(playerInitialPosition.X, playerInitialPosition.Y));
-                player.Score = new PlayerScore();
-                maze.PlayerPosition = player.Position;
-                maze.GenerateMaze();              
-                TypeCommand();
+            while (!this.hasExitCommand)
+            {
+                this.player = new Player(new Position(this.playerInitialPosition.X, this.playerInitialPosition.Y));
+                this.player.Score = new PlayerScore();
+                this.maze.PlayerPosition = this.player.Position;
+                this.maze.GenerateMaze();
+                this.TypeCommand();
             }
         }
 
@@ -51,62 +51,63 @@
         {
             while (true)
             {
-                player.Move(maze);               
-                player.Score.Moves++;               
-                renderer.Render(WELCOME_MESSAGE);
-                maze.Render(renderer);
+                this.player.Move(this.maze);
+                this.player.Score.Moves++;
+                this.renderer.Render(WELCOME_MESSAGE);
+                this.maze.Render(this.renderer);
 
-                if (player.Direction == PlayerDirection.Invalid)
+                if (this.player.Direction == PlayerDirection.Invalid)
                 {
-                    renderer.Render(INVALID_MOVE_MESSAGE);
+                    this.renderer.Render(INVALID_MOVE_MESSAGE);
                 }
-                if (player.IsOutOfTheMaze(maze))
+
+                if (this.player.IsOutOfTheMaze(this.maze))
                 {
-                    renderer.Render(CONGRATULATIONS_MESSAGE, player.Score.Moves);
-                    renderer.Render(NICKNAME_INPUT_MESSAGE);
-                    player.Score.Name = Console.ReadLine();
-                    scores.AddScore(player.Score);
-                    scores.Render(renderer);
+                    this.renderer.Render(CONGRATULATIONS_MESSAGE, this.player.Score.Moves);
+                    this.renderer.Render(NICKNAME_INPUT_MESSAGE);
+                    this.player.Score.Name = Console.ReadLine();
+                    this.scores.AddScore(this.player.Score);
+                    this.scores.Render(this.renderer);
                     return;
                 }
 
-                renderer.Render(INPUT_MESSAGE);
-                player.Direction = PlayerDirection.Idle;
+                this.renderer.Render(INPUT_MESSAGE);
+                this.player.Direction = PlayerDirection.Idle;
                 string command = Console.ReadLine().ToLower();
 
                 switch (command)
                 {
                     case "d":
-                        player.Direction = PlayerDirection.Down;
+                        this.player.Direction = PlayerDirection.Down;
                         break;
                     case "u":
-                        player.Direction = PlayerDirection.Up;
+                        this.player.Direction = PlayerDirection.Up;
                         break;
                     case "r":
-                        player.Direction = PlayerDirection.Right;
+                        this.player.Direction = PlayerDirection.Right;
                         break;
                     case "l":
-                        player.Direction = PlayerDirection.Left;
+                        this.player.Direction = PlayerDirection.Left;
                         break;
                     case "top":
-                        scores.Render(renderer);
-                        renderer.Render(NEW_LINE);
+                        this.scores.Render(this.renderer);
+                        this.renderer.Render(NEW_LINE);
                         break;
                     case "restart":
-                        renderer.Clear();
+                        this.renderer.Clear();
                         return;
                     case "exit":
-                        renderer.Render(GOODBYE_MESSAGE);
-                        hasExitCommand = true;
+                        this.renderer.Render(GOODBYE_MESSAGE);
+                        this.hasExitCommand = true;
                         return;
                     default:
-                        renderer.Render(INVALID_COMMAND_MESSAGE);
+                        this.renderer.Render(INVALID_COMMAND_MESSAGE);
                         break;
                 }
-               
-                if (player.Direction != PlayerDirection.Idle)
+
+                if (this.player.Direction != PlayerDirection.Idle)
                 {
-                    renderer.Clear();
+                    this.renderer.Clear();
                 }
             }
         }

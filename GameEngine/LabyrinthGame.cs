@@ -1,8 +1,8 @@
 ﻿namespace Labyrinth.GameEngine
 {
-    class LabyrinthGame
+    public class LabyrinthGame
     {
-        static void Main()
+        public static void Main()
         {
             GameEngine game = new GameEngine();
             game.Start();

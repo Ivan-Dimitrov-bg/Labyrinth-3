@@ -7,7 +7,7 @@
         private const char WALL = 'x';
         private const char DEFAULT_CELL_VALUE = '-';
 
-        private static readonly Random randomInt = new Random();
+        private static readonly Random RandomInt = new Random();
         
         public MazeCell(char value = DEFAULT_CELL_VALUE) : base(value)
         {
@@ -23,7 +23,7 @@
 
         public static MazeCell GenerateRandomCell()
         {
-            int valueDecider = randomInt.Next(2);
+            int valueDecider = RandomInt.Next(2);
             
             if (valueDecider == 0)
             {

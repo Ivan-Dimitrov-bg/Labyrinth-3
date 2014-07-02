@@ -1,16 +1,23 @@
 ﻿namespace Labyrinth.GameObjects
-{
+{    
+    using System;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
-    using System;
-    
+
     public class Player : Cell, IPlayer
     {
-        private const char PLAYER_VALUE = '*';
-
         public readonly Position PlayerInitialPosition;
 
+        private const char PLAYER_VALUE = '*'; 
+
         private Position position;
+     
+        public Player(Position position) : base(PLAYER_VALUE)
+        {
+            this.Position = position;
+            this.Direction = PlayerDirection.Idle;
+            this.PlayerInitialPosition = new Position(this.Position.X, this.Position.Y);
+        }
 
         public Position Position
         {
@@ -18,11 +25,12 @@
             {
                 return this.position;
             }
+
             private set
             {
                 if (value == null)
                 {
-                    this.position = new Position(PlayerInitialPosition.X, PlayerInitialPosition.Y);
+                    this.position = new Position(this.PlayerInitialPosition.X, this.PlayerInitialPosition.Y);
                 }
                 else
                 {
@@ -35,16 +43,9 @@
 
         public PlayerDirection Direction { get; set; }
 
-        public Player(Position position) : base(PLAYER_VALUE)
-        {
-            this.Position = position;
-            this.Direction = PlayerDirection.Idle;
-            this.PlayerInitialPosition = new Position(this.Position.X, this.Position.Y);
-        }
-        
         public void Move(IMaze labyrinth)
         {
-            if (IsCellEmpty(labyrinth))
+            if (this.IsCellEmpty(labyrinth))
             {
                 labyrinth[this.Position.X, this.Position.Y] = new MazeCell();
 
@@ -96,7 +97,7 @@
                     isCellEmpty = labyrinth[this.Position.X - 1, this.Position.Y].IsEmpty;
                     break;
                 case PlayerDirection.Down:
-                    isCellEmpty = labyrinth[this.Position.X + 1, position.Y].IsEmpty;
+                    isCellEmpty = labyrinth[this.Position.X + 1, this.position.Y].IsEmpty;
                     break;
                 case PlayerDirection.Left:
                     isCellEmpty = labyrinth[this.Position.X, this.Position.Y - 1].IsEmpty;

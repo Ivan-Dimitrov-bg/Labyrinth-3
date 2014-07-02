@@ -17,12 +17,14 @@
             {
                 return this.playerMoves;
             }
+
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException("Moves cannot be negative!", "moves");
                 }
+
                 this.playerMoves = value;
             }
         }
@@ -33,12 +35,14 @@
             {
                 return this.playerName;
             }
+
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("Name cannot be null or empty!", "name");
                 }
+
                 this.playerName = value;
             }
         }
@@ -49,12 +53,14 @@
             {
                 return this.position;
             }
+
             set
             {
                 if (value <= 0 || 5 < value)
                 {
                     throw new ArgumentException("Player score position must be between 0 and 5.");
                 }
+
                 this.position = value;
             }
         }

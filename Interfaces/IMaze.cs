@@ -2,7 +2,7 @@
 {
     using Labyrinth.GameObjects;
 
-    public interface IMaze: IRenderable
+    public interface IMaze : IRenderable
     {
         int Rows { get; }
 

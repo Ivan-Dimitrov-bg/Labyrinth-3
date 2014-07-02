@@ -5,6 +5,11 @@
 
     public abstract class Cell : ICell, IRenderable
     {
+        public Cell(char value)
+        {
+            this.Value = value;
+        }
+
         public char Value { get; set; }
 
         public virtual bool IsEmpty
@@ -14,13 +19,7 @@
                 return true;
             }
         }
-        
-        public Cell(char value)
-        {
-            this.Value = value;
-        }
-
-
+          
         //Bridge pattern.The object recieves particular implementation of the renderer.
         public void Render(IRenderer renderer)
         {

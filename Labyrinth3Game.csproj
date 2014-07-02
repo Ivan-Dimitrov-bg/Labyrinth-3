@@ -60,7 +60,9 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameEngine\Renderer.cs" />
     <Compile Include="ScoreUtils\PlayerScore.cs" />
-    <Compile Include="ScoreUtils\ScoreBoard.cs" />
+    <Compile Include="ScoreUtils\ScoreBoard.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
