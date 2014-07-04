@@ -8,7 +8,9 @@
     public class GameEngine
     {
         private const string NEW_LINE = "\n";
-        private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. Please try to escape. Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
+        private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
+        private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
+        private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
         private const string INPUT_MESSAGE = "\nEnter your move (L=left, R=right, D=down, U=up): ";
         private const string INVALID_MOVE_MESSAGE = "Invalid move!\n ";
         private const string INVALID_COMMAND_MESSAGE = "Invalid command!\n";
@@ -29,17 +31,37 @@
         // Here we can take initial position of player
         public GameEngine()
         {
-            this.player = new Player(new Position(this.playerInitialPosition.X, this.playerInitialPosition.Y));
-            this.maze = new Maze(this.player.Position);
-            this.scores = new ScoreBoard();
             this.renderer = new Renderer();
+            string choise = string.Empty;
+            LabCreator labFactory = null;
+
+            renderer.Render(WELCOME_MESSAGE);
+            renderer.Render(CHOOSE_LAB_MESAGE);
+            
+            while (choise != "small" && choise != "medium" && choise != "large")
+            {
+                choise = Console.ReadLine();
+
+                switch (choise)
+                {
+                    case "small": labFactory = new SmallLabCreator(); break;
+                    case "medium": labFactory = new MediumLabCreator(); break;
+                    case "large": labFactory = new LargeLabCreator(); break;
+                    default: renderer.Render(INVALID_COMMAND_MESSAGE); 
+                             renderer.Render(CHOOSE_LAB_MESAGE);
+                        break;
+                }
+            }
+
+            this.maze = labFactory.CreateLabyrinth();
+            this.scores = new ScoreBoard();
         }
 
         public void Start()
         {
             while (!this.hasExitCommand)
             {
-                this.player = new Player(new Position(this.playerInitialPosition.X, this.playerInitialPosition.Y));
+                this.player = new Player(this.maze.PlayerInitialPosition);
                 this.player.Score = new PlayerScore();
                 this.maze.PlayerPosition = this.player.Position;
                 this.maze.GenerateMaze();
@@ -53,7 +75,7 @@
             {
                 this.player.Move(this.maze);
                 this.player.Score.Moves++;
-                this.renderer.Render(WELCOME_MESSAGE);
+                this.renderer.Render(IN_GAME_MESSAGE);
                 this.maze.Render(this.renderer);
 
                 if (this.player.Direction == PlayerDirection.Invalid)

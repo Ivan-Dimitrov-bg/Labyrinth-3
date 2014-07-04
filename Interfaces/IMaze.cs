@@ -12,6 +12,8 @@
 
         Position PlayerPosition { get; set; }
 
+        Position PlayerInitialPosition { get; }
+
         void GenerateMaze();
     }
 }

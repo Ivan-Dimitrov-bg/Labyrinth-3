@@ -12,13 +12,15 @@
         private readonly ICell[,] lab;
 
         private Position playerPosition;
+        private Position playerInitialPosition;
         private bool mazeHasSolution;
         private bool[,] visitedCells;
 
-        public Maze(Position playerInitialPosition, int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
+        public Maze(int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
         {
             this.lab = new Cell[rows, cols];
-            this.PlayerPosition = playerInitialPosition;
+            this.playerInitialPosition = new Position(this.lab.GetLength(0) / 2, this.lab.GetLength(1) / 2);
+            //this.PlayerPosition = playerInitialPosition;
         }
 
         public ICell this[int row, int col]
@@ -38,6 +40,18 @@
                 this.lab[row, col] = value;
             }
         }   
+
+        public Position PlayerInitialPosition
+        {
+            get
+            {
+                return this.playerInitialPosition;
+            }
+            private set
+            {
+                this.PlayerInitialPosition = value;
+            }
+        }
 
         public Position PlayerPosition
         {

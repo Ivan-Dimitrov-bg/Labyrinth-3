@@ -6,11 +6,11 @@
 
     public class SmallLabCreator : LabCreator
     {
-        private const int SMALL_LAB_SIZE = 20;
+        private const int SMALL_LAB_SIZE = 10;
 
         public override Maze CreateLabyrinth()
         {
-            return new Maze(new Position(SMALL_LAB_SIZE/2, SMALL_LAB_SIZE/2),SMALL_LAB_SIZE, SMALL_LAB_SIZE);
+            return new Maze(SMALL_LAB_SIZE, SMALL_LAB_SIZE);
         }
     }
 }

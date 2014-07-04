@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameEngine\LabCreator.cs" />
+    <Compile Include="GameEngine\LargeLabCreator.cs" />
+    <Compile Include="GameEngine\MediumLabCreator.cs" />
+    <Compile Include="GameEngine\SmallLabCreator.cs" />
     <Compile Include="GameObjects\PlayerDirection.cs" />
     <Compile Include="GameEngine\CommandListener.cs" />
     <Compile Include="GameEngine\GameEngine.cs" />

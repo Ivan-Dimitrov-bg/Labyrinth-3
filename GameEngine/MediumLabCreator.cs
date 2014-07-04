@@ -10,7 +10,7 @@
 
         public override Maze CreateLabyrinth()
         {
-            return new Maze(new Position(MEDIUM_LAB_SIZE/2, MEDIUM_LAB_SIZE/2),MEDIUM_LAB_SIZE, MEDIUM_LAB_SIZE);
+            return new Maze(MEDIUM_LAB_SIZE, MEDIUM_LAB_SIZE);
         }
     }
 }
