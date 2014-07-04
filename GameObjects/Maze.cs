@@ -19,7 +19,7 @@
         public Maze(int rows = LAB_DIMENSIONS, int cols = LAB_DIMENSIONS)
         {
             this.lab = new Cell[rows, cols];
-            this.playerInitialPosition = new Position(this.lab.GetLength(0) / 2, this.lab.GetLength(1) / 2);
+            this.playerInitialPosition = new Position(this.Rows / 2, this.Cols / 2);
             //this.PlayerPosition = playerInitialPosition;
         }
 

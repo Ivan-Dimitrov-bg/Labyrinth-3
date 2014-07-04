@@ -32,28 +32,7 @@
         public GameEngine()
         {
             this.renderer = new Renderer();
-            string choise = string.Empty;
-            LabCreator labFactory = null;
-
-            renderer.Render(WELCOME_MESSAGE);
-            renderer.Render(CHOOSE_LAB_MESAGE);
-            
-            while (choise != "small" && choise != "medium" && choise != "large")
-            {
-                choise = Console.ReadLine();
-
-                switch (choise)
-                {
-                    case "small": labFactory = new SmallLabCreator(); break;
-                    case "medium": labFactory = new MediumLabCreator(); break;
-                    case "large": labFactory = new LargeLabCreator(); break;
-                    default: renderer.Render(INVALID_COMMAND_MESSAGE); 
-                             renderer.Render(CHOOSE_LAB_MESAGE);
-                        break;
-                }
-            }
-
-            this.maze = labFactory.CreateLabyrinth();
+            this.maze = InitMaze();
             this.scores = new ScoreBoard();
         }
 
@@ -67,6 +46,32 @@
                 this.maze.GenerateMaze();
                 this.TypeCommand();
             }
+        }
+
+        private Maze InitMaze()
+        {
+            string choise = string.Empty;
+            LabCreator labFactory = null;
+
+            renderer.Render(WELCOME_MESSAGE);
+            renderer.Render(CHOOSE_LAB_MESAGE);
+
+            while (choise != "small" && choise != "medium" && choise != "large")
+            {
+                choise = Console.ReadLine();
+
+                switch (choise)
+                {
+                    case "small": labFactory = new SmallLabCreator(); break;
+                    case "medium": labFactory = new MediumLabCreator(); break;
+                    case "large": labFactory = new LargeLabCreator(); break;
+                    default: renderer.Render(INVALID_COMMAND_MESSAGE);
+                        renderer.Render(CHOOSE_LAB_MESAGE);
+                        break;
+                }
+            }
+
+            return labFactory.CreateLabyrinth();
         }
 
         private void TypeCommand()
