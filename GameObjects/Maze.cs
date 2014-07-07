@@ -2,7 +2,8 @@
 {
     using System;
     using Labyrinth.Interfaces;
-    
+    using Labyrinth.Factories;
+
     public class Maze : IMaze, IRenderable
     {
         private const int LAB_DIMENSIONS = 7;
@@ -39,7 +40,7 @@
 
                 this.lab[row, col] = value;
             }
-        }   
+        }
 
         public Position PlayerInitialPosition
         {
@@ -88,11 +89,12 @@
 
             while (!this.mazeHasSolution)
             {
+
                 for (int row = 0; row < this.Rows; row++)
                 {
                     for (int col = 0; col < this.Cols; col++)
                     {
-                        this.lab[row, col] = MazeCell.GenerateRandomCell();
+                        this.lab[row, col] = MazeCellCreator.CreateCell();
                     }
                 }
 
@@ -104,7 +106,8 @@
         //Bridge pattern.The object recieves particular implementation of the renderer.
         public void Render(IRenderer renderer)
         {
-            this.lab[this.PlayerPosition.X, this.PlayerPosition.Y] = new Player(this.PlayerPosition);
+            this.lab[this.PlayerPosition.X, this.PlayerPosition.Y] = PlayerCreator.CreatePlayer(this.PlayerPosition);
+
 
             for (int row = 0; row < this.Rows; row++)
             { 
@@ -116,7 +119,7 @@
 
                 renderer.Render("\n");
             }
-        }     
+        }
 
         private void HasSolutuon(int row, int col)
         {

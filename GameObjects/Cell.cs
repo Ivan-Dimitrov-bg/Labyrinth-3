@@ -18,6 +18,7 @@
             {
                 return true;
             }
+
         }
           
         //Bridge pattern.The object recieves particular implementation of the renderer.

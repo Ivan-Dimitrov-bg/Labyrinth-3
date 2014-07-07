@@ -1,6 +1,7 @@
 ﻿namespace Labyrinth.GameEngine
 {
     using System;
+    using Labyrinth.Factories;
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
@@ -21,11 +22,14 @@
         private readonly IScoreBoard scores;
         private readonly IMaze maze;
         private readonly IRenderer renderer;
+        private IPlayer player;
+         LabCreator labFactory;
+
 
         // We can set this as default position, if no other is entered
         private readonly Position playerInitialPosition = new Position(3, 3);
 
-        private IPlayer player;
+       
         private bool hasExitCommand; //game in progress.    
 
         // Here we can take initial position of player
@@ -40,7 +44,7 @@
         {
             while (!this.hasExitCommand)
             {
-                this.player = new Player(this.maze.PlayerInitialPosition);
+                this.player = PlayerCreator.CreatePlayer(this.maze.PlayerInitialPosition);
                 this.player.Score = new PlayerScore();
                 this.maze.PlayerPosition = this.player.Position;
                 this.maze.GenerateMaze();
@@ -48,11 +52,10 @@
             }
         }
 
-        private Maze InitMaze()
+        private IMaze InitMaze()
         {
             string choise = string.Empty;
-            LabCreator labFactory = null;
-
+           
             renderer.Render(WELCOME_MESSAGE);
             renderer.Render(CHOOSE_LAB_MESAGE);
 

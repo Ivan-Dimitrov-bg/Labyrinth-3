@@ -1,14 +1,13 @@
 ﻿namespace Labyrinth.GameObjects
-{    
+{ 
     using System;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
 
     public class Player : Cell, IPlayer
     {
-        public readonly Position PlayerInitialPosition;
-
         private const char PLAYER_VALUE = '*'; 
+        private const char EMPTY_VALUE = '-'; 
 
         private Position position;
      
@@ -16,7 +15,6 @@
         {
             this.Position = position;
             this.Direction = PlayerDirection.Idle;
-            this.PlayerInitialPosition = new Position(this.Position.X, this.Position.Y);
         }
 
         public Position Position
@@ -28,14 +26,7 @@
 
             private set
             {
-                if (value == null)
-                {
-                    this.position = new Position(this.PlayerInitialPosition.X, this.PlayerInitialPosition.Y);
-                }
-                else
-                {
-                    this.position = new Position(value.X, value.Y);
-                }
+                this.position = new Position(value.X, value.Y);
             }
         }
 
@@ -47,7 +38,7 @@
         {
             if (this.IsCellEmpty(labyrinth))
             {
-                labyrinth[this.Position.X, this.Position.Y] = new MazeCell();
+                labyrinth[this.Position.X, this.Position.Y].Value = EMPTY_VALUE;
 
                 switch (this.Direction)
                 {
