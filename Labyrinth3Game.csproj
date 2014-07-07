@@ -49,8 +49,8 @@
     <Compile Include="Factories\MediumLabCreator.cs" />
     <Compile Include="Factories\PlayerCreator.cs" />
     <Compile Include="Factories\SmallLabCreator.cs" />
-    <Compile Include="GameObjects\PlayerDirection.cs" />
-    <Compile Include="GameEngine\Command.cs" />
+    <Compile Include="GameObjects\PlayerState.cs" />
+    <Compile Include="GameEngine\Commander.cs" />
     <Compile Include="GameEngine\GameEngine.cs" />
     <Compile Include="GameObjects\Cell.cs" />
     <Compile Include="GameObjects\Position.cs" />

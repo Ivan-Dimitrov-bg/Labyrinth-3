@@ -7,7 +7,7 @@
     {
         Position Position { get; }
 
-        PlayerDirection Direction { get; set; }
+        PlayerState State { get; set; }
 
         PlayerScore Score { get; set; }
 

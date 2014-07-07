@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract class CommandListener 
+    public abstract class Commander 
     {
         public abstract void ExecuteCommand();
         

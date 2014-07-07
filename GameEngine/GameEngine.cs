@@ -23,16 +23,10 @@
         private readonly IMaze maze;
         private readonly IRenderer renderer;
         private IPlayer player;
-         LabCreator labFactory;
-
-
-        // We can set this as default position, if no other is entered
-        private readonly Position playerInitialPosition = new Position(3, 3);
-
+        LabCreator labFactory;
        
         private bool hasExitCommand; //game in progress.    
 
-        // Here we can take initial position of player
         public GameEngine()
         {
             this.renderer = new Renderer();
@@ -80,16 +74,9 @@
         private void TypeCommand()
         {
             while (true)
-            {
-                this.player.Move(this.maze);
-                this.player.Score.Moves++;
+            {               
                 this.renderer.Render(IN_GAME_MESSAGE);
                 this.maze.Render(this.renderer);
-
-                if (this.player.Direction == PlayerDirection.Invalid)
-                {
-                    this.renderer.Render(INVALID_MOVE_MESSAGE);
-                }
 
                 if (this.player.IsOutOfTheMaze(this.maze))
                 {
@@ -101,27 +88,39 @@
                     return;
                 }
 
-                this.renderer.Render(INPUT_MESSAGE);
-                this.player.Direction = PlayerDirection.Idle;
+                switch (this.player.State)
+                {
+                    case PlayerState.InvalidMove:
+                        this.renderer.Render(INVALID_MOVE_MESSAGE); break;
+                    case PlayerState.Idle:
+                        this.renderer.Render(INVALID_COMMAND_MESSAGE); break;
+                    case PlayerState.PrintingTopScores:
+                        this.scores.Render(this.renderer);
+                        this.renderer.Render(NEW_LINE); break;
+                    default:
+                        this.renderer.Render(INPUT_MESSAGE);
+                        this.player.State = PlayerState.Idle;
+                        break;
+                }
+               
                 string command = Console.ReadLine().ToLower();
-
+                
                 switch (command)
                 {
                     case "d":
-                        this.player.Direction = PlayerDirection.Down;
+                        this.player.State = PlayerState.MoveDown;
                         break;
                     case "u":
-                        this.player.Direction = PlayerDirection.Up;
+                        this.player.State = PlayerState.MoveUp;
                         break;
                     case "r":
-                        this.player.Direction = PlayerDirection.Right;
+                        this.player.State = PlayerState.MoveRight;
                         break;
                     case "l":
-                        this.player.Direction = PlayerDirection.Left;
+                        this.player.State = PlayerState.MoveLeft;
                         break;
                     case "top":
-                        this.scores.Render(this.renderer);
-                        this.renderer.Render(NEW_LINE);
+                        this.player.State = PlayerState.PrintingTopScores;
                         break;
                     case "restart":
                         this.renderer.Clear();
@@ -131,14 +130,12 @@
                         this.hasExitCommand = true;
                         return;
                     default:
-                        this.renderer.Render(INVALID_COMMAND_MESSAGE);
                         break;
                 }
-
-                if (this.player.Direction != PlayerDirection.Idle)
-                {
-                    this.renderer.Clear();
-                }
+              
+                this.renderer.Clear();               
+                this.player.Move(this.maze);
+                this.player.Score.Moves++;
             }
         }
     }
