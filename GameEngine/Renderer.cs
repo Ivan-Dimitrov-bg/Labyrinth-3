@@ -26,7 +26,8 @@
             {
                 Console.Write(message, args);
             }
-            Console.ForegroundColor = ConsoleColor.White;
+
+            this.Color = ConsoleColor.White;
         }
 
         public void Clear()

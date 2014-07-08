@@ -107,7 +107,6 @@
                         break;
                     case PlayerCommand.PrintTopScores:
                         this.scores.Render(this.renderer);
-                        this.renderer.Render(NEW_LINE);
                         break;
                     default:
                         this.Player.Command = PlayerCommand.InvalidCommand;
