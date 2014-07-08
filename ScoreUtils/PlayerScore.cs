@@ -67,6 +67,7 @@
 
         public void Render(IRenderer renderer)
         {
+            //renderer.Color = ConsoleColor.Cyan;
             renderer.Render(SCORELIST_ROW_TEMPLATE, this.Position, this.Name, this.Moves);
         }
     }
