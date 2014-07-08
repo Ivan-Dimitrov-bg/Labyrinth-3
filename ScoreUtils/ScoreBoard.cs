@@ -55,15 +55,16 @@
             {
                 int playerPosition = 1;
                 renderer.Render(TOP_FIVE_MESSAGE);
-                this.scores.ForEach((currentPlayerScore) =>
-                {
-                    currentPlayerScore.Position = playerPosition;
+                
+                //Composite pattern... rendering the score list renders all the scores in it 
 
-                    //Composite pattern... rendering the score list renders all the scores in it 
-                    currentPlayerScore.Render(renderer);
+                foreach (PlayerScore score in this.scores)
+                {
+                    score.Position = playerPosition;
+                    score.Render(renderer);
                     playerPosition++;   
-                     renderer.Render(NEW_LINE);
-                });   
+                    renderer.Render(NEW_LINE);
+                }
             }
         }
     }

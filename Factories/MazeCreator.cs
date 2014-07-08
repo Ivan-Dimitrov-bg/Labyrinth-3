@@ -4,8 +4,8 @@
     using System;
     using System.Linq;
 
-    public abstract class LabCreator
+    public abstract class MazeCreator
     {
-        public abstract IMaze CreateLabyrinth();
+        public abstract IMaze CreateMaze();
     }
 }

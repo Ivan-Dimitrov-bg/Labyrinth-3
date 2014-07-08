@@ -3,7 +3,7 @@
     using System;
     using Labyrinth.Interfaces;
 
-    public class PlayerScore 
+    public class PlayerScore : IRenderable
     {
         private const string SCORELIST_ROW_TEMPLATE = "{0}. {1} ---> {2} moves";
 

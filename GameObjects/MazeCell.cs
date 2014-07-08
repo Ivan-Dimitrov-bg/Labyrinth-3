@@ -2,13 +2,9 @@
 {
     using System;
 
-    public class MazeCell : Cell
+    public class MazeCell : Cell, ICloneable
     {
-      
-        private const char DEFAULT_CELL_VALUE = '-';
-    
-        
-        public MazeCell(char value = DEFAULT_CELL_VALUE) : base(value)
+        public MazeCell(char value = EMPTY_CELL) : base(value)
         {
         }
 
@@ -16,10 +12,14 @@
         {
             get
             {
-                return this.Value == DEFAULT_CELL_VALUE;
+                return this.Value == EMPTY_CELL;
             }
         }
 
-       
+        //Prototype pattern
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

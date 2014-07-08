@@ -5,9 +5,11 @@
 
     public interface IPlayer : ICell
     {
-        Position Position { get; }
+        Position Position { get; set; }
 
-        PlayerState State { get; set; }
+        PlayerCommand Command { get; set; }
+
+        PlayerDirection Direction { get; set; }
 
         PlayerScore Score { get; set; }
 

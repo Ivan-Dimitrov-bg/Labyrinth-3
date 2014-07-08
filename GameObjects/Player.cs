@@ -5,99 +5,84 @@
     using Labyrinth.ScoreUtils;
 
     public class Player : Cell, IPlayer
-    {
-        private const char PLAYER_VALUE = '*'; 
-        private const char EMPTY_VALUE = '-'; 
+    { 
 
-        private Position position;
-     
-        public Player(Position position) : base(PLAYER_VALUE)
+        
+        public Player() : base(PLAYER_VALUE)
         {
-            this.Position = position;
         }
 
-        public Position Position
-        {
-            get
-            {
-                return this.position;
-            }
-
-            private set
-            {
-                this.position = new Position(value.X, value.Y);
-            }
-        }
-
+        public Position Position { get; set; }
+        
         public PlayerScore Score { get; set; }
 
-        public PlayerState State { get; set; }
+        public PlayerCommand Command { get; set; }
+
+        public PlayerDirection Direction { get; set; }
 
         public void Move(IMaze labyrinth)
         {
-            if (this.IsCellEmpty(labyrinth))
+            if (this.Command == PlayerCommand.Move)
             {
-                labyrinth[this.Position.X, this.Position.Y].Value = EMPTY_VALUE;
+                labyrinth[this.Position.X, this.Position.Y].Value = EMPTY_CELL;
 
-                switch (this.State)
+                switch (this.Direction)
                 {
-                    case PlayerState.MoveUp:
-                        this.Position.X--;
+                    case PlayerDirection.Up:
+                        if (labyrinth[this.Position.X - 1, this.Position.Y].IsEmpty)
+                        {
+                            this.Position.X--;
+                        }
+                        else
+                        {
+                            this.Command = PlayerCommand.InvalidMove;
+                        }
                         break;
-                    case PlayerState.MoveDown:
-                        this.Position.X++;
+                    case PlayerDirection.Down:
+                        if (labyrinth[this.Position.X + 1, this.Position.Y].IsEmpty)
+                        {
+                            this.Position.X++;
+                        }
+                        else
+                        {
+                            this.Command = PlayerCommand.InvalidMove;
+                        }
                         break;
-                    case PlayerState.MoveLeft:
-                        this.Position.Y--;
+                    case PlayerDirection.Left:
+                        if (labyrinth[this.Position.X, this.Position.Y - 1].IsEmpty)
+                        {
+                            this.Position.Y--;
+                        }
+                        else
+                        {
+                            this.Command = PlayerCommand.InvalidMove;
+                        }
                         break;
-                    case PlayerState.MoveRight:
-                        this.Position.Y++;
-                        break;
-                }
-            }
-            else
-            {
-                if (this.State != PlayerState.Idle)
-                {
-                    this.State = PlayerState.PrintingTopScores;
+                    case PlayerDirection.Right:
+                        if (labyrinth[this.Position.X, this.Position.Y + 1].IsEmpty)
+                        {
+                            this.Position.Y++;
+                        }
+                        else
+                        {
+                            this.Command = PlayerCommand.InvalidMove;
+                        }
+                        break;                   
                 }
             }
         }
 
         public bool IsOutOfTheMaze(IMaze maze)
         {
-            if (this.position.X == 0 ||
-                this.position.X == maze.Rows - 1 ||
-                this.position.Y == 0 ||
-                this.position.Y == maze.Cols - 1)
+            if (this.Position.X == 0 ||
+                this.Position.X == maze.Rows - 1 ||
+                this.Position.Y == 0 ||
+                this.Position.Y == maze.Cols - 1)
             {
                 return true;
             }
 
             return false;
-        }
-        
-        private bool IsCellEmpty(IMaze labyrinth)
-        {
-            bool isCellEmpty = false;
-
-            switch (this.State)
-            {
-                case PlayerState.MoveUp:
-                    isCellEmpty = labyrinth[this.Position.X - 1, this.Position.Y].IsEmpty;
-                    break;
-                case PlayerState.MoveDown:
-                    isCellEmpty = labyrinth[this.Position.X + 1, this.position.Y].IsEmpty;
-                    break;
-                case PlayerState.MoveLeft:
-                    isCellEmpty = labyrinth[this.Position.X, this.Position.Y - 1].IsEmpty;
-                    break;
-                case PlayerState.MoveRight:
-                    isCellEmpty = labyrinth[this.Position.X, this.Position.Y + 1].IsEmpty;
-                    break;
-            }
-
-            return isCellEmpty;
         }
     }
 }

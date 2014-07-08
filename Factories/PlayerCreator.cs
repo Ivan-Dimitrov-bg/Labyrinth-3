@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Labyrinth.GameObjects;
+﻿using Labyrinth.GameObjects;
 using Labyrinth.Interfaces;
 
 namespace Labyrinth.Factories
 {
     public static class PlayerCreator
     {
-        public static IPlayer CreatePlayer(Position pos)
+        private static IPlayer instance;
+       
+        public static IPlayer CreatePlayer()
         {
-            return new Player(pos);
+            if (instance == null)
+            {
+                instance =  new Player();
+            }
+            return instance;
         }
     }
 }
