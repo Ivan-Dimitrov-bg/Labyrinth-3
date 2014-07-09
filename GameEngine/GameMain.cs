@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace Labyrinth.GameEngine
+﻿namespace Labyrinth.GameEngine
 {
     public static class GameMain
     {

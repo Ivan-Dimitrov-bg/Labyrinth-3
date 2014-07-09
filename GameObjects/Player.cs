@@ -29,7 +29,7 @@
             set
             {
                 this.command = value;
-                //Observer pattern
+                //Observer pattern...
                 this.Move();
             }
         }

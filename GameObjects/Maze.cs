@@ -7,13 +7,13 @@
     {
         private const string OUTOFRANGE_MSG = "Position is out of the maze!";
 
-        private readonly ICell[,] Lab;
+        private readonly ICell[,] lab;
 
         private Position playerPosition;
 
         public Maze(int rows, int cols)
         {
-            this.Lab = new Cell[rows, cols];
+            this.lab = new Cell[rows, cols];
             this.PlayerPosition = new Position(this.Rows / 2, this.Cols / 2);
         }
 
@@ -21,7 +21,7 @@
         {
             get
             {
-                return this.Lab[row, col];
+                return this.lab[row, col];
             }
 
             set
@@ -31,7 +31,7 @@
                     throw new IndexOutOfRangeException(OUTOFRANGE_MSG);
                 }
 
-                this.Lab[row, col] = value;
+                this.lab[row, col] = value;
             }
         }
 
@@ -57,7 +57,7 @@
         {
             get
             {
-                return this.Lab.GetLength(0);
+                return this.lab.GetLength(0);
             }
         }
 
@@ -65,7 +65,7 @@
         {
             get
             {
-                return this.Lab.GetLength(1);
+                return this.lab.GetLength(1);
             }
         }
 
@@ -73,14 +73,14 @@
         //Bridge pattern.The object recieves particular implementation of the renderer.
         public void Render(IRenderer renderer)
         {
-            this.Lab[this.PlayerPosition.X, this.PlayerPosition.Y].Value = Cell.PLAYER_VALUE;
+            this.lab[this.PlayerPosition.X, this.PlayerPosition.Y].Value = Cell.PLAYER_VALUE;
 
             for (int row = 0; row < this.Rows; row++)
             { 
                 for (int col = 0; col < this.Cols; col++)
                 {
                     //Composite pattern... rendering the maze renders all the cells in it 
-                    this.Lab[row, col].Render(renderer);
+                    this.lab[row, col].Render(renderer);
                 }
 
                 renderer.Render("\n");
