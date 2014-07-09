@@ -23,7 +23,6 @@
         private readonly IPlayer player;
 
         private MazeCreator mazeFactory;
-
        
         private bool hasExitCommand; //game in progress.    
 
@@ -32,7 +31,7 @@
             this.renderer = new ConsoleRenderer();
             this.maze = this.InitMaze();
             this.scores = new ScoreBoard();
-            this.player = PlayerCreator.CreatePlayer();
+            this.player = PlayerCreator.CreatePlayer(this.maze);
         }
 
         public void Start()
@@ -85,7 +84,7 @@
                 this.renderer.Render(IN_GAME_MESSAGE);
                 this.maze.Render(this.renderer);
 
-                if (this.player.IsOutOfTheMaze(this.maze))
+                if (this.player.IsOutOfTheMaze())
                 {
                     this.renderer.Render(CONGRATULATIONS_MESSAGE, this.player.Score.Moves);
                     this.renderer.Render(NICKNAME_INPUT_MESSAGE);
@@ -115,20 +114,16 @@
                 switch (command)
                 {
                     case "d":
-                        this.player.Direction = PlayerDirection.Down;
-                        this.player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Down;                       
                         break;
                     case "u":
-                        this.player.Direction = PlayerDirection.Up;
-                        this.player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Up;                       
                         break;
                     case "r":
-                        this.player.Direction = PlayerDirection.Right;
-                        this.player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Right;                       
                         break;
                     case "l":
-                        this.player.Direction = PlayerDirection.Left;
-                        this.player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Left;                       
                         break;
                     case "top":
                         this.player.Command = PlayerCommand.PrintTopScores;
@@ -146,7 +141,6 @@
                 }
               
                 this.renderer.Clear();               
-                this.player.Move(this.maze);
                 this.player.Score.Moves++;
             }
         }

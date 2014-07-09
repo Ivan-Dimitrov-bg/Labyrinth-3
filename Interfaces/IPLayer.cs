@@ -13,8 +13,6 @@
 
         PlayerScore Score { get; set; }
 
-        void Move(IMaze maze);
-
-        bool IsOutOfTheMaze(IMaze maze);
+        bool IsOutOfTheMaze();
     }
 }
