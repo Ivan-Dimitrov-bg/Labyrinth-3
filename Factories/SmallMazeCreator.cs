@@ -9,7 +9,13 @@
 
         public override IMaze CreateMaze()
         {
-            return new Maze(SMALL_LAB_SIZE, SMALL_LAB_SIZE);
+            //Singleton pattern...
+            if (this.maze == null)
+            {
+                this.maze = new Maze(SMALL_LAB_SIZE, SMALL_LAB_SIZE);
+            }
+
+            return maze;
         }
     }
 }

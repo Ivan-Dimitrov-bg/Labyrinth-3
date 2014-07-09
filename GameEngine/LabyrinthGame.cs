@@ -8,7 +8,6 @@
     
     public class LabyrinthGame
     {
-        private const string NEW_LINE = "\n";
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
         private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
@@ -22,8 +21,10 @@
         private readonly IScoreBoard scores;
         private readonly IMaze maze;
         private readonly IRenderer renderer;
-        private IPlayer Player;
-        MazeCreator mazeFactory;
+        private readonly IPlayer player;
+
+        private MazeCreator mazeFactory;
+
        
         private bool hasExitCommand; //game in progress.    
 
@@ -32,17 +33,16 @@
             this.renderer = new Renderer();
             this.maze = this.InitMaze();
             this.scores = new ScoreBoard();
-            this.Player = PlayerCreator.CreatePlayer();
+            this.player = PlayerCreator.CreatePlayer();
         }
 
         public void Start()
         {
             while (!this.hasExitCommand)
             {
-                this.Player.Position = new Position(this.maze.Rows / 2, this.maze.Cols / 2);
-                this.Player.Score = new PlayerScore();
-                this.maze.PlayerPosition = this.Player.Position;
-                this.maze.GenerateMaze();
+                this.player.Score = new PlayerScore();
+                this.player.Position = this.maze.PlayerPosition;
+                this.mazeFactory.GenerateMaze();
                 this.TypeCommand();
             }
         }
@@ -86,18 +86,18 @@
                 this.renderer.Render(IN_GAME_MESSAGE);
                 this.maze.Render(this.renderer);
 
-                if (this.Player.IsOutOfTheMaze(this.maze))
+                if (this.player.IsOutOfTheMaze(this.maze))
                 {
-                    this.renderer.Render(CONGRATULATIONS_MESSAGE, this.Player.Score.Moves);
+                    this.renderer.Render(CONGRATULATIONS_MESSAGE, this.player.Score.Moves);
                     this.renderer.Render(NICKNAME_INPUT_MESSAGE);
-                    this.Player.Score.Name = Console.ReadLine();
+                    this.player.Score.Name = Console.ReadLine();
                     this.renderer.Clear();
-                    this.scores.AddScore(this.Player.Score);
-                    this.scores.Render(this.renderer);                    
+                    this.scores.AddScore(this.player.Score);
+                    this.scores.Render(this.renderer);
                     return;
                 }
 
-                switch (this.Player.Command)
+                switch (this.player.Command)
                 {
                     case PlayerCommand.InvalidMove:
                         this.renderer.Render(INVALID_MOVE_MESSAGE);
@@ -109,7 +109,7 @@
                         this.scores.Render(this.renderer);
                         break;
                     default:
-                        this.Player.Command = PlayerCommand.InvalidCommand;
+                        this.player.Command = PlayerCommand.InvalidCommand;
                         break;
                 }
 
@@ -119,23 +119,23 @@
                 switch (command)
                 {
                     case "d":
-                        this.Player.Direction = PlayerDirection.Down;
-                        this.Player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Down;
+                        this.player.Command = PlayerCommand.Move;
                         break;
                     case "u":
-                        this.Player.Direction = PlayerDirection.Up;
-                        this.Player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Up;
+                        this.player.Command = PlayerCommand.Move;
                         break;
                     case "r":
-                        this.Player.Direction = PlayerDirection.Right;
-                        this.Player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Right;
+                        this.player.Command = PlayerCommand.Move;
                         break;
                     case "l":
-                        this.Player.Direction = PlayerDirection.Left;
-                        this.Player.Command = PlayerCommand.Move;
+                        this.player.Direction = PlayerDirection.Left;
+                        this.player.Command = PlayerCommand.Move;
                         break;
                     case "top":
-                        this.Player.Command = PlayerCommand.PrintTopScores;
+                        this.player.Command = PlayerCommand.PrintTopScores;
                         break;
                     case "restart":
                         this.renderer.Clear();
@@ -149,8 +149,8 @@
                 }
               
                 this.renderer.Clear();               
-                this.Player.Move(this.maze);
-                this.Player.Score.Moves++;
+                this.player.Move(this.maze);
+                this.player.Score.Moves++;
             }
         }
     }

@@ -10,8 +10,6 @@
 
         ICell this[int row, int col] { get; set; }
 
-        Position PlayerPosition { set; }
-
-        void GenerateMaze();
+        Position PlayerPosition { get; set; }
     }
 }
