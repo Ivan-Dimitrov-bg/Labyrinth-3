@@ -1,6 +1,5 @@
 ﻿namespace Labyrinth.GameEngine
 {
-    using System;
     using Labyrinth.Factories;
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
@@ -30,7 +29,7 @@
 
         public LabyrinthGame()
         {
-            this.renderer = new Renderer();
+            this.renderer = new ConsoleRenderer();
             this.maze = this.InitMaze();
             this.scores = new ScoreBoard();
             this.player = PlayerCreator.CreatePlayer();
@@ -56,7 +55,7 @@
 
             while (labSizeChoice != "small" && labSizeChoice != "medium" && labSizeChoice != "large")
             {
-                labSizeChoice = Console.ReadLine();
+                labSizeChoice = this.renderer.ReadCommand();
 
                 switch (labSizeChoice)
                 {
@@ -90,7 +89,7 @@
                 {
                     this.renderer.Render(CONGRATULATIONS_MESSAGE, this.player.Score.Moves);
                     this.renderer.Render(NICKNAME_INPUT_MESSAGE);
-                    this.player.Score.Name = Console.ReadLine();
+                    this.player.Score.Name = this.renderer.ReadCommand();
                     this.renderer.Clear();
                     this.scores.AddScore(this.player.Score);
                     this.scores.Render(this.renderer);
@@ -108,13 +107,10 @@
                     case PlayerCommand.PrintTopScores:
                         this.scores.Render(this.renderer);
                         break;
-                    default:
-                        this.player.Command = PlayerCommand.InvalidCommand;
-                        break;
                 }
 
                 this.renderer.Render(INPUT_MESSAGE);
-                string command = Console.ReadLine().ToLower();
+                string command = this.renderer.ReadCommand().ToLower();
                 
                 switch (command)
                 {
@@ -145,6 +141,7 @@
                         this.hasExitCommand = true;
                         return;
                     default:
+                        this.player.Command = PlayerCommand.InvalidCommand;
                         break;
                 }
               

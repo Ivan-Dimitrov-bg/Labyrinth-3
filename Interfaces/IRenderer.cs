@@ -8,6 +8,8 @@
 
         void Render(string message, params object[] args);
 
+        string ReadCommand();
+
         void Clear();
     }
 }

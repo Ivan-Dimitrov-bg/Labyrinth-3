@@ -20,16 +20,16 @@
 
         public PlayerDirection Direction { get; set; }
 
-        public void Move(IMaze labyrinth)
+        public void Move(IMaze maze)
         {
             if (this.Command == PlayerCommand.Move)
             {
-                labyrinth[this.Position.X, this.Position.Y].Value = EMPTY_CELL;
+                maze[this.Position.X, this.Position.Y].Value = EMPTY_CELL;
 
                 switch (this.Direction)
                 {
                     case PlayerDirection.Up:
-                        if (labyrinth[this.Position.X - 1, this.Position.Y].IsEmpty)
+                        if (maze[this.Position.X - 1, this.Position.Y].IsEmpty)
                         {
                             this.Position.X--;
                         }
@@ -39,7 +39,7 @@
                         }
                         break;
                     case PlayerDirection.Down:
-                        if (labyrinth[this.Position.X + 1, this.Position.Y].IsEmpty)
+                        if (maze[this.Position.X + 1, this.Position.Y].IsEmpty)
                         {
                             this.Position.X++;
                         }
@@ -49,7 +49,7 @@
                         }
                         break;
                     case PlayerDirection.Left:
-                        if (labyrinth[this.Position.X, this.Position.Y - 1].IsEmpty)
+                        if (maze[this.Position.X, this.Position.Y - 1].IsEmpty)
                         {
                             this.Position.Y--;
                         }
@@ -59,7 +59,7 @@
                         }
                         break;
                     case PlayerDirection.Right:
-                        if (labyrinth[this.Position.X, this.Position.Y + 1].IsEmpty)
+                        if (maze[this.Position.X, this.Position.Y + 1].IsEmpty)
                         {
                             this.Position.Y++;
                         }
