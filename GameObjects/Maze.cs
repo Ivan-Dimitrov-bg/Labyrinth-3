@@ -9,7 +9,7 @@
 
         private readonly ICell[,] lab;
 
-        private Position playerPosition;
+
 
         public Maze(int rows, int cols)
         {
@@ -35,23 +35,8 @@
             }
         }
 
-        public Position PlayerPosition
-        {
-            get
-            {
-                return this.playerPosition;
-            }
-
-            set
-            {
-                if (!this.InRange(value.X, this.Rows) || !this.InRange(value.Y, this.Cols))
-                {
-                    throw new IndexOutOfRangeException(OUTOFRANGE_MSG);
-                }
-
-                this.playerPosition = value;
-            }
-        }
+        public Position PlayerPosition { get; private set; }
+   
 
         public int Rows
         {

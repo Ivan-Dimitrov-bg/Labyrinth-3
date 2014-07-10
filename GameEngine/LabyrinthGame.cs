@@ -38,9 +38,9 @@
         {
             while (!this.hasExitCommand)
             {
-                this.player.Score = new PlayerScore();
-                this.player.Position = this.maze.PlayerPosition;
+                this.player.Score = new PlayerScore();                
                 this.mazeFactory.GenerateMaze();
+                this.player.Position = this.maze.PlayerPosition;
                 this.TypeCommand();
             }
         }
