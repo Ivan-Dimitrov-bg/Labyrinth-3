@@ -44,7 +44,7 @@
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
 
-        //Strategy pattern.The method recieves concrete  strategy implementation...
+        //Strategy pattern.The object recieves concrete strategy implementation of the renderer.
         public void Render(IRenderer renderer)
         {
             if (this.scores.Count == 0)
@@ -56,7 +56,7 @@
                 int playerPosition = 1;
                 renderer.Render(TOP_FIVE_MESSAGE);
                 
-                //Composite pattern... rendering the score list renders all the scores in it 
+                //Composite pattern... rendering the score list renders all the score items in it 
 
                 foreach (PlayerScore score in this.scores)
                 {

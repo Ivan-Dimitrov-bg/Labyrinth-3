@@ -55,42 +55,42 @@
         {
             bool playerMoved = false;
             this.maze[this.Position.X, this.Position.Y].Value = EMPTY_CELL;
+            this.Command = PlayerCommand.Move;
 
-            switch (this.Direction)
+            if (this.Command == PlayerCommand.Move)
             {
-                case PlayerDirection.Up:
-                    if (this.maze[this.Position.X - 1, this.Position.Y].IsEmpty)
-                    {
-                        this.Position.X--;
-                        playerMoved = true;
-                    }
-                    break;
-
-                case PlayerDirection.Down:
-                    if (this.maze[this.Position.X + 1, this.Position.Y].IsEmpty)
-                    {
-                        this.Position.X++;
-                        playerMoved = true;
-                    }                  
-                    break;
-
-                case PlayerDirection.Left:
-                    if (this.maze[this.Position.X, this.Position.Y - 1].IsEmpty)
-                    {
-                        this.Position.Y--;
-                        playerMoved = true;
-                    }                 
-                    break;
-
-                case PlayerDirection.Right:
-                    if (this.maze[this.Position.X, this.Position.Y + 1].IsEmpty)
-                    {
-                        this.Position.Y++;
-                        playerMoved = true;
-                    }                
-                    break;                   
+                switch (this.Direction)
+                {
+                    case PlayerDirection.Up:
+                        if (this.maze[this.Position.X - 1, this.Position.Y].IsEmpty)
+                        {
+                            this.Position.X--;
+                            playerMoved = true;
+                        }
+                        break;
+                    case PlayerDirection.Down:
+                        if (this.maze[this.Position.X + 1, this.Position.Y].IsEmpty)
+                        {
+                            this.Position.X++;
+                            playerMoved = true;
+                        }
+                        break;
+                    case PlayerDirection.Left:
+                        if (this.maze[this.Position.X, this.Position.Y - 1].IsEmpty)
+                        {
+                            this.Position.Y--;
+                            playerMoved = true;
+                        }
+                        break;
+                    case PlayerDirection.Right:
+                        if (this.maze[this.Position.X, this.Position.Y + 1].IsEmpty)
+                        {
+                            this.Position.Y++;
+                            playerMoved = true;
+                        }
+                        break;
+                }
             }
-
             if (!playerMoved)
             {
                 this.Command = PlayerCommand.InvalidMove;

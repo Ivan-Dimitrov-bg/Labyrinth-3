@@ -2,6 +2,7 @@
 {
     public enum PlayerCommand
     {
+        Move,
         InvalidCommand,
         InvalidMove,
         PrintTopScores

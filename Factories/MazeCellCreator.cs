@@ -4,24 +4,25 @@
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
 
-    public  class MazeCellCreator 
+    public class MazeCellCreator
     {
-        private static readonly Random randomInt = new Random();       
-        private static readonly MazeCell emptyCell = new MazeCell();
-        private static readonly MazeCell wall = new MazeCell(Cell.WALL);
-        
-        public static ICell CreateCell()       
+        private static readonly Random randomInt = new Random();
+        private static readonly MazeCell cell = new MazeCell();
+
+        public static ICell CreateCell()
         {
             int valueDecider = randomInt.Next(2);
-            
+
             //Prototype pattern...
+            ICell cellToReturn = cell.Clone() as ICell;           
             if (valueDecider == 0)
             {
-                return emptyCell.Clone() as ICell;
+                return cellToReturn;
             }
             else
             {
-                return wall.Clone() as ICell;
+                cellToReturn.Value = Cell.WALL;
+                return cellToReturn;
             }
         }
     }
