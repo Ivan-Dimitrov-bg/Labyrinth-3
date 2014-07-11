@@ -13,8 +13,8 @@
 
         public void GenerateMaze()
         {
-            this.maze.PlayerPosition.X = maze.Rows / 2;
-            this.maze.PlayerPosition.Y = maze.Cols / 2;
+            this.maze.PlayerPosition.X = this.maze.Rows / 2;
+            this.maze.PlayerPosition.Y = this.maze.Cols / 2;
 
             this.mazeHasSolution = false;
 
@@ -35,12 +35,12 @@
 
         private void HasSolutuon(int row, int col)
         {
-            if (!this.InRange(row, maze.Rows) || !this.InRange(col, maze.Cols))
+            if (!this.InRange(row, this.maze.Rows) || !this.InRange(col, this.maze.Cols))
             {
                 this.mazeHasSolution = true;
                 return;
             }
-            else if (!this.visitedCells[row, col] && !this.mazeHasSolution && maze[row, col].IsEmpty)
+            else if (!this.visitedCells[row, col] && !this.mazeHasSolution && this.maze[row, col].IsEmpty)
             {
                 this.visitedCells[row, col] = true;
                 this.HasSolutuon(row, col + 1);

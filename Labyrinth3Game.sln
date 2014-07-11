@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth3Game", "Labyrinth3Game.csproj", "{5DA427F9-9891-40EB-85F8-19E00CC5F816}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoriesUnitTests", "FactoriesUnitTests\FactoriesUnitTests.csproj", "{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,16 @@ Global
 		{5DA427F9-9891-40EB-85F8-19E00CC5F816}.Release|Mixed Platforms.Build.0 = Release|x86
 		{5DA427F9-9891-40EB-85F8-19E00CC5F816}.Release|x86.ActiveCfg = Release|x86
 		{5DA427F9-9891-40EB-85F8-19E00CC5F816}.Release|x86.Build.0 = Release|x86
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{21593756-94DE-4BFF-8BC4-28C9FAC1C8C8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

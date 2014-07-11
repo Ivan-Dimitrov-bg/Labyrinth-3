@@ -3,7 +3,7 @@
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
 
-    class LargeMazeCreator : MazeCreator
+    public class LargeMazeCreator : MazeCreator
     {
         private const int LARGE_LAB_SIZE = 31;
 
