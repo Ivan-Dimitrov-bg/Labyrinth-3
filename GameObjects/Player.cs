@@ -7,12 +7,14 @@
     public class Player : Cell, IPlayer
     {
         private readonly IMaze maze;
+        private readonly IPlayer currentPlayer;
 
         private PlayerDirection direction;
-        private PlayerCommand command;
 
         public Player(IMaze maze) : base(PLAYER_VALUE)
         {
+            //Since we have one observer and it is the same type we attach it here.
+            this.currentPlayer = this;
             this.maze = maze;
         }
 
@@ -20,19 +22,7 @@
         
         public PlayerScore Score { get; set; }
 
-        public PlayerCommand Command
-        {
-            get
-            {
-                return this.command;
-            }
-            set
-            {
-                this.command = value;
-                //Observer pattern...
-                this.Move();
-            }
-        }
+        public PlayerCommand Command { get; set; }
 
         public PlayerDirection Direction
         {
@@ -43,8 +33,8 @@
             set
             {
                 this.direction = value;
-                //Observer pattern...
-                this.Command = PlayerCommand.Move;
+                //Observer pattern...player notifies himself to move when his direction is changed...
+                this.Notify();
             }
         }
 
@@ -61,56 +51,55 @@
             return false;
         }
 
-        private void Move()
+        public void Move()
         {
+            bool playerMoved = false;
+            this.maze[this.Position.X, this.Position.Y].Value = EMPTY_CELL;
+            this.Command = PlayerCommand.Move;
+
             if (this.Command == PlayerCommand.Move)
             {
-                maze[this.Position.X, this.Position.Y].Value = EMPTY_CELL;
-
                 switch (this.Direction)
                 {
                     case PlayerDirection.Up:
                         if (this.maze[this.Position.X - 1, this.Position.Y].IsEmpty)
                         {
                             this.Position.X--;
-                        }
-                        else
-                        {
-                            this.Command = PlayerCommand.InvalidMove;
+                            playerMoved = true;
                         }
                         break;
                     case PlayerDirection.Down:
                         if (this.maze[this.Position.X + 1, this.Position.Y].IsEmpty)
                         {
                             this.Position.X++;
-                        }
-                        else
-                        {
-                            this.Command = PlayerCommand.InvalidMove;
+                            playerMoved = true;
                         }
                         break;
                     case PlayerDirection.Left:
                         if (this.maze[this.Position.X, this.Position.Y - 1].IsEmpty)
                         {
                             this.Position.Y--;
-                        }
-                        else
-                        {
-                            this.Command = PlayerCommand.InvalidMove;
+                            playerMoved = true;
                         }
                         break;
                     case PlayerDirection.Right:
                         if (this.maze[this.Position.X, this.Position.Y + 1].IsEmpty)
                         {
                             this.Position.Y++;
+                            playerMoved = true;
                         }
-                        else
-                        {
-                            this.Command = PlayerCommand.InvalidMove;
-                        }
-                        break;                   
+                        break;
                 }
             }
+            if (!playerMoved)
+            {
+                this.Command = PlayerCommand.InvalidMove;
+            }
+        }
+
+        private void Notify()
+        {
+            this.currentPlayer.Move();
         }
     }
 }
