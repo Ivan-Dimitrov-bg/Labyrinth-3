@@ -1,18 +1,21 @@
 ﻿namespace Labyrinth.GameObjects
 { 
     using System;
+    using System.Collections.Generic;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
 
     public class Player : Cell, IPlayer
     {
         private readonly IMaze maze;
+        private readonly IPlayer observer;
 
         private PlayerDirection direction;
-        private PlayerCommand command;
+        private PlayerCommand command;       
 
         public Player(IMaze maze) : base(PLAYER_VALUE)
         {
+            this.observer = this;
             this.maze = maze;
         }
 
@@ -29,8 +32,6 @@
             set
             {
                 this.command = value;
-                //Observer pattern...
-                this.Move();
             }
         }
 
@@ -44,7 +45,7 @@
             {
                 this.direction = value;
                 //Observer pattern...
-                this.Command = PlayerCommand.Move;
+                this.Notify();
             }
         }
 
@@ -61,7 +62,7 @@
             return false;
         }
 
-        private void Move()
+        public void Move()
         {
             if (this.Command == PlayerCommand.Move)
             {
@@ -111,6 +112,12 @@
                         break;                   
                 }
             }
+        }
+
+        private void Notify()
+        {
+            this.observer.Command = PlayerCommand.Move;
+            this.observer.Move();
         }
     }
 }
