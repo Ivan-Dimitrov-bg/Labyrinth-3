@@ -44,7 +44,7 @@
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
 
-        //Bridge pattern.The object recieves particular implementation of the renderer.
+        //Strategy pattern.The method recieves concrete  strategy implementation...
         public void Render(IRenderer renderer)
         {
             if (this.scores.Count == 0)

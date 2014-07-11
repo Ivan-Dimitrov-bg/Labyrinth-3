@@ -55,7 +55,7 @@
         }
 
 
-        //Bridge pattern.The object recieves particular implementation of the renderer.
+        //Strategy pattern.The object recieves particular implementation of the renderer.
         public void Render(IRenderer renderer)
         {
             this.lab[this.PlayerPosition.X, this.PlayerPosition.Y].Value = Cell.PLAYER_VALUE;
