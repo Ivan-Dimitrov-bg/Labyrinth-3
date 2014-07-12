@@ -7,6 +7,7 @@
     [TestClass]
     public class LabyrinthGameUnitTest
     {
+        [Ignore]
         [TestMethod]
         public void TestMethod1()
         {

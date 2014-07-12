@@ -8,6 +8,7 @@
     [TestClass]
     public class GameMainUnitTest
     {
+        [Ignore]
         [TestMethod]
         public void GameMain_StartDoesNotResultInException()
         {
