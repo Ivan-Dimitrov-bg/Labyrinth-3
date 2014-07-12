@@ -1,6 +1,5 @@
 ﻿namespace FactoriesUnitTests
 {
-    using System;
     using Labyrinth.Factories;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

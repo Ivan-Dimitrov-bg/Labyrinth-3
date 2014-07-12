@@ -50,10 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="LargeMazeCreatorUnitTest.cs" />
-    <Compile Include="MediumMazeCreatorUnitTest.cs" />
+    <Compile Include="Factories\LargeMazeCreatorUnitTest.cs" />
+    <Compile Include="Factories\MazeCellCreatorUnitTest.cs" />
+    <Compile Include="Factories\MazeCreatorUnitTests.cs" />
+    <Compile Include="Factories\MediumMazeCreatorUnitTest.cs" />
+    <Compile Include="Factories\PlayerCreatorUnitTest.cs" />
+    <Compile Include="GameEngine\CommanderUnitTest.cs" />
+    <Compile Include="GameEngine\ConsoleRendererUnitTest.cs" />
+    <Compile Include="GameEngine\GameMainUnitTest.cs" />
+    <Compile Include="GameEngine\LabyrinthGameUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SmallMazeCreatorUnitTest.cs" />
+    <Compile Include="Factories\SmallMazeCreatorUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labyrinth3Game.csproj">
@@ -61,6 +68,7 @@
       <Name>Labyrinth3Game</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -23,7 +23,11 @@
         {
             Console.ForegroundColor = this.Color;
 
-            if (args.Length == 0)
+            if (args == null)
+            {
+                throw new NullReferenceException("Supplied args can't be null object!");
+            }
+            else if (args.Length == 0)
             {
                 Console.Write(STRING_FORMAT, message);
             }

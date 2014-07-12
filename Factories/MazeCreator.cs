@@ -1,7 +1,7 @@
 ﻿namespace Labyrinth.Factories
 {
-    using Labyrinth.Interfaces;
     using System;
+    using Labyrinth.Interfaces;
 
     public abstract class MazeCreator
     {
