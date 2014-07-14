@@ -10,7 +10,7 @@
         [TestMethod]
         public void Commander_ToBeDeterminedIfNotAbstract()
         {
-            Commander commander;
+            //Commander commander;
             // TODO: No test at the moment, nothing to test in the base class
         }
     }

@@ -7,11 +7,11 @@
     {
         private static IPlayer instance;
        
-        public static IPlayer CreatePlayer(IMaze maze)
+        public static IPlayer CreatePlayer()
         {
             if (instance == null)
             {
-                instance = new Player(maze);
+                instance = new Player();
             }
             return instance;
         }

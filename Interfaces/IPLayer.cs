@@ -5,16 +5,16 @@
 
     public interface IPlayer : ICell
     {
-        Position Position { get; set; }
-
         PlayerCommand Command { get; set; }
 
-        PlayerDirection Direction { get; set; }
+        IMaze Maze { get; set; }
 
         PlayerScore Score { get; set; }
 
-        void Move();
+        void ExecuteCommand(string command);
 
         bool IsOutOfTheMaze();
+
+        bool PlayerMoved { get; }
     }
 }

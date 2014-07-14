@@ -18,7 +18,7 @@
             IMaze maze = new Maze(this._large, this._large);
             Assert.AreEqual(maze.Cols, this._large);
             Assert.AreEqual(maze.Rows, this._large);
-            var player = PlayerCreator.CreatePlayer(maze);
+            var player = PlayerCreator.CreatePlayer();
             Assert.IsTrue(player != null);
         }
 
@@ -28,7 +28,7 @@
             IMaze maze = new Maze(this._large, this._large);
             Assert.AreEqual(maze.Cols, this._large);
             Assert.AreEqual(maze.Rows, this._large);
-            var player = PlayerCreator.CreatePlayer(maze);
+            var player = PlayerCreator.CreatePlayer();
             Assert.IsTrue(player is IPlayer);
         }
 
@@ -38,7 +38,7 @@
             IMaze maze = new Maze(this._medium, this._medium);
             Assert.AreEqual(maze.Cols, this._medium);
             Assert.AreEqual(maze.Rows, this._medium);
-            var player = PlayerCreator.CreatePlayer(maze);
+            var player = PlayerCreator.CreatePlayer();
             Assert.IsTrue(player != null);
         }
 
@@ -48,7 +48,7 @@
             IMaze maze = new Maze(this._medium, this._medium);
             Assert.AreEqual(maze.Cols, this._medium);
             Assert.AreEqual(maze.Rows, this._medium);
-            var player = PlayerCreator.CreatePlayer(maze);
+            var player = PlayerCreator.CreatePlayer();
             Assert.IsTrue(player is IPlayer);
         }
 
@@ -58,7 +58,7 @@
             IMaze maze = new Maze(this._small, this._small);
             Assert.AreEqual(maze.Cols, this._small);
             Assert.AreEqual(maze.Rows, this._small);
-            var player = PlayerCreator.CreatePlayer(maze);
+            var player = PlayerCreator.CreatePlayer();
             Assert.IsTrue(player != null);
         }
 
@@ -68,7 +68,7 @@
             IMaze maze = new Maze(this._small, this._small);
             Assert.AreEqual(maze.Cols, this._small);
             Assert.AreEqual(maze.Rows, this._small);
-            var player = PlayerCreator.CreatePlayer(maze);
+            var player = PlayerCreator.CreatePlayer();
             Assert.IsTrue(player is IPlayer);
         }
     }

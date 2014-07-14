@@ -2,9 +2,14 @@
 {
     public enum PlayerCommand
     {
+        CreateLargeMaze,
+        CreateMediumMaze,
+        CreateSmallMaze,
         Move,
         InvalidCommand,
         InvalidMove,
-        PrintTopScores
+        PrintTopScores,
+        Restart,
+        Exit
     }
 }
