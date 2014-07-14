@@ -1,5 +1,5 @@
 ﻿namespace Labyrinth.GameObjects
-{ 
+{
     using System;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
@@ -9,12 +9,13 @@
         private Position position;
         private PlayerDirection direction;
 
-        public Player() : base(PLAYER_VALUE)
+        public Player()
+            : base(PLAYER_VALUE)
         {
         }
 
         public IMaze Maze { get; set; }
-        
+
         public PlayerScore Score { get; set; }
 
         public PlayerCommand Command { get; set; }
@@ -27,18 +28,20 @@
             {
                 return this.direction;
             }
+
             set
             {
                 this.direction = value;
-                //Observer pattern...player notifies himself to move when his direction is changed...
+
+                // Observer pattern...player notifies himself to move when his direction is changed...
                 this.Move();
             }
         }
 
         public void ExecuteCommand(string @operator)
         {
-            switch(@operator)
-            { 
+            switch (@operator)
+            {
                 case "small":
                     this.Command = PlayerCommand.CreateSmallMaze;
                     break;
@@ -46,20 +49,20 @@
                     this.Command = PlayerCommand.CreateMediumMaze;
                     break;
                 case "large":
-                    this.Command = PlayerCommand.CreateLargeMaze;                    
+                    this.Command = PlayerCommand.CreateLargeMaze;
                     break;
                 case "d":
-                    this.Direction = PlayerDirection.Down;                       
+                    this.Direction = PlayerDirection.Down;
                     break;
                 case "u":
-                    this.Direction = PlayerDirection.Up;                       
+                    this.Direction = PlayerDirection.Up;
                     break;
                 case "r":
-                    this.Direction = PlayerDirection.Right;                       
+                    this.Direction = PlayerDirection.Right;
                     break;
                 case "l":
                     this.Direction = PlayerDirection.Left;
-                    break;                   
+                    break;
                 case "top":
                     this.Command = PlayerCommand.PrintTopScores;
                     break;
@@ -95,7 +98,7 @@
             this.PlayerMoved = false;
             this.position = this.Maze.PlayerPosition;
             this.Maze[this.position.X, this.position.Y].Value = EMPTY_CELL;
-            
+
             switch (this.Direction)
             {
                 case PlayerDirection.Up:
@@ -104,6 +107,7 @@
                         this.position.X--;
                         PlayerMoved = true;
                     }
+
                     break;
                 case PlayerDirection.Down:
                     if (this.Maze[this.position.X + 1, this.position.Y].IsEmpty)
@@ -111,6 +115,7 @@
                         this.position.X++;
                         this.PlayerMoved = true;
                     }
+
                     break;
                 case PlayerDirection.Left:
                     if (this.Maze[this.position.X, this.position.Y - 1].IsEmpty)
@@ -118,6 +123,7 @@
                         this.position.Y--;
                         PlayerMoved = true;
                     }
+
                     break;
                 case PlayerDirection.Right:
                     if (this.Maze[this.position.X, this.position.Y + 1].IsEmpty)
@@ -125,6 +131,7 @@
                         this.position.Y++;
                         PlayerMoved = true;
                     }
+
                     break;
             }
 

@@ -8,8 +8,8 @@
 
         int Cols { get; }
 
-        ICell this[int row, int col] { get; set; }
-
         Position PlayerPosition { get; }
+
+        ICell this[int row, int col] { get; set; }
     }
 }

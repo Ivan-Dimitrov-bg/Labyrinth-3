@@ -11,10 +11,10 @@
 
         PlayerScore Score { get; set; }
 
+        bool PlayerMoved { get; }
+
         void ExecuteCommand(string command);
 
         bool IsOutOfTheMaze();
-
-        bool PlayerMoved { get; }
     }
 }

@@ -16,7 +16,7 @@
             }
         }
 
-        //Prototype pattern
+        // Prototype pattern
         public object Clone()
         {
             return this.MemberwiseClone();

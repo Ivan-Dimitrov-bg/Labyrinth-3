@@ -8,19 +8,20 @@
         private const string INVALID_MOVE_MESSAGE = "Invalid move!\n ";
         private const string INVALID_COMMAND_MESSAGE = "Invalid command!\n";
         private const string GOODBYE_MESSAGE = "Good bye!\n";
-        
-        public PrintCommand(IPlayer player, string command) : base(player,command)
+
+        public PrintCommand(IPlayer player, string command)
+            : base(player, command)
         {
         }
 
         public bool IsExitCommandEntered { get; set; }
 
         public bool IsRestartCommandEntered { get; set; }
-        
-        //Strategy pattern.The object recieves concrete strategy implementation of the renderer.
+
+        // Strategy pattern.The object recieves concrete strategy implementation of the renderer.
         public void Parse(IRenderer renderer, IScoreBoard score)
         {
-            switch (this.player.Command)
+            switch (this.Player.Command)
             {
                 case PlayerCommand.InvalidMove:
                     renderer.Render(INVALID_MOVE_MESSAGE);

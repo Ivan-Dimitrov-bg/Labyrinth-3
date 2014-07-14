@@ -25,14 +25,14 @@
                 return this.scores.Count;
             }
         }
-    
+
         public void AddScore(PlayerScore currentPlayerScore)
         {
             if (this.scores.Count == MAX_SCORELIST_SIZE)
             {
                 if (this.scores[MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)
                 {
-                    this.scores.Remove(this.scores[4]);                  
+                    this.scores.Remove(this.scores[4]);
                 }
             }
 
@@ -44,7 +44,7 @@
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
 
-        //Strategy pattern.The object recieves concrete strategy implementation of the renderer.
+        // Strategy pattern.The object recieves concrete strategy implementation of the renderer.
         public void Render(IRenderer renderer)
         {
             if (this.scores.Count == 0)
@@ -55,14 +55,13 @@
             {
                 int playerPosition = 1;
                 renderer.Render(TOP_FIVE_MESSAGE);
-                
-                //Composite pattern... rendering the score list renders all the score items in it 
 
+                // Composite pattern... rendering the score list renders all the score items in it 
                 foreach (PlayerScore score in this.scores)
                 {
                     score.Position = playerPosition;
                     score.Render(renderer);
-                    playerPosition++;   
+                    playerPosition++;
                     renderer.Render(NEW_LINE);
                 }
             }

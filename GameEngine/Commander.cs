@@ -36,11 +36,12 @@
                     return false;
                 }
             }
+
             set
             {
                 if (this.command is PrintCommand && this.command != null)
                 {
-                    (this.command as PrintCommand).IsRestartCommandEntered = value ; 
+                    (this.command as PrintCommand).IsRestartCommandEntered = value;
                 }
             }
         }
@@ -78,6 +79,7 @@
                     return (this.command as MazeCreateCommand).CreateMaze(renderer, ref creator);
                 }
             }
+
             return null;
         }
     }

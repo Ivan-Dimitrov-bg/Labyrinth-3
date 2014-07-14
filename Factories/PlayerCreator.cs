@@ -13,6 +13,7 @@
             {
                 instance = new Player();
             }
+
             return instance;
         }
     }

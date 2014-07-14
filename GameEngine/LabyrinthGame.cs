@@ -53,11 +53,11 @@
 
             while (labSizeChoice != "small" && labSizeChoice != "medium" && labSizeChoice != "large")
             {
-                //Command pattern...
+                // Command pattern...
                 labSizeChoice = this.renderer.ReadCommand().ToLower();
                 this.commander.SetCommand(new MazeCreateCommand(this.player, labSizeChoice));
                 this.commander.ExecuteCommand();
-                this.mazeFactory = this.commander.GetMaze(renderer, ref this.mazeFactory);
+                this.mazeFactory = this.commander.GetMaze(this.renderer, ref this.mazeFactory);
             }
             
             return this.mazeFactory.CreateMaze();
@@ -91,7 +91,7 @@
                 this.renderer.Render(INPUT_MESSAGE);
                 string command = this.renderer.ReadCommand().ToLower();
 
-                //Command pattern...
+                // Command pattern...
                 if (command == "u" || command == "d" || command == "l" || command == "r")
                 {
                     this.commander.SetCommand(new MoveCommand(this.player, command));

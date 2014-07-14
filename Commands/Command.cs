@@ -4,18 +4,18 @@
     
     public abstract class Command : ICommand
     {
-        protected readonly IPlayer player;
+        protected readonly IPlayer Player;
         private readonly string operation;
 
         public Command(IPlayer player, string operation)
         {
-            this.player = player;
+            this.Player = player;
             this.operation = operation;
         }
 
         public void Execute()
         {
-            this.player.ExecuteCommand(this.operation);
+            this.Player.ExecuteCommand(this.operation);
         }
     }
 }

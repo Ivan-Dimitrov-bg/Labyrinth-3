@@ -2,10 +2,10 @@
 {
     using Labyrinth.ScoreUtils;
 
-    public interface IScoreBoard :IRenderable
+    public interface IScoreBoard : IRenderable
     {
         int Count { get; }
-        
+
         void AddScore(PlayerScore currentPlayer);
     }
 }

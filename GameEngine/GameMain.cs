@@ -4,7 +4,7 @@
     {
         public static void Main()
         {
-            //Facade pattern
+            // Facade pattern
             LabyrinthGame game = new LabyrinthGame();
             game.Start();
         }
