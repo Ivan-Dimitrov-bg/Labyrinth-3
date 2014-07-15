@@ -15,7 +15,7 @@
         }
 
         // Strategy pattern.The object recieves concrete strategy implementation of the renderer.
-        public MazeCreator CreateMaze(IRenderer renderer, ref MazeCreator creator)
+        public MazeCreator CreateMaze(IRenderer renderer,  MazeCreator creator)
         {
             switch (this.Player.Command)
             {

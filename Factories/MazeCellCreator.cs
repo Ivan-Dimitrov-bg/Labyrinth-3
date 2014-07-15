@@ -4,7 +4,7 @@
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
 
-    public class MazeCellCreator
+    public static class MazeCellCreator
     {
         private static readonly Random RandomInt = new Random();
         private static readonly MazeCell Cell = new MazeCell();

@@ -9,7 +9,7 @@
 
         IMaze Maze { get; set; }
 
-        PlayerScore Score { get; set; }
+        IScore Score { get; set; }
 
         bool PlayerMoved { get; }
 

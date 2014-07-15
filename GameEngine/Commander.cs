@@ -16,10 +16,8 @@
                 {
                     return (this.command as PrintCommand).IsExitCommandEntered;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
+                
             }
         }
 
@@ -31,18 +29,7 @@
                 {
                     return (this.command as PrintCommand).IsRestartCommandEntered;
                 }
-                else
-                {
-                    return false;
-                }
-            }
-
-            set
-            {
-                if (this.command is PrintCommand && this.command != null)
-                {
-                    (this.command as PrintCommand).IsRestartCommandEntered = value;
-                }
+                return false;    
             }
         }
 
@@ -70,13 +57,13 @@
             }
         }
 
-        public MazeCreator GetMaze(IRenderer renderer, ref MazeCreator creator)
+        public MazeCreator GetMaze(IRenderer renderer, MazeCreator creator)
         {
             if (this.command != null)
             {
                 if (this.command is MazeCreateCommand)
                 {
-                    return (this.command as MazeCreateCommand).CreateMaze(renderer, ref creator);
+                    return (this.command as MazeCreateCommand).CreateMaze(renderer, creator);
                 }
             }
 

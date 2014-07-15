@@ -11,11 +11,11 @@
         private const string EMPTY_SCOREBOARD_MESSAGE = "The scoreboard is empty!\n";
         private const int MAX_SCORELIST_SIZE = 5;
 
-        private readonly List<PlayerScore> scores;
+        private readonly List<IScore> scores;
 
         public ScoreBoard()
         {
-            this.scores = new List<PlayerScore>();
+            this.scores = new List<IScore>();
         }
 
         public int Count
@@ -26,7 +26,7 @@
             }
         }
 
-        public void AddScore(PlayerScore currentPlayerScore)
+        public void AddScore(IScore currentPlayerScore)
         {
             if (this.scores.Count == MAX_SCORELIST_SIZE)
             {
@@ -57,7 +57,7 @@
                 renderer.Render(TOP_FIVE_MESSAGE);
 
                 // Composite pattern... rendering the score list renders all the score items in it 
-                foreach (PlayerScore score in this.scores)
+                foreach (IScore score in this.scores)
                 {
                     score.Position = playerPosition;
                     score.Render(renderer);

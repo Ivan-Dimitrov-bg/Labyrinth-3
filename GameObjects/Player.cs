@@ -16,7 +16,7 @@
 
         public IMaze Maze { get; set; }
 
-        public PlayerScore Score { get; set; }
+        public IScore Score { get; set; }
 
         public PlayerCommand Command { get; set; }
 

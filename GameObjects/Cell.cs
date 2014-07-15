@@ -33,7 +33,7 @@
                     renderer.Color = ConsoleColor.Red;
                     break;
                 case PLAYER_VALUE:
-                    renderer.Color = ConsoleColor.Yellow;
+                    renderer.Color = ConsoleColor.Green;
                     break;
                 default:
                     renderer.Color = ConsoleColor.White;

@@ -6,6 +6,6 @@
     {
         int Count { get; }
 
-        void AddScore(PlayerScore currentPlayer);
+        void AddScore(IScore currentPlayer);
     }
 }

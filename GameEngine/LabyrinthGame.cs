@@ -8,19 +8,27 @@
     public class LabyrinthGame
     {
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
+
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
+
         private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
+
         private const string INPUT_MESSAGE = "\nEnter your move (L=left, R=right, D=down, U=up): ";
-        private const string INVALID_COMMAND_MESSAGE = "Invalid command!\n";
+
         private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname: ";
+
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
 
         private readonly IMaze maze;
+
         private readonly IRenderer renderer;
+
         private readonly IPlayer player;
+
         private readonly IScoreBoard scores;
 
         private Commander commander;
+
         private MazeCreator mazeFactory;
 
         public LabyrinthGame()
@@ -57,7 +65,7 @@
                 labSizeChoice = this.renderer.ReadCommand().ToLower();
                 this.commander.SetCommand(new MazeCreateCommand(this.player, labSizeChoice));
                 this.commander.ExecuteCommand();
-                this.mazeFactory = this.commander.GetMaze(this.renderer, ref this.mazeFactory);
+                this.mazeFactory = this.commander.GetMaze(this.renderer, this.mazeFactory);
             }
             
             return this.mazeFactory.CreateMaze();
