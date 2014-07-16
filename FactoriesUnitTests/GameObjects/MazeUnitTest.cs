@@ -8,11 +8,11 @@
     [TestClass]
     public class MazeUnitTest
     {
+        private const int SMALL_ROWS = 11;
 
-        private const int ROWS = 10;
-        private const int COLS = 10;
+        private const int SMALL_COLS = 11;
 
-        readonly Maze maze = new Maze(ROWS, COLS);
+        readonly Maze maze = new Maze(SMALL_ROWS, SMALL_COLS);
 
         [TestMethod]
         public void Maze_IsInstanceOfMaze()
@@ -36,19 +36,18 @@
         [TestMethod]
         public void Maze_AreColsAndRowsEqualToMazeColsAndRows()
         {
-            Assert.AreEqual(COLS,this.maze.Cols);
-            Assert.AreEqual(ROWS,this.maze.Rows);         
+            Assert.AreEqual(SMALL_COLS, this.maze.Cols);
+            Assert.AreEqual(SMALL_ROWS, this.maze.Rows);         
         }
 
         [TestMethod]
         public void Maze_IsPlayerPossitionSetCurrectly()
         {
             Position mazePlayerPosition = this.maze.PlayerPosition;
-            Position expectedPlayerPosition = new Position(COLS / 2, ROWS / 2);
-            Assert.AreEqual(expectedPlayerPosition.X,mazePlayerPosition.X);
-            Assert.AreEqual( expectedPlayerPosition.Y,mazePlayerPosition.Y);           
+            Position expectedPlayerPosition = new Position(SMALL_COLS / 2, SMALL_ROWS / 2);
+            Assert.AreEqual(expectedPlayerPosition.X, mazePlayerPosition.X);
+            Assert.AreEqual(expectedPlayerPosition.Y, mazePlayerPosition.Y);           
         }
-
-       //TODO maze.Renderer TESTS if possible 
+        //TODO maze.Renderer TESTS if possible 
     }
 }

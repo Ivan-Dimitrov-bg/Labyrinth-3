@@ -3,17 +3,17 @@
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth.GameObjects;
+    using Labyrinth.Interfaces;
 
     [TestClass]
     public class MazeCellUnitTest
     {
-
         readonly MazeCell mazeCell = new MazeCell();
 
         [TestMethod]
-        public void Mazecell_IsInstanceOfCell()
+        public void Mazecell_IsInstanceOfICell()
         {
-            Assert.IsTrue(this.mazeCell is MazeCell);
+            Assert.IsTrue(this.mazeCell is ICell);
         }
 
         [TestMethod]
@@ -25,15 +25,15 @@
         [TestMethod]
         public void MazeCell_IsCreatedAsEmptyCell()
         {
-            Assert.AreEqual('-', this.mazeCell.Value);
+            Assert.IsTrue(this.mazeCell.IsEmpty);
         }
 
         //probably unnecessary method clone is using c# object.MemberwiseClone(); So it is tested by Microsoft
         [TestMethod]
         public void MazeCell_DoCloneMethodReturnsMazeCell()
         {
-            var clonedMazeCell = this.mazeCell.Clone();
-            Assert.IsTrue(clonedMazeCell is MazeCell);
+            var clonedMazeCell = this.mazeCell.Clone() as ICell;
+            Assert.IsTrue(clonedMazeCell.Value == this.mazeCell.Value && clonedMazeCell.IsEmpty == this.mazeCell.IsEmpty);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace FactoriesUnitTests.GameObjects
 {
     using System;
+    using Labyrinth.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth.GameObjects;
 
@@ -12,7 +13,7 @@
         [TestMethod]
         public void Player_IsInstanceOfCell()
         {
-            Assert.IsTrue(this.player is Cell);
+            Assert.IsTrue(this.player is ICell);
         }
 
         [TestMethod]
@@ -26,7 +27,6 @@
         {
             Assert.AreEqual('*', this.player.Value);
         }
-
         //TODO ALL IMPORTANT TOMORROW
     }
 }

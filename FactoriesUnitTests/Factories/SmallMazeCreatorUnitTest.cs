@@ -6,7 +6,6 @@
     [TestClass]
     public class SmallMazeCreatorUnitTest
     {
-        [Ignore]
         [TestMethod]
         public void CreateMaze_IsCreatedSmall()
         {
