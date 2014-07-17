@@ -2,7 +2,6 @@
 {
     using System;
     using Labyrinth.Interfaces;
-    using Labyrinth.ScoreUtils;
 
     public class Player : Cell, IPlayer
     {

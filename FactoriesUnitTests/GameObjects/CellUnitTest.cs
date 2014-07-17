@@ -2,7 +2,6 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Labyrinth.GameObjects;
 
     [TestClass]
     public class CellUnitTest
