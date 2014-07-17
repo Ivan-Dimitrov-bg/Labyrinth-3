@@ -5,7 +5,6 @@
         CreateLargeMaze,
         CreateMediumMaze,
         CreateSmallMaze,
-        Move,
         InvalidCommand,
         InvalidMove,
         PrintTopScores,
