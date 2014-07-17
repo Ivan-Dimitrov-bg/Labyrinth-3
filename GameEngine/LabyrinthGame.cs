@@ -34,19 +34,19 @@
         public LabyrinthGame()
         {
             this.renderer = new ConsoleRenderer();
+            this.scores = new ScoreBoard();
             this.commander = new Commander();           
             this.player = PlayerCreator.CreatePlayer();     
             this.maze = this.InitMaze();           
-            this.scores = new ScoreBoard();
         }
 
         public void Start()
         {
             while (!this.commander.IsExitCommandEntered)
             {
-                this.player.Score = new PlayerScore();    
                 this.commander = new Commander();
                 this.mazeFactory.GenerateMaze();
+                this.player.Score = new PlayerScore();   
                 this.player.Maze = this.maze;                
                 this.TypeCommand();
             }

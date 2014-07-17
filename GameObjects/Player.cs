@@ -6,16 +6,46 @@
     public class Player : Cell, IPlayer
     {
         private Position position;
+
+        private IMaze maze;
+
+        private IScore score;
+
         private PlayerDirection direction;
 
-        public Player()
-            : base(Cell.PLAYER_VALUE)
+        public Player() : base(Cell.PLAYER_VALUE)
         {
         }
 
-        public IMaze Maze { get; set; }
+        public IMaze Maze
+        {
+            get
+            {
+                this.CheckIfPropertyIsNull(this.maze);
+                return this.maze;
+            }
 
-        public IScore Score { get; set; }
+            set
+            {
+                this.CheckIfPropertyIsNull(value);
+                this.maze = value;
+            }
+        }
+
+        public IScore Score
+        {
+            get
+            {
+                this.CheckIfPropertyIsNull(this.score);
+                return this.score;
+            }
+
+            set
+            {
+                this.CheckIfPropertyIsNull(value);
+                this.score = value;
+            }
+        }
 
         public PlayerCommand Command { get; set; }
 
@@ -93,7 +123,7 @@
         }
 
         private void Move()
-        {
+        { 
             this.PlayerMoved = false;
             this.position = this.Maze.PlayerPosition;
             this.Maze[this.position.X, this.position.Y].Value = Cell.EMPTY_CELL;
@@ -161,6 +191,14 @@
             {
                 this.position.Y++;
                 this.PlayerMoved = true;
+            }
+        }
+                
+        private void CheckIfPropertyIsNull(object obj)
+        {
+            if (obj == null)
+            {
+                throw new NullReferenceException("This player property cannot be null!");
             }
         }
     }
