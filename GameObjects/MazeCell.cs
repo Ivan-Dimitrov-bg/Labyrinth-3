@@ -12,7 +12,7 @@
         {
             get
             {
-                return this.Value == EMPTY_CELL;
+                return this.Value == Cell.EMPTY_CELL;
             }
         }
 

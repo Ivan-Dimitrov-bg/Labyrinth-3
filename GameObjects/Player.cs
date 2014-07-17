@@ -9,7 +9,7 @@
         private PlayerDirection direction;
 
         public Player()
-            : base(PLAYER_VALUE)
+            : base(Cell.PLAYER_VALUE)
         {
         }
 
@@ -96,7 +96,7 @@
         {
             this.PlayerMoved = false;
             this.position = this.Maze.PlayerPosition;
-            this.Maze[this.position.X, this.position.Y].Value = EMPTY_CELL;
+            this.Maze[this.position.X, this.position.Y].Value = Cell.EMPTY_CELL;
 
             switch (this.Direction)
             {
@@ -104,7 +104,7 @@
                     if (this.Maze[this.position.X - 1, this.position.Y].IsEmpty)
                     {
                         this.position.X--;
-                        PlayerMoved = true;
+                        this.PlayerMoved = true;
                     }
 
                     break;
@@ -120,7 +120,7 @@
                     if (this.Maze[this.position.X, this.position.Y - 1].IsEmpty)
                     {
                         this.position.Y--;
-                        PlayerMoved = true;
+                        this.PlayerMoved = true;
                     }
 
                     break;
@@ -128,7 +128,7 @@
                     if (this.Maze[this.position.X, this.position.Y + 1].IsEmpty)
                     {
                         this.position.Y++;
-                        PlayerMoved = true;
+                        this.PlayerMoved = true;
                     }
 
                     break;

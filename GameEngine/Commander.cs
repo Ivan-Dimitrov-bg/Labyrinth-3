@@ -16,8 +16,8 @@
                 {
                     return (this.command as PrintCommand).IsExitCommandEntered;
                 }
+
                 return false;
-                
             }
         }
 
@@ -29,6 +29,7 @@
                 {
                     return (this.command as PrintCommand).IsRestartCommandEntered;
                 }
+
                 return false;    
             }
         }

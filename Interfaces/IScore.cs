@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Labyrinth.Interfaces
+﻿namespace Labyrinth.Interfaces
 {
+    using System;
+    using System.Linq;
+
     public interface IScore : IRenderable
     {
         int Moves { get; set; }
