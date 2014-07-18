@@ -79,6 +79,7 @@
     <Compile Include="GameObjects\MazeCellUnitTest.cs" />
     <Compile Include="GameObjects\MazeUnitTest.cs" />
     <Compile Include="GameObjects\PlayerUnitTest.cs" />
+    <Compile Include="GameObjects\PositionUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factories\SmallMazeCreatorUnitTest.cs" />
     <Compile Include="ScoreUtils\PlayerScoreUnitTest.cs" />

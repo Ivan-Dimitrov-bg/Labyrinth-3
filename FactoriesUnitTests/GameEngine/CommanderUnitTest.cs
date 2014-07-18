@@ -1,7 +1,5 @@
 ﻿namespace FactoriesUnitTests.GameEngine
 {
-    using Labyrinth.GameEngine;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

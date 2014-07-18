@@ -1,6 +1,5 @@
 ﻿namespace FactoriesUnitTests.GameObjects
 {
-    using System;
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

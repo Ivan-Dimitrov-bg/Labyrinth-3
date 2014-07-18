@@ -1,4 +1,4 @@
-﻿namespace FactoriesUnitTests
+﻿namespace FactoriesUnitTests.Factories
 {
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
