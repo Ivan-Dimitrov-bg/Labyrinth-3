@@ -1,6 +1,6 @@
 ﻿namespace FactoriesUnitTests.GameObjects
 {
-    using System;
+    using Labyrinth.GameEngine;
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -49,5 +49,10 @@
         }
 
         ///TODO maze.Renderer TESTS if possible 
+        public void Maze_Renderer()
+        {
+            IRenderer dummyRenderer = new ConsoleRenderer();
+            
+        }
     }
 }
