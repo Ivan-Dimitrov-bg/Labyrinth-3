@@ -11,7 +11,7 @@
         {
             SmallMazeCreator mazeCreator = new SmallMazeCreator();
             var maze = mazeCreator.CreateMaze();
-            // TODO: Large maze dimensions must be exactly 11x11
+            /// TODO: Large maze dimensions must be exactly 11x11
             Assert.AreEqual(maze.Cols, 11);
             Assert.AreEqual(maze.Rows, 11);
         }

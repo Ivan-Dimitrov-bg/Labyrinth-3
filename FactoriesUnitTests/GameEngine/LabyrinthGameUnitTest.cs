@@ -11,7 +11,7 @@
         [TestMethod]
         public void TestMethod1()
         {
-            //LabyrinthGame game = new LabyrinthGame();
+            ///LabyrinthGame game = new LabyrinthGame();
         }
     }
 }

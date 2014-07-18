@@ -1,18 +1,17 @@
 ﻿namespace FactoriesUnitTests.GameObjects
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class MazeUnitTest
     {
         private const int SMALL_ROWS = 11;
-
         private const int SMALL_COLS = 11;
 
-        readonly Maze maze = new Maze(SMALL_ROWS, SMALL_COLS);
+        private readonly Maze maze = new Maze(SMALL_ROWS, SMALL_COLS);
 
         [TestMethod]
         public void Maze_IsInstanceOfMaze()
@@ -48,6 +47,7 @@
             Assert.AreEqual(expectedPlayerPosition.X, mazePlayerPosition.X);
             Assert.AreEqual(expectedPlayerPosition.Y, mazePlayerPosition.Y);           
         }
-        //TODO maze.Renderer TESTS if possible 
+
+        ///TODO maze.Renderer TESTS if possible 
     }
 }

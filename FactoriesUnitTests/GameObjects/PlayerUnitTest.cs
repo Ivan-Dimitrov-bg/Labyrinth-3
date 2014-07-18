@@ -2,15 +2,15 @@
 {
     using System;
     using Labyrinth.Factories;
+    using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Labyrinth.GameObjects;
 
     [TestClass]
     public class PlayerUnitTest
     {
-        readonly IPlayer player = new Player();
+        private readonly IPlayer player = new Player();
 
         [TestMethod]
         public void Player_IsInstanceOfCell()
@@ -71,16 +71,14 @@
             mazeBuilder.GenerateMaze();
             this.player.Score = new PlayerScore();                        
             this.player.ExecuteCommand("u");
-            if (this.player.Maze.PlayerPosition.X == this.player.Maze.Rows / 2 - 1)
+            if (this.player.Maze.PlayerPosition.X == (this.player.Maze.Rows / 2) - 1)
             {
                 Assert.IsTrue(this.player.PlayerMoved);
             }
             else
             {
                 Assert.IsFalse(this.player.PlayerMoved);
-            }
-            
+            }        
         }
-        //TODO to find way to test method Move()
     }
 }

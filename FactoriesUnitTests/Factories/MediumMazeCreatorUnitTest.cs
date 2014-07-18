@@ -11,7 +11,7 @@
         {
             MediumMazeCreator mazeCreator = new MediumMazeCreator();
             var maze = mazeCreator.CreateMaze();
-            // TODO: Large maze dimensions must be exactly 21x21
+            /// TODO: Large maze dimensions must be exactly 21x21
             Assert.AreEqual(maze.Cols, 21);
             Assert.AreEqual(maze.Rows, 21);
         }

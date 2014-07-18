@@ -1,5 +1,6 @@
 ﻿namespace Labyrinth.ScoreUtils
 {
+    using System;
     using System.Collections.Generic;
     using Labyrinth.Interfaces;
 
@@ -28,6 +29,11 @@
 
         public void AddScore(IScore currentPlayerScore)
         {
+            if (currentPlayerScore == null)
+            {
+                throw new ArgumentNullException("Cannot add null to ScoreBoard scores");
+            }
+
             if (this.scores.Count == MAX_SCORELIST_SIZE)
             {
                 if (this.scores[MAX_SCORELIST_SIZE - 1].Moves > currentPlayerScore.Moves)

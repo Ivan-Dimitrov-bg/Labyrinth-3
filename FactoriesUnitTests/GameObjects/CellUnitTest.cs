@@ -6,12 +6,11 @@
     [TestClass]
     public class CellUnitTest
     {
-
         [TestMethod]
         public void CellAbstractCLass()
         {
-            // TODO ...
-            //Nothing to test in the abstract class
+            /// TODO ...
+            ///Nothing to test in the abstract class
         }
     }
 }

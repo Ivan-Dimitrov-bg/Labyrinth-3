@@ -8,9 +8,8 @@
     [TestClass]
     public class ConsoleRendererUnitTest
     {
-        ConsoleRenderer consoleRenderer = new ConsoleRenderer();
+        private readonly ConsoleRenderer consoleRenderer = new ConsoleRenderer();
 
-        
         public void ConsoleRenderer_IsInstanceOfIRenderer()
         {
             Assert.IsTrue(this.consoleRenderer is IRenderer);
