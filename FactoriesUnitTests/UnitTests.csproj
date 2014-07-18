@@ -75,8 +75,6 @@
     <Compile Include="Factories\PlayerCreatorUnitTest.cs" />
     <Compile Include="GameEngine\CommanderUnitTest.cs" />
     <Compile Include="GameEngine\ConsoleRendererUnitTest.cs" />
-    <Compile Include="GameEngine\GameMainUnitTest.cs" />
-    <Compile Include="GameEngine\LabyrinthGameUnitTest.cs" />
     <Compile Include="GameObjects\CellUnitTest.cs" />
     <Compile Include="GameObjects\MazeCellUnitTest.cs" />
     <Compile Include="GameObjects\MazeUnitTest.cs" />

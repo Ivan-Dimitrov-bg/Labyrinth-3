@@ -79,5 +79,53 @@
             
             Assert.AreEqual(expected, writer.ToString());
         }
+
+        //
+        [TestMethod]
+        public void PlayerScore_InitialNameIsEmpty()
+        {
+            Assert.IsTrue(string.IsNullOrEmpty(this.playerScore.Name));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), "Value must be different than null or empty string!")]
+        public void PlayerScore_GetNameCantBeSetToNull()
+        {
+            this.playerScore.Name = string.Empty;
+            this.playerScore.Name = null;
+        }
+
+        [TestMethod]
+        public void PlayerScore_GetPositionIsReturnedAsInt32()
+        {
+            Assert.IsTrue(this.playerScore.Position is Int32);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Value must be in [0;5]")]
+        public void PlayerScore_GetPositionSetCoordinatesToNegative()
+        {
+            this.playerScore.Position = -1;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Value must be in [0;5]")]
+        public void PlayerScore_GetPositionSetCoordinatesToOver5()
+        {
+            this.playerScore.Position = 6;
+        }
+
+        [TestMethod]
+        public void PlayerScore_GetPositionSetCoordinatesToWithingRange()
+        {
+            try
+            {
+                this.playerScore.Position = 3;
+            }
+            catch (ArgumentException fe)
+            {
+                throw new ArgumentException("Setting the coords didn't work.");
+            }
+        }
     }
 }

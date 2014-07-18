@@ -81,5 +81,37 @@
 
             Assert.AreEqual(expected, writer.ToString());
         }
+
+        public void ScoreBoard_GetCountIsReturnedAsInt32()
+        {
+            Assert.IsTrue(this.scoreBoard.Count is Int32);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Can't pass to AddScore wrong value for moves!")]
+        public void ScoreBoard_AddScorePassWrongValueInMoves()
+        {
+            PlayerScore wrongTypeOfScore = new PlayerScore();
+            wrongTypeOfScore.Moves = -7;
+            this.scoreBoard.AddScore(wrongTypeOfScore);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Can't pass to AddScore wrong value for position!")]
+        public void ScoreBoard_AddScorePassWrongValueInPosition()
+        {
+            PlayerScore wrongTypeOfScore = new PlayerScore();
+            wrongTypeOfScore.Position = -4;
+            this.scoreBoard.AddScore(wrongTypeOfScore);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Can't pass to AddScore wrong value for name!")]
+        public void ScoreBoard_AddScorePassWrongValueInName()
+        {
+            PlayerScore wrongTypeOfScore = new PlayerScore();
+            wrongTypeOfScore.Name = string.Empty;
+            this.scoreBoard.AddScore(wrongTypeOfScore);
+        }
     }
 }
