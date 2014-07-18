@@ -1,7 +1,6 @@
 ﻿namespace Labyrinth.Interfaces
 {
     using Labyrinth.GameObjects;
-    using Labyrinth.ScoreUtils;
 
     public interface IPlayer : ICell
     {

@@ -19,6 +19,8 @@
 
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
 
+        private readonly string[] COMMANDS = new string[] { "u", "d", "l", "r", "small", "medium", "large" };
+
         private readonly IMaze maze;
 
         private readonly IRenderer renderer;
@@ -59,7 +61,7 @@
             this.renderer.Render(WELCOME_MESSAGE);
             this.renderer.Render(CHOOSE_LAB_MESAGE);           
 
-            while (labSizeChoice != "small" && labSizeChoice != "medium" && labSizeChoice != "large")
+            while (labSizeChoice != COMMANDS[4] && labSizeChoice != COMMANDS[5] && labSizeChoice != COMMANDS[6])
             {
                 // Command pattern...
                 labSizeChoice = this.renderer.ReadCommand().ToLower();
@@ -100,11 +102,11 @@
                 string command = this.renderer.ReadCommand().ToLower();
 
                 // Command pattern...
-                if (command == "u" || command == "d" || command == "l" || command == "r")
+                if (command == COMMANDS[0] || command == COMMANDS[1] || command == COMMANDS[2] || command == COMMANDS[3])
                 {
                     this.commander.SetCommand(new MoveCommand(this.player, command));
                     this.commander.ExecuteCommand();   
-
+                    
                     if (!this.player.PlayerMoved)
                     {
                         this.commander.SetCommand(new PrintCommand(this.player, command));

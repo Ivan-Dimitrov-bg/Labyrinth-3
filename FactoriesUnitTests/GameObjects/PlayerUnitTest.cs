@@ -71,6 +71,7 @@
             mazeBuilder.GenerateMaze();
             this.player.Score = new PlayerScore();                        
             this.player.ExecuteCommand("u");
+
             if (this.player.Maze.PlayerPosition.X == (this.player.Maze.Rows / 2) - 1)
             {
                 Assert.IsTrue(this.player.PlayerMoved);
@@ -78,7 +79,32 @@
             else
             {
                 Assert.IsFalse(this.player.PlayerMoved);
-            }        
+            }
+
+        }
+
+        [TestMethod]
+        public void Player_TestOutOfMazeMoveRight()
+        {
+            var mazeBuilder = new SmallMazeCreator();
+            IMaze maze = mazeBuilder.CreateMaze();           
+            mazeBuilder.GenerateMaze();
+            maze.PlayerPosition.X = 9;
+            maze.PlayerPosition.Y = 9;
+            this.player.Maze = maze;
+            
+            this.player.Score = new PlayerScore();
+            this.player.ExecuteCommand("r");
+            
+            if (maze[9, 10].IsEmpty)
+            {
+                Assert.IsTrue(this.player.IsOutOfTheMaze());
+            }
+            else
+            {
+                Assert.IsFalse(this.player.IsOutOfTheMaze());
+            }
+
         }
     }
 }

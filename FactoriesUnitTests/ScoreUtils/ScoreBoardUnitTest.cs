@@ -82,11 +82,6 @@
             Assert.AreEqual(expected, writer.ToString());
         }
 
-        public void ScoreBoard_GetCountIsReturnedAsInt32()
-        {
-            Assert.IsTrue(this.scoreBoard.Count is Int32);
-        }
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Can't pass to AddScore wrong value for moves!")]
         public void ScoreBoard_AddScorePassWrongValueInMoves()

@@ -6,15 +6,33 @@
     public abstract class Cell : ICell, IRenderable
     {
         public const char EMPTY_CELL = '-';
+
         public const char PLAYER_VALUE = '*';
+
         public const char WALL = 'x';
+
+        private char value;
 
         public Cell(char value)
         {
             this.Value = value;
         }
 
-        public char Value { get; set; }
+        public char Value
+        {
+            get
+            {
+                return this.value;
+            }
+            set
+            {
+                if (value != Cell.EMPTY_CELL && value != Cell.WALL && value != Cell.PLAYER_VALUE)
+                {
+                    throw new ArgumentException("Invalid cell value.");
+                }
+                this.value = value;
+            }
+        }
 
         public virtual bool IsEmpty
         {
