@@ -14,11 +14,29 @@
 
         private readonly List<IScore> scores;
 
+        /// <summary>
+        /// Constructor for the scoreboard
+        /// <remarks>
+        /// Uses a list with IScore element
+        /// <returns>
+        /// Does not return anything, this is a constructor
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public ScoreBoard()
         {
             this.scores = new List<IScore>();
         }
 
+        /// <summary>
+        /// Getter for the current count, will be used for the high score
+        /// <remarks>
+        /// None
+        /// <returns>
+        /// Returns the count with a getter
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public int Count
         {
             get

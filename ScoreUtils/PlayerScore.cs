@@ -12,7 +12,13 @@
         private int position;
 
         /// <summary>
-        /// Get & Set player moves
+        /// Getter and setter for the current player moves
+        /// <remarks>
+        /// With validation for wrong data input which can not be a string with length shorter than 0
+        /// <returns>
+        /// Returns the player moves with a getter
+        /// </returns>
+        /// </remarks>
         /// </summary>
         public int Moves
         {
@@ -33,7 +39,13 @@
         }
 
         /// <summary>
-        /// Get & Set player name
+        /// Getter and setter for the current player name
+        /// <remarks>
+        /// With validation for wrong data input which must not be empty or null
+        /// <returns>
+        /// Returns the player name with a getter
+        /// </returns>
+        /// </remarks>
         /// </summary>
         public string Name
         {
@@ -54,7 +66,13 @@
         }
 
         /// <summary>
-        /// Get & Set player position
+        /// Getter and setter for the current player position
+        /// <remarks>
+        /// With validation for wrong data input. Position must be in the range [0;5]
+        /// <returns>
+        /// Returns the player position with a getter
+        /// </returns>
+        /// </remarks>
         /// </summary>
         public int Position
         {
@@ -75,9 +93,18 @@
         }
 
         /// <summary>
-        /// Render the score result on the screen
+        /// Renders the score result for the current player
+        /// <remarks>
+        /// Will be visualized with the default color and the score template
+        /// <param name="renderer">
+        /// Accepts an object instance of IRenderer
+        /// </param>
+        /// <returns>
+        /// Does not return anything
+        /// </returns>
+        /// </remarks>
         /// </summary>
-        /// <param name="renderer"></param>
+        
         public void Render(IRenderer renderer)
         {
             renderer.Color = ConsoleColor.Cyan;
