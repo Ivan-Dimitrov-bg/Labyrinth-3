@@ -59,9 +59,9 @@
             string labSizeChoice = string.Empty;
            
             this.renderer.Render(WELCOME_MESSAGE);
-            this.renderer.Render(CHOOSE_LAB_MESAGE);           
+            this.renderer.Render(CHOOSE_LAB_MESAGE);
 
-            while (labSizeChoice != COMMANDS[4] && labSizeChoice != COMMANDS[5] && labSizeChoice != COMMANDS[6])
+            while (labSizeChoice != this.COMMANDS[4] && labSizeChoice != this.COMMANDS[5] && labSizeChoice != this.COMMANDS[6])
             {
                 // Command pattern...
                 labSizeChoice = this.renderer.ReadCommand().ToLower();
@@ -102,7 +102,7 @@
                 string command = this.renderer.ReadCommand().ToLower();
 
                 // Command pattern...
-                if (command == COMMANDS[0] || command == COMMANDS[1] || command == COMMANDS[2] || command == COMMANDS[3])
+                if (command == this.COMMANDS[0] || command == this.COMMANDS[1] || command == this.COMMANDS[2] || command == this.COMMANDS[3])
                 {
                     this.commander.SetCommand(new MoveCommand(this.player, command));
                     this.commander.ExecuteCommand();   

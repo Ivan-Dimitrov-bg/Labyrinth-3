@@ -80,7 +80,6 @@
             Assert.AreEqual(expected, writer.ToString());
         }
 
-        //
         [TestMethod]
         public void PlayerScore_InitialNameIsEmpty()
         {
@@ -94,7 +93,6 @@
             this.playerScore.Name = string.Empty;
             this.playerScore.Name = null;
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Value must be in [0;5]")]

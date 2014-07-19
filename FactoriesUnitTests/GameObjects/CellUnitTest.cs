@@ -1,13 +1,11 @@
-﻿
-using Labyrinth.GameEngine;
-
-namespace FactoriesUnitTests.GameObjects
+﻿namespace FactoriesUnitTests.GameObjects
 {
     using System;
+    using Labyrinth.GameEngine;
     using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+    
     [TestClass]
     public class CellUnitTest
     {
@@ -32,7 +30,6 @@ namespace FactoriesUnitTests.GameObjects
         public void Cell_TryToSetWrongValue()
         {
             this.cell = new MazeCell('?');
-
         }
 
         [TestMethod]

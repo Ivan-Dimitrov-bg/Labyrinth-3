@@ -7,7 +7,7 @@
     [TestClass]
     public class PositionUnitTest
     {
-        Position position;
+        private Position position;
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "When setting a cell value can be only -, *, x!")]

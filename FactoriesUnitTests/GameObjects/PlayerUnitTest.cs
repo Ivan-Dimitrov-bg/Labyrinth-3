@@ -80,7 +80,6 @@
             {
                 Assert.IsFalse(this.player.PlayerMoved);
             }
-
         }
 
         [TestMethod]
@@ -104,7 +103,6 @@
             {
                 Assert.IsFalse(this.player.IsOutOfTheMaze());
             }
-
         }
     }
 }

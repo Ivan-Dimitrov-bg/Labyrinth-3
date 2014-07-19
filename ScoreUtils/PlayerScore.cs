@@ -11,6 +11,9 @@
         private string playerName;
         private int position;
 
+        /// <summary>
+        /// Get & Set player moves
+        /// </summary>
         public int Moves
         {
             get
@@ -29,6 +32,9 @@
             }
         }
 
+        /// <summary>
+        /// Get & Set player name
+        /// </summary>
         public string Name
         {
             get
@@ -47,6 +53,9 @@
             }
         }
 
+        /// <summary>
+        /// Get & Set player position
+        /// </summary>
         public int Position
         {
             get
@@ -65,6 +74,10 @@
             }
         }
 
+        /// <summary>
+        /// Render the score result on the screen
+        /// </summary>
+        /// <param name="renderer"></param>
         public void Render(IRenderer renderer)
         {
             renderer.Color = ConsoleColor.Cyan;

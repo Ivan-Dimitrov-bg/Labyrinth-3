@@ -24,12 +24,14 @@
             {
                 return this.value;
             }
+
             set
             {
                 if (value != Cell.EMPTY_CELL && value != Cell.WALL && value != Cell.PLAYER_VALUE)
                 {
                     throw new ArgumentException("Invalid cell value.");
                 }
+
                 this.value = value;
             }
         }

@@ -48,11 +48,10 @@
             Assert.AreEqual(expectedPlayerPosition.Y, mazePlayerPosition.Y);           
         }
 
-        ///TODO maze.Renderer TESTS if possible 
+        // TODO maze.Renderer TESTS if possible 
         public void Maze_Renderer()
         {
             IRenderer dummyRenderer = new ConsoleRenderer();
-            
         }
     }
 }

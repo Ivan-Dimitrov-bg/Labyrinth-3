@@ -18,12 +18,14 @@
             {
                 return this.x;
             }
+
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException("Position X cannot be negative.");
                 }
+
                 this.x = value;
             }
         }
@@ -34,12 +36,14 @@
             {
                 return this.y;
             }
+
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException("Position Y cannot be negative.");
                 }
+
                 this.y = value;
             }
         }
