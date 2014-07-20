@@ -31,7 +31,7 @@
         /// <summary>
         /// Getter for the current count, will be used for the high score
         /// <remarks>
-        /// None
+        /// No setter
         /// <returns>
         /// Returns the count with a getter
         /// </returns>
@@ -45,6 +45,18 @@
             }
         }
 
+        /// <summary>
+        /// Sets the score according to the supplied currentPlayerScore element and count
+        /// <remarks>
+        /// Validates the supplied param for null value
+        /// <param name="currentPlayerScore">
+        /// Accepts an object instance of IScore
+        /// </param>
+        /// <returns>
+        /// Does not return anything
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public void AddScore(IScore currentPlayerScore)
         {
             if (currentPlayerScore == null)
@@ -68,7 +80,18 @@
             this.scores.Sort((currentPlayer, otherPlayer) => currentPlayer.Moves.CompareTo(otherPlayer.Moves));
         }
 
-        // Strategy pattern.The object recieves concrete strategy implementation of the renderer.
+        /// <summary>
+        /// Strategy pattern.The object recieves concrete strategy implementation of the renderer
+        /// <remarks>
+        /// If the count is 0, will utilize the composite pattern
+        /// <param name="renderer">
+        /// Accepts an object instance of IRenderer
+        /// </param>
+        /// <returns>
+        /// Does not return anything
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public void Render(IRenderer renderer)
         {
             if (this.scores.Count == 0)
