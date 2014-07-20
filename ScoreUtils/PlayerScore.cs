@@ -91,7 +91,7 @@
                 this.position = value;
             }
         }
-
+        
         /// <summary>
         /// Renders the score result for the current player
         /// <remarks>
@@ -104,7 +104,6 @@
         /// </returns>
         /// </remarks>
         /// </summary>
-        
         public void Render(IRenderer renderer)
         {
             renderer.Color = ConsoleColor.Cyan;

@@ -3,20 +3,38 @@
     using System;
     using Labyrinth.Interfaces;
 
+    /// <summary>
+    /// Player class
+    /// <remarks>
+    /// Inhertis the Cell and IPlayer interfaces
+    /// </remarks>
+    /// </summary>
     public class Player : Cell, IPlayer
     {
         private Position position;
-
         private IMaze maze;
-
         private IScore score;
-
         private PlayerDirection direction;
 
+        /// <summary>
+        /// Player consturctor
+        /// <remarks>
+        /// Will call the base constructor
+        /// </remarks>
+        /// </summary>
         public Player() : base(Cell.PLAYER_VALUE)
         {
         }
 
+        /// <summary>
+        /// Getter and setter for the current Maze
+        /// <remarks>
+        /// Validates the input for null or empty value
+        /// <returns>
+        /// Returns the maze object with a getter
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public IMaze Maze
         {
             get
@@ -32,6 +50,15 @@
             }
         }
 
+        /// <summary>
+        /// Getter and setter for the current Score
+        /// <remarks>
+        /// Validates the input for null or empty value
+        /// <returns>
+        /// Returns the score object with a getter
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public IScore Score
         {
             get
@@ -47,10 +74,37 @@
             }
         }
 
+        /// <summary>
+        /// Getter and setter for the current Command
+        /// <remarks>
+        /// None
+        /// <returns>
+        /// Utilizes automatic getter and setter
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public PlayerCommand Command { get; set; }
 
+        /// <summary>
+        /// Getter and setter for the current PlayerMoved
+        /// <remarks>
+        /// None
+        /// <returns>
+        /// Utilizes automatic getter and private setter
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public bool PlayerMoved { get; private set; }
 
+        /// <summary>
+        /// Getter and setter for the current Direction
+        /// <remarks>
+        /// Setter utilizes the Observer pattern
+        /// <returns>
+        /// Returns the current direction with a getter
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         private PlayerDirection Direction
         {
             get
@@ -62,11 +116,20 @@
             {
                 this.direction = value;
 
-                // Observer pattern...player notifies himself to move when his direction is changed...
+                // Observer pattern... player notifies himself to move when his direction is changed...
                 this.Move();
             }
         }
 
+        /// <summary>
+        /// Method for console command evaluation
+        /// <remarks>
+        /// Can create maze, move player, show score, restart and exit
+        /// </remarks>
+        /// <param name="operator">
+        /// Accepts a string for further command parsing
+        /// </param>
+        /// </summary>
         public void ExecuteCommand(string @operator)
         {
             switch (@operator)
@@ -107,6 +170,15 @@
             }
         }
 
+        /// <summary>
+        /// This method checks whether the player has exited the maze
+        /// <remarks>
+        /// Will check maze limits and player position
+        /// <returns>
+        /// Returns TRUE if player is outside of maze
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         public bool IsOutOfTheMaze()
         {
             this.position = this.Maze.PlayerPosition;
@@ -122,6 +194,12 @@
             return false;
         }
 
+        /// <summary>
+        /// Move method. Can be invoked by the observer pattern
+        /// <remarks>
+        /// Can move in directions set as in the enumerator. Will check for invalid move if the player's way is blocked
+        /// </remarks>
+        /// </summary>
         private void Move()
         { 
             this.PlayerMoved = false;
@@ -158,6 +236,9 @@
             }
         }
 
+        /// <summary>
+        /// Move UP method
+        /// </summary>
         private void MoveUp()
         {
             if (this.Maze[this.position.X - 1, this.position.Y].IsEmpty)
@@ -167,6 +248,9 @@
             }
         }
 
+        /// <summary>
+        /// Move DOWN method
+        /// </summary>
         private void MoveDown()
         {
             if (this.Maze[this.position.X + 1, this.position.Y].IsEmpty)
@@ -176,6 +260,9 @@
             }
         }
 
+        /// <summary>
+        /// Move LEFT method
+        /// </summary>
         private void MoveLeft()
         {
             if (this.Maze[this.position.X, this.position.Y - 1].IsEmpty)
@@ -185,6 +272,9 @@
             }
         }
 
+        /// <summary>
+        /// Move RIGHT method
+        /// </summary>
         private void MoveRight()
         {
             if (this.Maze[this.position.X, this.position.Y + 1].IsEmpty)
@@ -193,7 +283,16 @@
                 this.PlayerMoved = true;
             }
         }
-                
+
+        /// <summary>
+        /// Defensive method for rejecting wrong values
+        /// <remarks>
+        /// Will check value for null
+        /// <returns>
+        /// Will throw a NullReferenceException if supplied value is null
+        /// </returns>
+        /// </remarks>
+        /// </summary>
         private void CheckIfPropertyIsNull(object obj)
         {
             if (obj == null)
