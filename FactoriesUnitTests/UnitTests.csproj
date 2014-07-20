@@ -68,6 +68,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Command\CommandUnitTest.cs" />
     <Compile Include="Factories\LargeMazeCreatorUnitTest.cs" />
     <Compile Include="Factories\MazeCellCreatorUnitTest.cs" />
     <Compile Include="Factories\MazeCreatorUnitTests.cs" />
