@@ -4,35 +4,32 @@
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
-    
+
+    /// <summary>
+    /// LabyrinthGame class
+    /// </summary>
     public class LabyrinthGame
     {
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
-
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
-
         private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
-
         private const string INPUT_MESSAGE = "\nEnter your move (L=left, R=right, D=down, U=up): ";
-
         private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname: ";
-
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
-
         private readonly string[] COMMANDS = new string[] { "u", "d", "l", "r", "small", "medium", "large" };
-
         private readonly IMaze maze;
-
         private readonly IRenderer renderer;
-
         private readonly IPlayer player;
-
         private readonly IScoreBoard scores;
-
         private Commander commander;
-
         private MazeCreator mazeFactory;
 
+        /// <summary>
+        /// LabyrinthGame consturctor
+        /// <remarks>
+        /// Will initiate the console renderer and all other required classes
+        /// </remarks>
+        /// </summary>
         public LabyrinthGame()
         {
             this.renderer = new ConsoleRenderer();
@@ -42,6 +39,12 @@
             this.maze = this.InitMaze();           
         }
 
+        /// <summary>
+        /// Start the game
+        /// <remarks>
+        /// Will initiate all required classes and loop until forced to exit or player wins
+        /// </remarks>
+        /// </summary>
         public void Start()
         {
             while (!this.commander.IsExitCommandEntered)
@@ -54,6 +57,12 @@
             }
         }
 
+        /// <summary>
+        /// Command pattern and maze initialization after valid maze choice
+        /// <remarks>
+        /// Choice must be between the allowed maze size enumerations
+        /// </remarks>
+        /// </summary>
         private IMaze InitMaze()
         {
             string labSizeChoice = string.Empty;
@@ -73,6 +82,12 @@
             return this.mazeFactory.CreateMaze();
         }
 
+        /// <summary>
+        /// More command pattern
+        /// <remarks>
+        /// Utilize the command pattern for correct game progress and evaluation
+        /// </remarks>
+        /// </summary>
         private void TypeCommand()
         {
             while (true)

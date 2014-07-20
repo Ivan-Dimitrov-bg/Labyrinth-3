@@ -4,10 +4,19 @@
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
 
+    /// <summary>
+    /// Commander class
+    /// </summary>
     public class Commander
     {
         private ICommand command;
 
+        /// <summary>
+        /// Provide info if command is entered
+        /// </summary>
+        /// <returns>
+        /// Boolean value
+        /// </returns>
         public bool IsExitCommandEntered
         {
             get
@@ -21,6 +30,12 @@
             }
         }
 
+        /// <summary>
+        /// If command is entered -> check if command is to restart
+        /// </summary>
+        /// <returns>
+        /// Boolean value
+        /// </returns>
         public bool IsRestartCommandEntered
         {
             get
@@ -34,11 +49,20 @@
             }
         }
 
+        /// <summary>
+        /// Set current command
+        /// </summary>
+        /// /// <param name="command">
+        /// Must be an instance of ICommand
+        /// </param>
         public void SetCommand(ICommand command)
         {
             this.command = command;
         }
 
+        /// <summary>
+        ///  If current command is set then execute it
+        /// </summary>
         public void ExecuteCommand()
         {
             if (this.command != null)
@@ -47,6 +71,15 @@
             }
         }
 
+        /// <summary>
+        /// Parse the current command
+        /// </summary>
+        /// <param name="renderer">
+        /// Must be an instance of IRenderer
+        /// </param>
+        /// <param name="score">
+        /// Must be an instance of IScoreBoard
+        /// </param>
         public void ParseCommand(IRenderer renderer, IScoreBoard score)
         {
             if (this.command != null)
@@ -58,6 +91,16 @@
             }
         }
 
+        /// <summary>
+        /// Create the required maze
+        /// </summary>
+        /// <param name="renderer">
+        /// Must be an instance of IRenderer
+        /// </param>
+        /// <param name="creator">
+        /// Must be an instance of MazeCreator
+        /// </param>
+        /// <returns></returns>
         public MazeCreator GetMaze(IRenderer renderer, MazeCreator creator)
         {
             if (this.command != null)
