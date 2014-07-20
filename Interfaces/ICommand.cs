@@ -1,8 +1,11 @@
 ﻿namespace Labyrinth.Interfaces
 {
-    using System;
-    using System.Linq;
-
+    /// <summary>
+    /// Base interface for the command parsing and execution
+    /// <remarks>
+    /// None
+    /// </remarks>
+    /// </summary>
     public interface ICommand
     {
         void Execute();

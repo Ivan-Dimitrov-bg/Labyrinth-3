@@ -2,6 +2,12 @@
 {
     using Labyrinth.GameObjects;
 
+    /// <summary>
+    /// Inherits the IRenderable inrerface
+    /// <remarks>
+    /// Creates the maze interface with appropriate getters and setters accordingly
+    /// </remarks>
+    /// </summary>
     public interface IMaze : IRenderable
     {
         int Rows { get; }

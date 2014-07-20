@@ -1,7 +1,11 @@
 ﻿namespace Labyrinth.Interfaces
 {
-    using Labyrinth.ScoreUtils;
-
+    /// <summary>
+    /// Inherits the IRenderable interface
+    /// <remarks>
+    /// Contains count and AddScore
+    /// </remarks>
+    /// </summary>
     public interface IScoreBoard : IRenderable
     {
         int Count { get; }

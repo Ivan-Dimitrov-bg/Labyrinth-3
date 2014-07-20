@@ -1,8 +1,11 @@
 ﻿namespace Labyrinth.Interfaces
 {
-    using System;
-    using System.Linq;
-
+    /// <summary>
+    /// Inherits the IRenderable interface
+    /// <remarks>
+    /// Contains Moves, Position and Name each with it own getter and setter
+    /// </remarks>
+    /// </summary>
     public interface IScore : IRenderable
     {
         int Moves { get; set; }
