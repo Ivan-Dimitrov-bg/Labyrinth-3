@@ -54,7 +54,6 @@
             }
         }
 
-
         /// <summary>
         /// Check the IsEmpty value
         /// <remarks>

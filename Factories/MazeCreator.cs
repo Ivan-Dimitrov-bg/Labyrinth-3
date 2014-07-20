@@ -1,6 +1,5 @@
 ﻿namespace Labyrinth.Factories
 {
-    using System;
     using Labyrinth.Interfaces;
 
     /// <summary>

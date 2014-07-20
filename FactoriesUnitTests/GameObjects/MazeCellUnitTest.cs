@@ -27,7 +27,7 @@
             Assert.IsTrue(this.mazeCell.IsEmpty);
         }
 
-        ///probably unnecessary method clone is using c# object.MemberwiseClone(); So it is tested by Microsoft
+        // probably unnecessary method clone is using c# object.MemberwiseClone(); So it is tested by Microsoft
         [TestMethod]
         public void MazeCell_DoCloneMethodReturnsMazeCell()
         {
