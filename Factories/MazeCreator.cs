@@ -8,14 +8,18 @@
     public abstract class MazeCreator
     {
         private bool mazeHasSolution;
+
         private bool[,] visitedCells;
+        
+        /// <summary>
+        /// Gets and sets the only instance of the maze creator
+        /// </summary>
+        protected IMaze Maze { get; set; }
 
         /// <summary>
         /// Can override if needed
         /// </summary>
         public abstract IMaze CreateMaze();
-
-        protected IMaze Maze { get; set; }
 
         /// <summary>
         /// Generate the maze
