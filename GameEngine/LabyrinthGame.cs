@@ -16,11 +16,11 @@
         private const string INPUT_MESSAGE = "\nEnter your move (L=left, R=right, D=down, U=up): ";
         private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname: ";
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
-        private readonly string[] COMMANDS = new string[] { "u", "d", "l", "r", "small", "medium", "large" };
-        private readonly IMaze maze;
-        private readonly IRenderer renderer;
-        private readonly IPlayer player;
-        private readonly IScoreBoard scores;
+        private readonly string[] Commands = new string[] { "u", "d", "l", "r", "small", "medium", "large" };
+        private readonly IMaze Maze;
+        private readonly IRenderer Renderer;
+        private readonly IPlayer Player;
+        private readonly IScoreBoard Scores;
         private Commander commander;
         private MazeCreator mazeFactory;
 
@@ -32,11 +32,11 @@
         /// </summary>
         public LabyrinthGame()
         {
-            this.renderer = new ConsoleRenderer();
-            this.scores = new ScoreBoard();
+            this.Renderer = new ConsoleRenderer();
+            this.Scores = new ScoreBoard();
             this.commander = new Commander();           
-            this.player = PlayerCreator.CreatePlayer();     
-            this.maze = this.InitMaze();           
+            this.Player = PlayerCreator.CreatePlayer();     
+            this.Maze = this.InitMaze();           
         }
 
         /// <summary>
@@ -51,8 +51,8 @@
             {
                 this.commander = new Commander();
                 this.mazeFactory.GenerateMaze();
-                this.player.Score = new PlayerScore();   
-                this.player.Maze = this.maze;                
+                this.Player.Score = new PlayerScore();   
+                this.Player.Maze = this.Maze;                
                 this.TypeCommand();
             }
         }
@@ -67,16 +67,16 @@
         {
             string labSizeChoice = string.Empty;
            
-            this.renderer.Render(WELCOME_MESSAGE);
-            this.renderer.Render(CHOOSE_LAB_MESAGE);
+            this.Renderer.Render(WELCOME_MESSAGE);
+            this.Renderer.Render(CHOOSE_LAB_MESAGE);
 
-            while (labSizeChoice != this.COMMANDS[4] && labSizeChoice != this.COMMANDS[5] && labSizeChoice != this.COMMANDS[6])
+            while (labSizeChoice != this.Commands[4] && labSizeChoice != this.Commands[5] && labSizeChoice != this.Commands[6])
             {
                 // Command pattern...
-                labSizeChoice = this.renderer.ReadCommand().ToLower();
-                this.commander.SetCommand(new MazeCreateCommand(this.player, labSizeChoice));
+                labSizeChoice = this.Renderer.ReadCommand().ToLower();
+                this.commander.SetCommand(new MazeCreateCommand(this.Player, labSizeChoice));
                 this.commander.ExecuteCommand();
-                this.mazeFactory = this.commander.GetMaze(this.renderer, this.mazeFactory);
+                this.mazeFactory = this.commander.GetMaze(this.Renderer, this.mazeFactory);
             }
             
             return this.mazeFactory.CreateMaze();
@@ -92,48 +92,48 @@
         {
             while (true)
             { 
-                this.renderer.Render(IN_GAME_MESSAGE);
-                this.maze.Render(this.renderer);
+                this.Renderer.Render(IN_GAME_MESSAGE);
+                this.Maze.Render(this.Renderer);
 
-                if (this.player.IsOutOfTheMaze())
+                if (this.Player.IsOutOfTheMaze())
                 {
-                    this.renderer.Render(CONGRATULATIONS_MESSAGE, this.player.Score.Moves);
-                    this.renderer.Render(NICKNAME_INPUT_MESSAGE);
-                    this.player.Score.Name = this.renderer.ReadCommand();
-                    this.renderer.Clear();
-                    this.scores.AddScore(this.player.Score);
-                    this.scores.Render(this.renderer);
+                    this.Renderer.Render(CONGRATULATIONS_MESSAGE, this.Player.Score.Moves);
+                    this.Renderer.Render(NICKNAME_INPUT_MESSAGE);
+                    this.Player.Score.Name = this.Renderer.ReadCommand();
+                    this.Renderer.Clear();
+                    this.Scores.AddScore(this.Player.Score);
+                    this.Scores.Render(this.Renderer);
                     return;
                 }
                
-                this.commander.ParseCommand(this.renderer, this.scores);
+                this.commander.ParseCommand(this.Renderer, this.Scores);
                 
                 if (this.commander.IsExitCommandEntered || this.commander.IsRestartCommandEntered)
                 {
                     return;
                 }
 
-                this.renderer.Render(INPUT_MESSAGE);
-                string command = this.renderer.ReadCommand().ToLower();
+                this.Renderer.Render(INPUT_MESSAGE);
+                string command = this.Renderer.ReadCommand().ToLower();
 
                 // Command pattern...
-                if (command == this.COMMANDS[0] || command == this.COMMANDS[1] || command == this.COMMANDS[2] || command == this.COMMANDS[3])
+                if (command == this.Commands[0] || command == this.Commands[1] || command == this.Commands[2] || command == this.Commands[3])
                 {
-                    this.commander.SetCommand(new MoveCommand(this.player, command));
+                    this.commander.SetCommand(new MoveCommand(this.Player, command));
                     this.commander.ExecuteCommand();   
                     
-                    if (!this.player.PlayerMoved)
+                    if (!this.Player.PlayerMoved)
                     {
-                        this.commander.SetCommand(new PrintCommand(this.player, command));
+                        this.commander.SetCommand(new PrintCommand(this.Player, command));
                     }
                 }
                 else
                 {
-                    this.commander.SetCommand(new PrintCommand(this.player, command));
+                    this.commander.SetCommand(new PrintCommand(this.Player, command));
                     this.commander.ExecuteCommand();        
                 }
          
-                this.renderer.Clear(); 
+                this.Renderer.Clear(); 
             }
         }
     }
