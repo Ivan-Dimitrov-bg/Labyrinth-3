@@ -4,12 +4,23 @@
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
+    using System;
 
     /// <summary>
     /// LabyrinthGame class
     /// </summary>
     public class LabyrinthGame
     {
+        private enum MoveCommands
+        {
+            u, d, l, r
+        }
+
+        private enum CreationCommands
+        {
+            small, medium, large
+        }
+
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
         private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
@@ -34,9 +45,9 @@
         {
             this.Renderer = new ConsoleRenderer();
             this.Scores = new ScoreBoard();
-            this.commander = new Commander();           
-            this.Player = PlayerCreator.CreatePlayer();     
-            this.Maze = this.InitMaze();           
+            this.commander = new Commander();
+            this.Player = PlayerCreator.CreatePlayer();
+            this.Maze = this.InitMaze();
         }
 
         /// <summary>
@@ -51,8 +62,8 @@
             {
                 this.commander = new Commander();
                 this.mazeFactory.GenerateMaze();
-                this.Player.Score = new PlayerScore();   
-                this.Player.Maze = this.Maze;                
+                this.Player.Score = new PlayerScore();
+                this.Player.Maze = this.Maze;
                 this.TypeCommand();
             }
         }
@@ -66,11 +77,12 @@
         private IMaze InitMaze()
         {
             string labSizeChoice = string.Empty;
-           
+
             this.Renderer.Render(WELCOME_MESSAGE);
             this.Renderer.Render(CHOOSE_LAB_MESAGE);
 
-            while (labSizeChoice != this.Commands[4] && labSizeChoice != this.Commands[5] && labSizeChoice != this.Commands[6])
+            //while (labSizeChoice != this.Commands[4] && labSizeChoice != this.Commands[5] && labSizeChoice != this.Commands[6])
+            while (!IsCreationCommand(labSizeChoice))
             {
                 // Command pattern...
                 labSizeChoice = this.Renderer.ReadCommand().ToLower();
@@ -78,7 +90,7 @@
                 this.commander.ExecuteCommand();
                 this.mazeFactory = this.commander.GetMaze(this.Renderer, this.mazeFactory);
             }
-            
+
             return this.mazeFactory.CreateMaze();
         }
 
@@ -91,7 +103,7 @@
         private void TypeCommand()
         {
             while (true)
-            { 
+            {
                 this.Renderer.Render(IN_GAME_MESSAGE);
                 this.Maze.Render(this.Renderer);
 
@@ -105,9 +117,9 @@
                     this.Scores.Render(this.Renderer);
                     return;
                 }
-               
+
                 this.commander.ParseCommand(this.Renderer, this.Scores);
-                
+
                 if (this.commander.IsExitCommandEntered || this.commander.IsRestartCommandEntered)
                 {
                     return;
@@ -117,11 +129,12 @@
                 string command = this.Renderer.ReadCommand().ToLower();
 
                 // Command pattern...
-                if (command == this.Commands[0] || command == this.Commands[1] || command == this.Commands[2] || command == this.Commands[3])
+                //if (command == this.Commands[0] || command == this.Commands[1] || command == this.Commands[2] || command == this.Commands[3])
+                if (IsMoveCommand(command))
                 {
                     this.commander.SetCommand(new MoveCommand(this.Player, command));
-                    this.commander.ExecuteCommand();   
-                    
+                    this.commander.ExecuteCommand();
+
                     if (!this.Player.PlayerMoved)
                     {
                         this.commander.SetCommand(new PrintCommand(this.Player, command));
@@ -130,11 +143,35 @@
                 else
                 {
                     this.commander.SetCommand(new PrintCommand(this.Player, command));
-                    this.commander.ExecuteCommand();        
+                    this.commander.ExecuteCommand();
                 }
-         
-                this.Renderer.Clear(); 
+
+                this.Renderer.Clear();
             }
+        }
+
+        private bool IsMoveCommand(string command)
+        {
+            bool isMoveCommand = false;
+
+            if (Enum.IsDefined(typeof(MoveCommands), command))
+            {
+                isMoveCommand = true;
+            }
+
+            return isMoveCommand;
+        }
+
+        private bool IsCreationCommand(string command)
+        {
+            bool isCreationCommand = false;
+
+            if (Enum.IsDefined(typeof(CreationCommands), command))
+            {
+                isCreationCommand = true;
+            }
+
+            return isCreationCommand;
         }
     }
 }
