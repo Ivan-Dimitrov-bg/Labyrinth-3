@@ -1,26 +1,16 @@
 ﻿namespace Labyrinth.GameEngine
 {
+    using System;
     using Labyrinth.Commands;
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
-    using System;
 
     /// <summary>
     /// LabyrinthGame class
     /// </summary>
     public class LabyrinthGame
     {
-        private enum MoveCommands
-        {
-            u, d, l, r
-        }
-
-        private enum CreationCommands
-        {
-            small, medium, large
-        }
-
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
         private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
@@ -48,6 +38,16 @@
             this.commander = new Commander();
             this.Player = PlayerCreator.CreatePlayer();
             this.Maze = this.InitMaze();
+        }
+
+        private enum MoveCommands
+        {
+            u, d, l, r
+        }
+
+        private enum CreationCommands
+        {
+            small, medium, large
         }
 
         /// <summary>
@@ -81,8 +81,8 @@
             this.Renderer.Render(WELCOME_MESSAGE);
             this.Renderer.Render(CHOOSE_LAB_MESAGE);
 
-            //while (labSizeChoice != this.Commands[4] && labSizeChoice != this.Commands[5] && labSizeChoice != this.Commands[6])
-            while (!IsCreationCommand(labSizeChoice))
+            // while (labSizeChoice != this.Commands[4] && labSizeChoice != this.Commands[5] && labSizeChoice != this.Commands[6])
+            while (!this.IsCreationCommand(labSizeChoice))
             {
                 // Command pattern...
                 labSizeChoice = this.Renderer.ReadCommand().ToLower();
@@ -130,7 +130,7 @@
 
                 // Command pattern...
                 //if (command == this.Commands[0] || command == this.Commands[1] || command == this.Commands[2] || command == this.Commands[3])
-                if (IsMoveCommand(command))
+                if (this.IsMoveCommand(command))
                 {
                     this.commander.SetCommand(new MoveCommand(this.Player, command));
                     this.commander.ExecuteCommand();
