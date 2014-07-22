@@ -22,12 +22,12 @@
         public override IMaze CreateMaze()
         {
             // Singleton pattern...
-            if (this.maze == null)
+            if (this.Maze == null)
             {
-                this.maze = new Maze(SMALL_LAB_SIZE, SMALL_LAB_SIZE);
+                this.Maze = new Maze(SMALL_LAB_SIZE, SMALL_LAB_SIZE);
             }
 
-            return this.maze;
+            return this.Maze;
         }
     }
 }

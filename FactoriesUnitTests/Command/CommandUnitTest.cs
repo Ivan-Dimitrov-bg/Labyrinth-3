@@ -1,8 +1,8 @@
 ﻿namespace FactoriesUnitTests.Command
 {
     using Labyrinth.Commands;
-    using Labyrinth.GameObjects;
     using Labyrinth.Factories;
+    using Labyrinth.GameObjects;
     using Labyrinth.Interfaces;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

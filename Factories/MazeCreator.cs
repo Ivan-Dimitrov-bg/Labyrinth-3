@@ -7,7 +7,6 @@
     /// </summary>
     public abstract class MazeCreator
     {
-        protected IMaze maze;
         private bool mazeHasSolution;
         private bool[,] visitedCells;
 
@@ -15,6 +14,8 @@
         /// Can override if needed
         /// </summary>
         public abstract IMaze CreateMaze();
+
+        protected IMaze Maze { get; set; }
 
         /// <summary>
         /// Generate the maze
@@ -24,23 +25,23 @@
         /// </summary>
         public void GenerateMaze()
         {
-            this.maze.PlayerPosition.X = this.maze.Rows / 2;
-            this.maze.PlayerPosition.Y = this.maze.Cols / 2;
+            this.Maze.PlayerPosition.X = this.Maze.Rows / 2;
+            this.Maze.PlayerPosition.Y = this.Maze.Cols / 2;
 
             this.mazeHasSolution = false;
 
             while (!this.mazeHasSolution)
             {
-                for (int row = 0; row < this.maze.Rows; row++)
+                for (int row = 0; row < this.Maze.Rows; row++)
                 {
-                    for (int col = 0; col < this.maze.Cols; col++)
+                    for (int col = 0; col < this.Maze.Cols; col++)
                     {
-                        this.maze[row, col] = MazeCellCreator.CreateCell();
+                        this.Maze[row, col] = MazeCellCreator.CreateCell();
                     }
                 }
 
-                this.visitedCells = new bool[this.maze.Rows, this.maze.Cols];
-                this.HasSolutuon(this.maze.PlayerPosition.X, this.maze.PlayerPosition.Y);
+                this.visitedCells = new bool[this.Maze.Rows, this.Maze.Cols];
+                this.HasSolutuon(this.Maze.PlayerPosition.X, this.Maze.PlayerPosition.Y);
             }
         }
 
@@ -52,12 +53,12 @@
         /// </summary>
         private void HasSolutuon(int row, int col)
         {
-            if (!this.InRange(row, this.maze.Rows) || !this.InRange(col, this.maze.Cols))
+            if (!this.InRange(row, this.Maze.Rows) || !this.InRange(col, this.Maze.Cols))
             {
                 this.mazeHasSolution = true;
                 return;
             }
-            else if (!this.visitedCells[row, col] && !this.mazeHasSolution && this.maze[row, col].IsEmpty)
+            else if (!this.visitedCells[row, col] && !this.mazeHasSolution && this.Maze[row, col].IsEmpty)
             {
                 this.visitedCells[row, col] = true;
                 this.HasSolutuon(row, col + 1);
