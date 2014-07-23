@@ -1,6 +1,5 @@
 ﻿namespace Labyrinth.GameEngine
 {
-    using System;
     using Labyrinth.Commands;
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
