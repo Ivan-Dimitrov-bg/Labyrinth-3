@@ -97,17 +97,14 @@
         /// <param name="renderer">
         /// Must be an instance of IRenderer
         /// </param>
-        /// <param name="creator">
-        /// Must be an instance of MazeCreator
-        /// </param>
         /// <returns></returns>
-        public MazeCreator GetMaze(IRenderer renderer, MazeCreator creator)
+        public MazeCreator GetMaze(IRenderer renderer)
         {
             if (this.command != null)
             {
                 if (this.command is MazeCreateCommand)
                 {
-                    return (this.command as MazeCreateCommand).CreateMaze(renderer, creator);
+                    return (this.command as MazeCreateCommand).CreateMaze(renderer);
                 }
             }
 

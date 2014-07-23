@@ -13,26 +13,48 @@
     {
         private enum MoveCommands
         {
-            u, d, l, r
+            u,
+
+            d,
+
+            l,
+
+            r
         }
 
         private enum CreationCommands
         {
-            small, medium, large
+            small,
+
+            medium,
+
+            large
         }
 
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
+
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
+
         private const string IN_GAME_MESSAGE = "Try to escape! Use 'top' to view the top \nscoreboard,'restart' to start a new game and 'exit' to quit the game.\n";
+
         private const string INPUT_MESSAGE = "\nEnter your move (L=left, R=right, D=down, U=up): ";
+
         private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname: ";
+
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
+
         private readonly string[] Commands = new string[] { "u", "d", "l", "r", "small", "medium", "large" };
+
         private readonly IMaze Maze;
+
         private readonly IRenderer Renderer;
+
         private readonly IPlayer Player;
+
         private readonly IScoreBoard Scores;
+
         private Commander commander;
+
         private MazeCreator mazeFactory;
 
         /// <summary>
@@ -53,7 +75,7 @@
         /// <summary>
         /// Start the game
         /// <remarks>
-        /// Will initiate all required classes and loop until forced to exit or player wins
+        /// Will initiate all required classes and loop until forced to exit
         /// </remarks>
         /// </summary>
         public void Start()
@@ -80,15 +102,14 @@
 
             this.Renderer.Render(WELCOME_MESSAGE);
             this.Renderer.Render(CHOOSE_LAB_MESAGE);
-
-            //while (labSizeChoice != this.Commands[4] && labSizeChoice != this.Commands[5] && labSizeChoice != this.Commands[6])
-            while (!IsCreationCommand(labSizeChoice))
+          
+            while (this.mazeFactory == null)
             {
                 // Command pattern...
                 labSizeChoice = this.Renderer.ReadCommand().ToLower();
                 this.commander.SetCommand(new MazeCreateCommand(this.Player, labSizeChoice));
                 this.commander.ExecuteCommand();
-                this.mazeFactory = this.commander.GetMaze(this.Renderer, this.mazeFactory);
+                this.mazeFactory = this.commander.GetMaze(this.Renderer);
             }
 
             return this.mazeFactory.CreateMaze();
@@ -127,20 +148,11 @@
 
                 this.Renderer.Render(INPUT_MESSAGE);
                 string command = this.Renderer.ReadCommand().ToLower();
+                
+                this.commander.SetCommand(new MoveCommand(this.Player, command));
+                this.commander.ExecuteCommand();
 
-                // Command pattern...
-                //if (command == this.Commands[0] || command == this.Commands[1] || command == this.Commands[2] || command == this.Commands[3])
-                if (IsMoveCommand(command))
-                {
-                    this.commander.SetCommand(new MoveCommand(this.Player, command));
-                    this.commander.ExecuteCommand();
-
-                    if (!this.Player.PlayerMoved)
-                    {
-                        this.commander.SetCommand(new PrintCommand(this.Player, command));
-                    }
-                }
-                else
+                if (!this.Player.PlayerMoved)
                 {
                     this.commander.SetCommand(new PrintCommand(this.Player, command));
                     this.commander.ExecuteCommand();
@@ -148,30 +160,6 @@
 
                 this.Renderer.Clear();
             }
-        }
-
-        private bool IsMoveCommand(string command)
-        {
-            bool isMoveCommand = false;
-
-            if (Enum.IsDefined(typeof(MoveCommands), command))
-            {
-                isMoveCommand = true;
-            }
-
-            return isMoveCommand;
-        }
-
-        private bool IsCreationCommand(string command)
-        {
-            bool isCreationCommand = false;
-
-            if (Enum.IsDefined(typeof(CreationCommands), command))
-            {
-                isCreationCommand = true;
-            }
-
-            return isCreationCommand;
         }
     }
 }

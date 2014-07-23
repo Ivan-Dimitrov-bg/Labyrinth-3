@@ -41,13 +41,10 @@
         /// <param name="renderer">
         /// Must be an instance of IRenderer
         /// </param>
-        /// <param name="creator">
-        /// Must be an instance of MazeCreator
-        /// </param>
         /// <returns>
         /// MazeCreator object and null if invalid
         /// </returns>
-        public MazeCreator CreateMaze(IRenderer renderer,  MazeCreator creator)
+        public MazeCreator CreateMaze(IRenderer renderer)
         {
             switch (this.Player.Command)
             {

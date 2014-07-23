@@ -166,6 +166,7 @@
                     break;
                 default:
                     this.Command = PlayerCommand.InvalidCommand;
+                    this.PlayerMoved = false;
                     break;
             }
         }

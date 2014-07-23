@@ -38,7 +38,7 @@
         /// Will read a single line from the console
         /// </remarks>
         /// <returns>
-        /// Will return a string which is red from the console
+        /// Will return a string which is read from the console
         /// </returns>
         /// </summary>
         public string ReadCommand()
