@@ -62,11 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\CommandCreator.cs" />
     <Compile Include="Factories\MazeCreator.cs" />
     <Compile Include="Factories\LargeMazeCreator.cs" />
     <Compile Include="Factories\MazeCellCreator.cs" />
     <Compile Include="Factories\MediumMazeCreator.cs" />
     <Compile Include="Factories\PlayerCreator.cs" />
+    <Compile Include="Factories\ScoreBoardCreator.cs" />
     <Compile Include="Factories\SmallMazeCreator.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="GameEngine\Commander.cs" />

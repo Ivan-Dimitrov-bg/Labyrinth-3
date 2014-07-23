@@ -1,17 +1,13 @@
 ﻿namespace Labyrinth.GameEngine
 {
-    using Labyrinth.Commands;
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
-    using Labyrinth.ScoreUtils;
 
     /// <summary>
     /// LabyrinthGame class
     /// </summary>
     public class LabyrinthGame
     {
-
-
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
 
         private const string CHOOSE_LAB_MESAGE = "Please enter what kind of labyrinth you want to play in: 'small', 'medium' or 'large':";
@@ -23,8 +19,6 @@
         private const string NICKNAME_INPUT_MESSAGE = "Please enter your nickname: ";
 
         private const string CONGRATULATIONS_MESSAGE = "\nCongratulations you escaped with {0} moves.\n";
-
-        private readonly string[] Commands = new string[] { "u", "d", "l", "r", "small", "medium", "large" };
 
         private readonly IMaze Maze;
 
@@ -47,13 +41,11 @@
         public LabyrinthGame()
         {
             this.Renderer = new ConsoleRenderer();
-            this.Scores = new ScoreBoard();
             this.commander = new Commander();
+            this.Scores = ScoreBoardCreator.CreateScoreBoard();           
             this.Player = PlayerCreator.CreatePlayer();
             this.Maze = this.InitMaze();
         }
-
-
 
         /// <summary>
         /// Start the game
@@ -67,7 +59,7 @@
             {
                 this.commander = new Commander();
                 this.mazeFactory.GenerateMaze();
-                this.Player.Score = new PlayerScore();
+                this.Player.Score = ScoreBoardCreator.CreatePlayerScore();
                 this.Player.Maze = this.Maze;
                 this.TypeCommand();
             }
@@ -90,11 +82,11 @@
             {
                 // Command pattern...
                 labSizeChoice = this.Renderer.ReadCommand().ToLower();
-                this.commander.SetCommand(new MazeCreateCommand(this.Player, labSizeChoice));
+                this.commander.SetCommand(CommandCreator.CreateMazeCreatorCommand(this.Player, labSizeChoice));
                 this.commander.ExecuteCommand();
                 this.mazeFactory = this.commander.GetMaze(this.Renderer);
             }
-
+            
             return this.mazeFactory.CreateMaze();
         }
 
@@ -132,13 +124,13 @@
                 this.Renderer.Render(INPUT_MESSAGE);
                 string command = this.Renderer.ReadCommand().ToLower();
 
-                this.commander.SetCommand(new MoveCommand(this.Player, command));
+                this.commander.SetCommand(CommandCreator.CreateMoveCommand(this.Player, command));
                 this.commander.ExecuteCommand();
 
                 if (!this.Player.PlayerMoved)
                 {
                     this.commander.ExecuteCommand();
-                    this.commander.SetCommand(new PrintCommand(this.Player, command));
+                    this.commander.SetCommand(CommandCreator.CreatePrintCommand(this.Player, command));
                 }
 
                 this.Renderer.Clear();
