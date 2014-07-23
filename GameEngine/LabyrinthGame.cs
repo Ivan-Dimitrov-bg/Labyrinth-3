@@ -1,35 +1,17 @@
 ﻿namespace Labyrinth.GameEngine
 {
+    using System;
     using Labyrinth.Commands;
     using Labyrinth.Factories;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
-    using System;
 
     /// <summary>
     /// LabyrinthGame class
     /// </summary>
     public class LabyrinthGame
     {
-        private enum MoveCommands
-        {
-            u,
 
-            d,
-
-            l,
-
-            r
-        }
-
-        private enum CreationCommands
-        {
-            small,
-
-            medium,
-
-            large
-        }
 
         private const string WELCOME_MESSAGE = "Welcome to \"Labyrinth\" game. \n";
 
@@ -72,6 +54,8 @@
             this.Maze = this.InitMaze();
         }
 
+
+
         /// <summary>
         /// Start the game
         /// <remarks>
@@ -102,7 +86,7 @@
 
             this.Renderer.Render(WELCOME_MESSAGE);
             this.Renderer.Render(CHOOSE_LAB_MESAGE);
-          
+
             while (this.mazeFactory == null)
             {
                 // Command pattern...
@@ -148,14 +132,14 @@
 
                 this.Renderer.Render(INPUT_MESSAGE);
                 string command = this.Renderer.ReadCommand().ToLower();
-                
+
                 this.commander.SetCommand(new MoveCommand(this.Player, command));
                 this.commander.ExecuteCommand();
 
                 if (!this.Player.PlayerMoved)
                 {
-                    this.commander.SetCommand(new PrintCommand(this.Player, command));
                     this.commander.ExecuteCommand();
+                    this.commander.SetCommand(new PrintCommand(this.Player, command));
                 }
 
                 this.Renderer.Clear();
