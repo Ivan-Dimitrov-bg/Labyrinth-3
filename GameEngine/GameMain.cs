@@ -1,8 +1,6 @@
-﻿using Labyrinth.GameObjects;
-using Labyrinth.Interfaces;
-
-namespace Labyrinth.GameEngine
+﻿namespace Labyrinth.GameEngine
 {
+    
     /// <summary>
     /// GameMain class
     /// <remarks>
@@ -14,7 +12,6 @@ namespace Labyrinth.GameEngine
         public static void Main()
         {
             // Facade pattern
-            PlayerCommand command = PlayerCommand.Exit;
             LabyrinthGame game = new LabyrinthGame();
             game.Start();
         }
