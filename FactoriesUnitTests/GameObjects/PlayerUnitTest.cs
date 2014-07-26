@@ -64,25 +64,6 @@
         }
 
         [TestMethod]
-        public void Player_TestMoveCommand()
-        {
-            var mazeBuilder = new SmallMazeCreator();
-            this.player.Maze = mazeBuilder.CreateMaze();
-            mazeBuilder.GenerateMaze();
-            this.player.Score = new PlayerScore();                        
-            this.player.ExecuteCommand("u");
-
-            if (this.player.Maze.PlayerPosition.X == (this.player.Maze.Rows / 2) - 1)
-            {
-                Assert.IsTrue(this.player.PlayerMoved);
-            }
-            else
-            {
-                Assert.IsFalse(this.player.PlayerMoved);
-            }
-        }
-
-        [TestMethod]
         public void Player_TestOutOfMazeMoveRight()
         {
             var mazeBuilder = new SmallMazeCreator();

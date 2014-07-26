@@ -7,6 +7,13 @@
     {
         private static IScoreBoard scoreBoard;
 
+        // <summary>
+        /// ScoreBoard creation method
+        /// </summary>
+        /// <remarks>
+        /// Will return instance of IScoreBoard
+        /// </remarks>      
+
         public static IScoreBoard CreateScoreBoard()
         {
             if (scoreBoard == null)
@@ -17,6 +24,12 @@
             return scoreBoard;
         }
 
+        // <summary>
+        /// PlayerScore creation method
+        /// </summary>
+        /// <remarks>
+        /// Will return instance of IScore
+        /// </remarks>  
         public static IScore CreatePlayerScore()
         {
             return new PlayerScore();

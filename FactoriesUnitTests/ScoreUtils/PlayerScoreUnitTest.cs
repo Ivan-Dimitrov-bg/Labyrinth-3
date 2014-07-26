@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using Labyrinth.Factories;
     using Labyrinth.GameEngine;
     using Labyrinth.Interfaces;
     using Labyrinth.ScoreUtils;
@@ -57,8 +58,7 @@
             this.playerScore.Moves = INVALID_NEGATIVE_MOVE;
         }
 
-        [TestMethod]
-        
+        [TestMethod]       
         public void PlayerScore_TestRenderMethodIfSetsProperMassageToConsole()
         {
             const int TEST_MOVES = 4;
@@ -119,6 +119,20 @@
             {
                 throw new ArgumentException("Setting the coords didn't work.");
             }
+        }
+
+        [TestMethod]
+        public void PlayerScoreFactoryTest()
+        {
+            var score = ScoreBoardCreator.CreatePlayerScore();
+            Assert.IsTrue(score is IScore);
+        }
+
+         [TestMethod]
+        public void ScoreboardFactoryTest()
+        {
+            var score = ScoreBoardCreator.CreateScoreBoard();
+            Assert.IsTrue(score is IScoreBoard);
         }
     }
 }
