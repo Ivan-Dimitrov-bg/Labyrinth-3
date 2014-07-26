@@ -27,5 +27,18 @@
         {
             this.consoleRenderer.Render("Dummy command #1", null);
         }
+
+        [TestMethod]
+        public void ConsoleRenderer_Clear()
+        {
+            this.consoleRenderer.Clear();
+        }
+
+        [TestMethod]
+        public void ConsoleRenderer_ReadCommand()
+        {
+            string dummyText = "Exit";
+            //this.consoleRenderer.ReadCommand();
+        }
     }
 }
