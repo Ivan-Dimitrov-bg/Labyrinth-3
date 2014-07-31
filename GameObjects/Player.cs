@@ -1,6 +1,7 @@
 ﻿namespace Labyrinth.GameObjects
 {
     using System;
+    using System.Collections.Generic;
     using Labyrinth.Interfaces;
 
     /// <summary>
@@ -12,9 +13,14 @@
     public class Player : Cell, IPlayer
     {
         private Position position;
+
         private IMaze maze;
+
         private IScore score;
+
         private PlayerDirection direction;
+
+        private IDictionary<PlayerDirection, int[]> directions ;
 
         /// <summary>
         /// Player consturctor
@@ -24,6 +30,16 @@
         /// </summary>
         public Player() : base(Cell.PLAYER_VALUE)
         {
+            this.directions = new Dictionary<PlayerDirection, int[]>();
+            this.InitializeDirections();
+        }
+
+        private void InitializeDirections()
+        {
+            this.directions.Add(PlayerDirection.Up, new[] { -1, 0 });
+            this.directions.Add(PlayerDirection.Left, new[] { 0, -1 });
+            this.directions.Add(PlayerDirection.Down, new[] { 1, 0 });
+            this.directions.Add(PlayerDirection.Right, new[] { 0, 1 });
         }
 
         /// <summary>
@@ -206,25 +222,19 @@
             this.PlayerMoved = false;
             this.position = this.Maze.PlayerPosition;
             this.Maze[this.position.X, this.position.Y].Value = Cell.EMPTY_CELL;
-
-            switch (this.Direction)
+            
+            if (this.Maze[this.position.X + this.directions[this.Direction][0], this.position.Y +
+                                                                                this.directions[this.Direction][1]].IsEmpty)
             {
-                case PlayerDirection.Up:
-                    this.MoveUp();
-
-                    break;
-                case PlayerDirection.Down:
-                    this.MoveDown();
-
-                    break;
-                case PlayerDirection.Left:
-                    this.MoveLeft();
-
-                    break;
-                case PlayerDirection.Right:
-                    this.MoveRight();
-
-                    break;
+                if (this.directions[this.Direction][1] != 0)
+                {
+                    this.position.Y += this.directions[this.Direction][1];
+                }
+                else
+                {
+                    this.position.X += this.directions[this.Direction][0];
+                }
+                this.PlayerMoved = true;
             }
 
             if (!this.PlayerMoved)
@@ -234,54 +244,6 @@
             else
             {
                 this.Score.Moves++;
-            }
-        }
-
-        /// <summary>
-        /// Move UP method
-        /// </summary>
-        private void MoveUp()
-        {
-            if (this.Maze[this.position.X - 1, this.position.Y].IsEmpty)
-            {
-                this.position.X--;
-                this.PlayerMoved = true;
-            }
-        }
-
-        /// <summary>
-        /// Move DOWN method
-        /// </summary>
-        private void MoveDown()
-        {
-            if (this.Maze[this.position.X + 1, this.position.Y].IsEmpty)
-            {
-                this.position.X++;
-                this.PlayerMoved = true;
-            }
-        }
-
-        /// <summary>
-        /// Move LEFT method
-        /// </summary>
-        private void MoveLeft()
-        {
-            if (this.Maze[this.position.X, this.position.Y - 1].IsEmpty)
-            {
-                this.position.Y--;
-                this.PlayerMoved = true;
-            }
-        }
-
-        /// <summary>
-        /// Move RIGHT method
-        /// </summary>
-        private void MoveRight()
-        {
-            if (this.Maze[this.position.X, this.position.Y + 1].IsEmpty)
-            {
-                this.position.Y++;
-                this.PlayerMoved = true;
             }
         }
 
